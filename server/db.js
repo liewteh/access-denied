@@ -1,14 +1,29 @@
 import { Pool } from "pg";
+require('dotenv').config();
 
-const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
+let config;
 
-const pool = new Pool({
-	connectionString: dbUrl,
-	connectionTimeoutMillis: 5000,
-});
+if (process.env.DATABASE_URL) {
+	config = {
+		connectionString: process.env.DATABASE_URL,
+		connectionTimeoutMillis: 5000,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+	};
+} else {
+    config = {
+		user: process.env.DB_USER,
+		host: process.env.DB_HOST,
+		database: "cyf",
+		password: process.env.DB_PASS,
+		port: 5432,
+	};
+}
+const pool = new Pool(config);
 
 export const connectDb = async () => {
-	let client;
+    let client;
 	try {
 		client = await pool.connect();
 	} catch (err) {
