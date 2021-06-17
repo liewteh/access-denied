@@ -1,0 +1,21 @@
+.titleGridContainer {
+    display: grid;
+    grid-template-columns: 150px 90px 90px 130px 90px 100px auto;
+    padding: 10px;
+}
+
+.grid-item {
+    padding: 10px;
+    margin: 0px;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.lateInput {
+    margin: 0px;
+    max-width: 62px;
+}
+
+.nameContainer {
+    border: 1px solid blue;
+}

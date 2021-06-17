@@ -36,9 +36,12 @@ export function Home() {
 			     <input onChange={(e) => setPassword(e.target.value)} placeholder="password" type="password"></input>
 			 </div>
 
-				<Link to="/about/this/site">
+				<Link to="/classRegisterForm"> 
 				<button  className="login-btn">Sign In</button>
 				</Link>
+				{/* <Link to="/about/this/site"> 
+				<button  className="login-btn">Sign In</button>
+				</Link> */}
 			
 		</div>
 			<div className="footer-component">
