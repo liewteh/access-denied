@@ -10,6 +10,12 @@ module.exports = {
       password: process.env.DB_PASS,
       port: 5432,
     },
+    migrations: {
+      directory: __dirname + "/server/db/migrations",
+    },
+    seeds: {
+      directory: __dirname + "/server/db/seeds",
+    },
   },
 
   production: {
