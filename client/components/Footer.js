@@ -1,7 +1,7 @@
 import React from 'react'
 import './Footer.css'
 import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
           </div>
           <div className="footer-icons">  
             <FacebookIcon />
-            <InstagramIcon />
+            <GitHubIcon />
             <TwitterIcon />
           </div>
         </div>
