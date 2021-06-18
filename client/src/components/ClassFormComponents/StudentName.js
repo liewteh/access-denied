@@ -13,7 +13,7 @@ const StudentName = ({firstName, lastName}) => {
           </div>
           <div className="grid-item">
             <ToggleButtonOff className="ToggleButtonOffContainer" />
-          </div>
+          </div>gi
           <div className="grid-item">
             <input className="lateInput" type="integer" placeholder="minutes" />
           </div>
