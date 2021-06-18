@@ -12,12 +12,12 @@ if (process.env.DATABASE_URL) {
 	};
 } else {
 		require("dotenv").config();
-    config = {
-		user: process.env.DB_USER,
-		host: process.env.DB_HOST,
-		database: "cyf",
-		password: process.env.DB_PASS,
-		port: 5432,
+		config = {
+			user: process.env.DB_USER,
+			host: process.env.DB_HOST,
+			database: "cyf",
+			password: process.env.DB_PASS,
+			port: 5432,
 	};
 }
 const pool = new Pool(config);
