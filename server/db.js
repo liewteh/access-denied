@@ -1,4 +1,5 @@
 import { Pool } from "pg";
+require("dotenv").config();
 
 let config;
 
@@ -11,8 +12,7 @@ if (process.env.DATABASE_URL) {
 		},
 	};
 } else {
-		require("dotenv").config();
-    config = {
+	config = {
 		user: process.env.DB_USER,
 		host: process.env.DB_HOST,
 		database: "cyf",
@@ -23,7 +23,7 @@ if (process.env.DATABASE_URL) {
 const pool = new Pool(config);
 
 export const connectDb = async () => {
-    let client;
+	let client;
 	try {
 		client = await pool.connect();
 	} catch (err) {
