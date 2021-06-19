@@ -1,4 +1,5 @@
 import { Pool } from "pg";
+require("dotenv").config();
 
 let config;
 
@@ -11,7 +12,6 @@ if (process.env.DATABASE_URL) {
 		},
 	};
 } else {
-	require("dotenv").config();
 	config = {
 		user: process.env.DB_USER,
 		host: process.env.DB_HOST,
