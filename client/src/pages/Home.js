@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Footer from '../components/Footer';
+import Footer from "../components/Footer";
 import "./Home.css";
 
-
 export function Home() {
+  const [username, setUsername] = useState(""); // eslint-disable-line no-unused-vars
+  const [password, setPassword] = useState(""); // eslint-disable-line no-unused-vars
 
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
-
-	
-	
-
-	return (
-		<main role="main">
-		<div className="container">
-			<div className="heading">
-			<img
+  return (
+    <main role="main">
+      <div className="container">
+        <div className="heading">
+          <img
             className="logo"
             src="https://syllabus.codeyourfuture.io/img/logo.png"
             alt="cyf_logo"
