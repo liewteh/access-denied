@@ -13,7 +13,9 @@ if (process.env.DATABASE_URL) {
 } else {
 		require("dotenv").config();
 		config = {
-			user: process.env.DB_USER,
+			// user: process.env.DB_USER,
+						user: "postgres",
+
 			host: process.env.DB_HOST,
 			database: "cyf",
 			password: process.env.DB_PASS,
