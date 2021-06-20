@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer">
 
           <div className="footer-p">
-            <p >Copyright&copy; CodeYourFuture</p>
+            <p >Copyright&copy; {new Date().getFullYear()} CodeYourFuture</p>
           </div>
           <div className="footer-icons">  
             <FacebookIcon onClick={() => window.open( 'https://www.facebook.com/codeyourfuture.io/', "_blank")} />
