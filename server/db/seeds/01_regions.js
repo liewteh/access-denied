@@ -1,6 +1,6 @@
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('regions').del()
+  return knex("regions").del()
     .then(function () {
       // Inserts seed entries
       return knex("regions").insert([
@@ -39,7 +39,7 @@ exports.seed = function(knex) {
           name: "Cape Town",
           country: "South Africa",
           city: "Cape Town",
-        }
+        },
       ]);
     });
 };
