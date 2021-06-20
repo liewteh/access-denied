@@ -1,0 +1,27 @@
+.infoCard {
+  background-color: hsl(0, 0%, 100%);
+  width: 20%;
+  margin: 3rem 1rem;
+  text-align: left;
+  border: 1px solid red;
+}
+
+.cohortDetails {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid green;
+}
+
+.cohortDetailsList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cohortDetailType {
+  font-weight: bold;
+}
