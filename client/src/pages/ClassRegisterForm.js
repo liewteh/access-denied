@@ -3,6 +3,8 @@ import Header from "../components/ClassFormComponents/Header.js";
 import StudentName from "../components/ClassFormComponents/StudentName.js";
 import Footer from "../components/Footer";
 import StudentNames from "../TestData/Names.json";
+import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
+import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle.js";
 
 import "./ClassRegisterForm.css";
 
@@ -10,11 +12,17 @@ const ClassRegisterForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("hello");
-  }
+  };
 
   return (
     <div className="formContainer">
-      <Header />
+      <div className="HeaderContainer">
+        <Header />
+      </div>
+      <div className="classTitle">
+        <RegionAndClassTitle />
+        <DownloadReportButton className="DownloadReportButton" />
+      </div>
       <div className="titleGridContainer">
         <div className="grid-item">Student Name</div>
         <div className="grid-item">Absence</div>
