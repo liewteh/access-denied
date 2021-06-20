@@ -10,9 +10,10 @@ const CohortCard = ({ cohort }) => {
     history.push(path);
   };
 
-  const showClasses = () => {};
+  // const showClasses = () => {};
   return (
-    <div className="infoCard" onClick={routeChange}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div className="infoCard" onClick={routeChange} role="link" tabIndex={0}>
       <div className="cohortDetails">
         <h2 className="cohortName">
           {`${cohort.region_name} Class ${cohort.cohort_number}`}
