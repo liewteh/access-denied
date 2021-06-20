@@ -32,7 +32,7 @@ export function Home() {
 			<div className="heading">
 			<img
             className="logo"
-            src="https://syllabus.codeyourfuture.io/img/logo.png"
+            src="./client/img/cyf_logo.png"
             alt="cyf_logo"
             />
 		  	</div>
