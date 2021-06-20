@@ -7,6 +7,11 @@ import StudentNames from "../TestData/Names.json";
 import "./ClassRegisterForm.css";
 
 const ClassRegisterForm = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("hello");
+  }
+
   return (
     <div className="formContainer">
       <Header />
