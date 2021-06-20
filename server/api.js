@@ -9,11 +9,23 @@ router.get("/", (_, res) => {
 });
 
 router.get("/cohorts", async (req, res) => {
-  const result = await knex("regions")
+  const cohorts = await knex("regions")
     .join("cohorts", "regions.id", "=", "cohorts.region_id")
-    .select("regions.name as region_name", "cohorts.cohort_number");
+    .select(
+      "cohorts.id",
+      "regions.name as region_name",
+      "cohorts.cohort_number"
+    );
 
-  res.send(result);
+  res.send(cohorts);
+});
+
+router.get("/cohorts/:cohortId/classes", async (req, res) => {
+  const cohortId = req.params.cohortId;
+  const classes = await knex("classes")
+    .where("cohort_id", cohortId)
+    .select("*");
+  res.send(classes);
 });
 
 export default router;
