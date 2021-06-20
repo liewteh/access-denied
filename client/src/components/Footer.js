@@ -5,8 +5,8 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import InstagramIcon from '@material-ui/icons/Instagram';
 
 const Footer = () => {
-    return (
-        <div className="footer">
+  return (
+    <div className="footer">
 
           <div className="footer-p">
             <p >Copyright&copy; {new Date().getFullYear()} CodeYourFuture</p>
@@ -20,4 +20,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default Footer;

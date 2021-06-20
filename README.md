@@ -31,6 +31,15 @@ Whenever you commit to master (or e.g. merge a [pull request]) it will get autom
 
 You should now make sure all of the project team are [collaborators] on the repository.
 
+## Steps to setup the database with the dummy data
+
+- Checkout to the branch create-db.
+- Run the command `npm ci`, to ensure that you have all the required packages installed.
+- Ensure that you have a database named "cyf", already created on your local machine. If not run the command `createdb cyf` on the `terminal`.
+-Run the command `npx knex migrate:latest`. It should import 7 migrations.
+-Then run the command `npx knex seed:run`.
+-Your database should be setup now.
+
 ## Scripts
 
 Various scripts are provided in the package file, but many are helpers for other scripts; here are the ones you'll

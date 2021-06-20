@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = new Router();
 
 router.get("/", (_, res) => {
-	res.json({ message: "Hello, world!" });
+  res.json({ message: "Hello, world!" });
 });
 
 router.get("/test", (_, res) => {

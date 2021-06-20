@@ -23,8 +23,8 @@ app.use(session({
   
 
 if (app.get("env") === "production") {
-	app.enable("trust proxy");
-	app.use(httpsOnly());
+  app.enable("trust proxy");
+  app.use(httpsOnly());
 }
 
 app.use(apiRoot, router);

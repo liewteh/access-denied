@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import Footer from '../components/Footer';
 import "./Home.css";
 
-
 export function Home() {
 	const history = useHistory()
 
