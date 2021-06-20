@@ -1,13 +1,27 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Footer from '../components/Footer';
 import "./Home.css";
 
 
 export function Home() {
+	const history = useHistory()
 
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+
+	function loginHandler(){
+		axios.post('/api/login',{
+			username: username,
+			password: password
+		}, undefined, {withCredentials: true})
+
+		.then((res) => {
+			history.push('/blah')
+			console.log('hello');
+		})
+	}
 
 	
 	
@@ -27,23 +41,30 @@ export function Home() {
 				<h2>Welcome</h2>
 				
 			</div>
+
+			
 		     <div className="login">
-			 <h3>Please Sign In</h3>
-			 	
+			 
+			 	<h3>Please Sign In</h3>
+			 
 				 <input onChange={(e) => setUsername(e.target.value)} placeholder="username" type="text"></input> 
 			 </div>
 			 <div className="login">
 			     <input onChange={(e) => setPassword(e.target.value)} placeholder="password" type="password"></input>
 			 </div>
 
-				<Link to="/about/this/site">
-				<button  className="login-btn">Sign In</button>
-				</Link>
-			
-		</div>
+			 <div>
+				<button  className="login-btn" onClick={loginHandler}>Sign In</button>
+			</div>
 			<div className="footer-component">
 				<Footer />
-			</div>	
+		     </div>	
+	
+		 </div>
+		
+
+		
+		
 
 		</main>
 	);
