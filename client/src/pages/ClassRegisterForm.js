@@ -1,4 +1,5 @@
-import React from "react";
+import "./ClassRegisterForm.css";
+import React, {useState, useEffect} from "react";
 import Header from "../components/ClassFormComponents/Header.js";
 import StudentName from "../components/ClassFormComponents/StudentName.js";
 import Footer from "../components/Footer";
@@ -6,13 +7,31 @@ import StudentNames from "../TestData/Names.json";
 import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle.js";
 
-import "./ClassRegisterForm.css";
-
 const ClassRegisterForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("hello");
   };
+
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        alert (res.status);
+        alert ("Error! Data not found")
+      }
+    })
+    .then ((data) => {
+      setStudents(data);
+    })
+    .catch((error) => {
+      console.error("Error while fetching data")
+    })
+  })
 
   return (
     <div className="formContainer">

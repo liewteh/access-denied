@@ -59,6 +59,12 @@ input:focus{
     transform: translateY(5px);
   }
 
+.footer-component {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 
 
 
