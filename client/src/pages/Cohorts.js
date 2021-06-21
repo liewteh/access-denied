@@ -1,3 +1,4 @@
+import "./Cohorts.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import CohortList from "../components/CohortList";
@@ -23,7 +24,8 @@ const Cohorts = () => {
   }, []);
 
   return (
-    <div>
+    <div className="cohortPage">
+      <h1 className="cohortPageHeading">Your Cohorts</h1>
       <CohortList cohortList={cohortList} />
       <Footer />
     </div>

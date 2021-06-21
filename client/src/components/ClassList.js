@@ -1,5 +1,5 @@
 import React from "react";
-import "./CohortList.css";
+import "./ClassList.css";
 
 import ClassCard from "./ClasstCard";
 

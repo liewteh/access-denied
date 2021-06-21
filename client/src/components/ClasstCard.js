@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import "./CohortCard.css";
@@ -16,9 +17,10 @@ const ClassCard = ({ cohortClass }) => {
     <div className="infoCard">
       <div className="cohortDetails">
         <h2 className="cohortName">
-          {`Cohort : ${cohortClass.cohort_id} Class Date: ${cohortClassDate}`}
+          {/* {`Cohort ID: ${cohortClass.cohort_id} Class Date: ${cohortClassDate}`} */}
+          {`Class Date: ${cohortClassDate}`}
         </h2>
-        <ul className="cohortDetailsList">
+        {/* <ul className="cohortDetailsList">
           <li>
             <span className="cohortDetailType">Cohort ID: </span>
             {cohortClass.cohort_id}
@@ -27,7 +29,7 @@ const ClassCard = ({ cohortClass }) => {
             <span className="cohortDetailType">Class Date: </span>
             {cohortClassDate}
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

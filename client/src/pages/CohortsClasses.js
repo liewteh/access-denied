@@ -1,3 +1,4 @@
+import "./CohortsClasses.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -28,7 +29,8 @@ const CohortClasses = () => {
   }, [cohortId]);
 
   return (
-    <div>
+    <div className="classPage">
+      <h1 className="cohortClassPageHeading">Cohort Classes</h1>
       <ClassList classList={classList} />
       <button>Add News Class</button>
       <Footer />
