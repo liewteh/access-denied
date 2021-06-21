@@ -16,7 +16,7 @@ const ClassRegisterForm = () => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000`)
+    fetch(`http://127.0.0.1:5100/students`)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -27,6 +27,7 @@ const ClassRegisterForm = () => {
     })
     .then ((data) => {
       setStudents(data);
+      
     })
     .catch((error) => {
       console.error("Error while fetching data")
@@ -53,10 +54,9 @@ const ClassRegisterForm = () => {
       </div>
       <form>
         <div className="studentNameContainer">
-          {StudentNames.map((student, index) => (
+          {students.map((student, index) => (
             <StudentName
-              firstName={student.firstName}
-              lastName={student.lastName}
+              studentName={student.user_name}
               key={index}
             />
           ))}

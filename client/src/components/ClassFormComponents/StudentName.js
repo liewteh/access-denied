@@ -4,12 +4,12 @@ import ToggleButtonOff from './ToggleButtonOff'
 
 import './StudentName.css'
 
-const StudentName = ({firstName, lastName}) => {
+const StudentName = ({studentName}) => {
     return (
       <>
         <div className="titleGridContainer">
           <div className="grid-item">
-            {firstName} {lastName}
+            {studentName}
           </div>
           <div className="grid-item">
             <ToggleButtonOff className="ToggleButtonOffContainer" />
