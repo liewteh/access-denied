@@ -11,10 +11,10 @@ const App = () => (
     <Route path="/" exact>
       <Home />
     </Route>
-    <Route path="/cohorts">
+    <Route path="/cohorts" exact>
       <Cohorts />
     </Route>
-    <Route path="/cohorts/:cohortId/classes" component={CohortClasses} />
+    <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
     <Route path="/classRegisterForm">
       <ClassRegisterForm />
     </Route>

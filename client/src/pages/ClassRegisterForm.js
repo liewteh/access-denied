@@ -37,34 +37,31 @@ const ClassRegisterForm = () => {
     <div className="formContainer">
       <div className="HeaderContainer">
         <Header />
-      </div> 
+      </div>
       <div className="classTitle">
         <RegionAndClassTitle />
         <DownloadReportButton className="DownloadReportButton" />
-      </div> 
-      <div className="titleGridContainer">
-        <div className="grid-item"> Student Name </div> 
-        <div className="grid-item"> Absence </div> 
-        <div className="grid-item"> Late </div> 
-        <div className="grid-item"> Distract / Not Participate </div> 
-        <div className="grid-item"> Camera On / Off </div> 
-        <div className="grid-item"> Tech Issues </div> 
-        <div className="grid-item"> Comments </div> 
-      </div> 
+      </div>
       <form>
-        <div className="studentNameContainer">
-           
-          {students.map((student, index) => (
-            <StudentName studentName={student.user_name} key={index} />
-          ))} 
-        </div> 
+        <div className="tableHeader">
+          <div className="grid-item"> Student Name </div>
+          <div className="grid-item"> Absence </div>
+          <div className="grid-item"> Late </div>
+          <div className="grid-item"> Distract / Not Participate </div>
+          <div className="grid-item"> Camera On / Off </div>
+          <div className="grid-item"> Tech Issues </div>
+          <div className="grid-item"> Comments </div>
+        </div>
+        {students.map((student, index) => (
+          <StudentName studentName={student.user_name} key={index} />
+        ))}
         <button type="submit" className="submitButton" onClick={submitHandler}>
-          Submit 
-        </button> 
-      </form> 
+          Submit
+        </button>
+      </form>
       <div className="footer-component">
         <Footer />
-      </div> 
+      </div>
     </div>
   );
 };

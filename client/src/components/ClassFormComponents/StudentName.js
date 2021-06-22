@@ -7,26 +7,24 @@ import './StudentName.css'
 const StudentName = ({studentName}) => {
     return (
       <>
-        <div className="titleGridContainer">
-          <div className="studentName">
-            {studentName}
-          </div>
-          <div>
+        <div className="tableHeader">
+          <div className="grid-item">{studentName}</div>
+          <div className="grid-item">
             <ToggleButtonOff className="ToggleButtonOffContainer" />
           </div>
-          <div>
+          <div className="grid-item">
             <input className="lateInput" type="integer" placeholder="minutes" />
           </div>
-          <div>
+          <div className="grid-item">
             <ToggleButtonOff className="ToggleButtonOffContainer" />
           </div>
-          <div>
+          <div className="grid-item">
             <ToggleButtonOn className="ToggleButtonOnContainer" />
           </div>
-          <div>
+          <div className="grid-item">
             <ToggleButtonOff className="ToggleButtonOffContainer" />
           </div>
-          <div>
+          <div className="grid-item">
             <input type="string" placeholder="brief comments" />
           </div>
         </div>
