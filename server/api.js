@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
 	}
      req.session.username = user.username
      req.session.role = user.role
-	 req.session.userId = user.id;
+	   req.session.userId = user.id;
 
 	 res.send('hello');
 

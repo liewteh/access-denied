@@ -41,7 +41,6 @@ export function Home() {
 				
 			</div>
 
-			
 		     <div className="login">
 			 
 			 	<h3>Please Sign In</h3>

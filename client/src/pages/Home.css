@@ -59,12 +59,20 @@ input:focus{
 
 .login-btn{
     padding: .75rem;
-    background-color: #303846;
+    /* background-color: #303846; */
+    background-color: #ed4343;
     color: #fff;
     width: 100px;
     border-radius: 10px;
+    margin-top: 1rem;
     margin-bottom: 10rem;
     cursor: pointer;
+    outline: 0;
+}
+
+.login-btn:hover{
+    background-color: #f52d34;
+
 }
 
 
