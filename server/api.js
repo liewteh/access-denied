@@ -1,21 +1,17 @@
 import { Router } from "express";
-import { knex } from "./knex";
 
+const knex = require("./knex");
 const router = new Router();
 
 router.get("/", (_, res) => {
   res.json({ message: "Hello, world!" });
-  console.log(knex);
 });
 
 router.get("/students", async (req, res) => {
-  const students = knex.select("user_name")
-    .from("users")
-    .where("user_name")
-    .like("Stude%")
-    .limit(5);
+  const students = await knex("users")
+    .select("user_name")
+    .where("user_name", "like", "Student%");
 
-    console.log(students);
   res.send(students);
 });
 
