@@ -57,12 +57,13 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-export default function ToggleButtonOff() {
+export default function ToggleButtonOff({ defaultValue, toggleValue }) {
   const [state, setState] = React.useState({
-    checkedB: false,
+    checkedB: defaultValue,
   });
 
   const handleChange = (event) => {
+    toggleValue(event.target.checked);
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 

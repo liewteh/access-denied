@@ -18,7 +18,7 @@
 
 .grid-item {
     flex: 7;
-    margin-left: 2rem;
+    padding: 10px;
 }
 
 /* .grid-item {
