@@ -1,9 +1,10 @@
 import React from 'react'
+import "./DownloadReportButton.css";
 
 const DownloadReportButton = () => {
     return (
         <>
-            <button>Download Report Button</button>
+            <button className="downloadButton">Download Report Button</button>
         </>
     )
 }

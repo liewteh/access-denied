@@ -8,22 +8,22 @@ const StudentName = ({studentName}) => {
     return (
       <>
         <div className="titleGridContainer">
-          <div className="grid-item">
+          <div className="studentName">
             {studentName}
           </div>
-          <div className="grid-item">
+          <div>
             <ToggleButtonOff className="ToggleButtonOffContainer" />
           </div>
-          <div className="grid-item">
+          <div>
             <input className="lateInput" type="integer" placeholder="minutes" />
           </div>
-          <div className="grid-item">
+          <div>
             <ToggleButtonOff className="ToggleButtonOffContainer" />
           </div>
-          <div className="grid-item">
+          <div>
             <ToggleButtonOn className="ToggleButtonOnContainer" />
           </div>
-          <div className="grid-item">
+          <div>
             <ToggleButtonOff className="ToggleButtonOffContainer" />
           </div>
           <div>

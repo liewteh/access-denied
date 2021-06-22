@@ -10,7 +10,8 @@ router.get("/", (_, res) => {
 router.get("/students", async (req, res) => {
   const students = await knex("users")
     .select("user_name")
-    .where("user_name", "like", "Student%");
+    .where("user_name", "like", "Student%")
+    .limit(10);
 
   res.send(students);
 });
