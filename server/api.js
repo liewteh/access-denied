@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { Pool } from "pg";
-const knex = require("./knex");
 
 const knex = require("./knex");
 const router = new Router();
