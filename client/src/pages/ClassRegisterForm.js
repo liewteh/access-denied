@@ -14,21 +14,7 @@ const ClassRegisterForm = () => {
   };
 
   const [students, setStudents] = useState([]);
-
-//   useEffect(() => {
-//     const fetchStudents = async () => {
-//       const res = await fetch(`/api/students`);
-//       if (!res.ok) {
-//         const message = `Error fetching data: ${res.status}`;
-//         throw new Error(message);
-//       }
-//       const students = await res.json();
-//       setStudents(students);
-//     };
-
-//     fetchStudents();
-//   }, []);
-
+  
   useEffect(() => {
       fetch(`/api/students`)
       .then((res) => {
