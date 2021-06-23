@@ -7,7 +7,6 @@ const StudentName = ({ studentData, rowUpdate }) => {
   const handleUpdate = (value, field) => {
     const newData = { ...studentData };
     newData[field] = value;
-    console.log(field);
     rowUpdate(newData);
   };
 

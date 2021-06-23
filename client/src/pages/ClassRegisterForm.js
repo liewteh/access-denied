@@ -41,28 +41,23 @@ const ClassRegisterForm = () => {
   const updateHandlerUserChange = (data, index) => {
     const newData = [...studentsData];
     newData[index] = data;
-    console.log("index", index);
     setStudentsData(newData);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     // post students data to api
-    axios.post(
-      `api/1/class_attendance`,
-      {
-        studentsData,
-      }
-        .then((res) => {
-          // console.log(res);
-        })
-        .catch((error) => {
-          // console.log(error);
-        })
-    );
+    axios
+      .post(`api/1/class_attendance`, {
+        body: studentsData,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
-  
 
   return (
     <div className="formContainer">
