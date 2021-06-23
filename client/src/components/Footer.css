@@ -3,11 +3,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* margin-top: 1rem; */
     height: 100%;
     padding: 2rem;
     background-color:#303846;
     color: #fff; 
+   
 }
 
 .footer-p{
@@ -22,6 +22,8 @@
     gap: 1.5rem;
     cursor: pointer;
 }
+
+
 
 
 
