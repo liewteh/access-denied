@@ -1,26 +1,14 @@
 import "./ClassRegisterForm.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "../components/ClassFormComponents/Header.js";
-import StudentName from "../components/ClassFormComponents/StudentName.js";
+import Header from "../components/ClassFormComponents/Header";
+import StudentName from "../components/ClassFormComponents/StudentName";
 import Footer from "../components/Footer";
 import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
-import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle.js";
-
-// a default student of region's class's student
-const defaultStudent = {
-  user_id: null,
-  absence: false,
-  late: 0,
-  distractNotParticipate: false,
-  cameraOnOff: true,
-  techIssue: false,
-  comments: "",
-};
+import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
+import DateTime from "../components/ClassFormComponents/DateTime";
 
 const ClassRegisterForm = () => {
-  // hook for region's class's student's list from database
-  const [students, setStudents] = useState([]);
   // hook for input students data
   const [studentsData, setStudentsData] = useState([]);
 
@@ -29,7 +17,8 @@ const ClassRegisterForm = () => {
     axios
       .get(`/api/students`)
       .then((res) => {
-        const newStudentsData = (res.data).map((s) => {
+        const newStudentsData = res.data.map((s) => {
+          // a default student of region's class's student
           const defaultStudent = {
             user_id: null,
             user_name: s.user_name,
@@ -41,8 +30,7 @@ const ClassRegisterForm = () => {
             comments: "",
           };
           return defaultStudent;
-        })
-        setStudents(res.data);
+        });
         setStudentsData(newStudentsData);
       })
       .catch((error) => {
@@ -53,22 +41,28 @@ const ClassRegisterForm = () => {
   const updateHandlerUserChange = (data, index) => {
     const newData = [...studentsData];
     newData[index] = data;
+    console.log("index", index);
     setStudentsData(newData);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    fetch(`api/1/class_attendance`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(studentsData)
-    })
-    .then(console.log)
+    // post students data to api
+    axios.post(
+      `api/1/class_attendance`,
+      {
+        studentsData,
+      }
+        .then((res) => {
+          // console.log(res);
+        })
+        .catch((error) => {
+          // console.log(error);
+        })
+    );
   };
 
-  console.log(studentsData);
+  
 
   return (
     <div className="formContainer">
@@ -79,6 +73,7 @@ const ClassRegisterForm = () => {
         <RegionAndClassTitle />
         <DownloadReportButton className="DownloadReportButton" />
       </div>
+      <DateTime />
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
         <div className="grid-item"> Absence </div>
@@ -91,17 +86,14 @@ const ClassRegisterForm = () => {
       <form>
         <div className="studentNameContainer">
           {studentsData.map((student, index) => (
-            <StudentName 
+            <StudentName
               key={index}
               studentData={student}
-              rowUpdate={(data) => updateHandlerUserChange (data, index)} 
+              rowUpdate={(data) => updateHandlerUserChange(data, index)}
             />
           ))}
         </div>
-        <button 
-          type="submit" 
-          className="submitButton" 
-          onClick={submitHandler}>
+        <button type="submit" className="submitButton" onClick={submitHandler}>
           Submit
         </button>
       </form>
