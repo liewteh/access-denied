@@ -22,7 +22,7 @@ export function Home() {
         { withCredentials: true }
       )
       .then((res) => {
-        history.push("/login");
+        history.push("/loginPage");
       });
   }
 

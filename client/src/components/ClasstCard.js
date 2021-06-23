@@ -5,16 +5,16 @@ import moment from "moment";
 import "./CohortCard.css";
 
 const ClassCard = ({ cohortClass }) => {
-  // const history = useHistory();
+  const history = useHistory();
 
-  // const routeChange = () => {
-  //   let path = `/api/cohorts/${cohort.id}/classes`;
-  //   history.push(path);
-  // };
+  const routeChange = () => {
+    let path = `/classRegisterForm`;
+    history.push(path);
+  };
   const cohortClassDate = moment(cohortClass.date).format("MMM Do YY");
 
   return (
-    <div className="infoCard">
+    <div className="infoCard" onClick={routeChange} role="link">
       <div className="cohortDetails">
         <h2 className="cohortName">
           {/* {`Cohort ID: ${cohortClass.cohort_id} Class Date: ${cohortClassDate}`} */}

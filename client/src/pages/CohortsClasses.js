@@ -24,7 +24,6 @@ const CohortClasses = () => {
       setClassList(classes);
     };
 
-    console.log("in useEffect.");
     fetchClasses();
   }, [cohortId]);
 

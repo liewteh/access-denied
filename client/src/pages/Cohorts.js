@@ -19,7 +19,6 @@ const Cohorts = () => {
       setCohortList(cohorts);
     };
 
-    console.log("in useEffect.");
     fetchCohorts();
   }, []);
 

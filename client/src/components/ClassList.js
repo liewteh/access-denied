@@ -5,8 +5,7 @@ import ClassCard from "./ClasstCard";
 
 const ClassList = ({ classList }) => {
   if (classList) {
-    console.log("in class list");
-    console.log(classList);
+
     return (
       <div className="classList">
         {classList.map((cohortClass, index) => (

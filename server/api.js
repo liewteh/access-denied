@@ -53,8 +53,6 @@ function fakeLogin(username, password) {
   const userFound = logins.find(
     (x) => x.username === username && x.password === password
   );
-  console.log(username, password);
-
   return userFound;
 }
 
@@ -74,7 +72,7 @@ router.post("/login", (req, res) => {
   res.send("hello");
 });
 
-router.get("/login", (req, res) => {
+router.get("/loginPage", (req, res) => {
   req.session.count += 1;
   res.json({
     username: req.session.username,
