@@ -20,16 +20,16 @@ const defaultStudent = {
 const ClassRegisterForm = () => {
   const [students, setStudents] = useState([]);
   const [studentsData, setStudentsData] = useState([]);
-  
+
   useEffect(() => {
-      fetch(`/api/students`)
+    fetch("/api/students")
       .then((res) => {
-          if (res.ok) {
-              return res.json()
-          } else {
-              alert(res.status)
-              alert("Error! Data not found")
-          }
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert(res.status);
+          alert("Error! Data not found");
+        }
       })
       .then((data) => {
         const newStudentsData = data.map((s) => {
@@ -44,34 +44,33 @@ const ClassRegisterForm = () => {
             comments: "",
           };
           return defaultStudent;
-        })
-          setStudents(data)
-          setStudentsData(newStudentsData)
+        });
+        setStudents(data);
+        setStudentsData(newStudentsData);
       })
       .catch((error) => {
-          console.error("Error while fetching data");
-      })
-  }, [])
+        console.error("Error while fetching data");
+      });
+  }, []);
 
   const updateHandlerUserChange = (data, index) => {
-      const newData = [...studentsData];
-      newData[index] = data;
-      setStudentsData(newData);
-  }
+    const newData = [...studentsData];
+    newData[index] = data;
+    setStudentsData(newData);
+  };
 
   console.log(studentsData);
 
   const submitHandler = (e) => {
     e.preventDefault();
     // Default options are marked with *
-    fetch(`/api/1/class_attendance`, {
-      method: 'POST',
+    fetch("/api/1/class_attendance", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(studentsData)
-    })
-    .then(console.log)
+      body: JSON.stringify(studentsData),
+    }).then(console.log);
   };
 
   return (
@@ -94,10 +93,11 @@ const ClassRegisterForm = () => {
           <div className="grid-item"> Comments </div>
         </div>
         {studentsData.map((student, index) => (
-          <StudentName 
-            studentData={student} 
-            key={index} 
-            rowUpdate={(data) => updateHandlerUserChange (data, index)} />
+          <StudentName
+            studentData={student}
+            key={index}
+            rowUpdate={(data) => updateHandlerUserChange(data, index)}
+          />
         ))}
         <button type="submit" className="submitButton" onClick={submitHandler}>
           Submit

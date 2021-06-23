@@ -6,7 +6,7 @@
   column-gap: 1rem;
   row-gap: 1rem;
   grid-template-rows: repeat(auto-fit, minmax(1rem, 1fr));
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .cohortClassPageHeading {
