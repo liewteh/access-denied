@@ -12,7 +12,6 @@ const App = () => (
     <Route path="/loginPage" exact>
       <Cohorts />
     </Route>
-    {/* <Route path="/cohorts" exact></Route> */}
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
     <Route path="/classRegisterForm" exact>
       <ClassRegisterForm />
