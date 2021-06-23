@@ -1,0 +1,9 @@
+.cohortPage {
+  background-color: rgb(246, 243,243);
+}
+
+.cohortPageHeading {
+  text-align: center;
+  padding: 2rem;
+  text-decoration: underline red;
+}

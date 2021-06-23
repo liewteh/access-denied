@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import "./Home.css";
 
@@ -21,10 +21,8 @@ export function Home() {
         undefined,
         { withCredentials: true }
       )
-
       .then((res) => {
-        history.push("/blah");
-        console.log("hello");
+        history.push("/login");
       });
   }
 
