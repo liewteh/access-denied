@@ -1,8 +1,8 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -13,18 +13,18 @@ const IOSSwitch = withStyles((theme) => ({
   },
   switchBase: {
     padding: 1,
-    '&$checked': {
-      transform: 'translateX(16px)',
+    "&$checked": {
+      transform: "translateX(16px)",
       color: theme.palette.common.white,
-      '& + $track': {
-        backgroundColor: '#ff2a13',
+      "& + $track": {
+        backgroundColor: "#ff2a13",
         opacity: 1,
-        border: 'none',
+        border: "none",
       },
     },
-    '&$focusVisible $thumb': {
-      color: '#ff2a13',
-      border: '6px solid #fff',
+    "&$focusVisible $thumb": {
+      color: "#ff2a13",
+      border: "6px solid #fff",
     },
   },
   thumb: {
@@ -33,10 +33,10 @@ const IOSSwitch = withStyles((theme) => ({
   },
   track: {
     borderRadius: 26 / 2,
-    border: `1px solid ${theme.palette.grey[400]}`,
+    border: `1px solid ${theme.palette.grey[500]}`,
     backgroundColor: theme.palette.grey[50],
     opacity: 1,
-    transition: theme.transitions.create(['background-color', 'border']),
+    transition: theme.transitions.create(["background-color", "border"]),
   },
   checked: {},
   focusVisible: {},
@@ -57,12 +57,13 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-export default function ToggleButtonOff() {
+export default function ToggleButtonOff({ defaultValue, toggleValue }) {
   const [state, setState] = React.useState({
-    checkedB: false,
+    checkedB: defaultValue,
   });
 
   const handleChange = (event) => {
+    toggleValue(event.target.checked);
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
