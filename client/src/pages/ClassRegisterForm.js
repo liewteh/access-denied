@@ -3,22 +3,22 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/ClassFormComponents/Header.js";
 import StudentName from "../components/ClassFormComponents/StudentName.js";
 import Footer from "../components/Footer";
-import StudentNames from "../TestData/Names.json";
+// import StudentNames from "../TestData/Names.json";
 import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle.js";
 
-const defaultStudent = {
-  user_id: null,
-  absence: false,
-  late: 0,
-  distractNotParticipate: false,
-  cameraOnOff: true,
-  techIssue: false,
-  comments: "",
-};
+// const defaultStudent = {
+//   user_id: null,
+//   absence: false,
+//   late: 0,
+//   distractNotParticipate: false,
+//   cameraOnOff: true,
+//   techIssue: false,
+//   comments: "",
+// };
 
 const ClassRegisterForm = () => {
-  const [students, setStudents] = useState([]);
+  // const [students, setStudents] = useState([]);
   const [studentsData, setStudentsData] = useState([]);
 
   useEffect(() => {
@@ -45,11 +45,11 @@ const ClassRegisterForm = () => {
           };
           return defaultStudent;
         });
-        setStudents(data);
+        // setStudents(data);
         setStudentsData(newStudentsData);
       })
       .catch((error) => {
-        console.error("Error while fetching data");
+        console.error(`Error while fetching data: ${error}`);
       });
   }, []);
 

@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
-import About from "./pages/About";
+// import About from "./pages/About";
 import ClassRegisterForm from "./pages/ClassRegisterForm";
 import Home from "./pages/Home";
 import Cohorts from "./pages/Cohorts";
@@ -15,7 +15,7 @@ const App = () => (
       <Cohorts />
     </Route>
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
-    <Route path="/classRegisterForm">
+    <Route path="/cohorts/:cohortId/classRegisterForm">
       <ClassRegisterForm />
     </Route>
   </Switch>
