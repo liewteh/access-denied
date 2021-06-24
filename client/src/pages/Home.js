@@ -10,11 +10,38 @@ export function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function loginHandler(){
-    axios.post("/api/login",{
-      username: username,
-      password: password,
-    }, undefined, { withCredentials: true })
+  /****************************************************** */
+
+  // Request on Client
+
+  const auth = async () => {
+    try {
+      console.log("hello, authentication in process");
+      console.log(username);
+      console.log(password);
+      const res = await axios.get("/api/authenticate", {
+        auth: { user: username, password: password },
+      });
+      console.log(res);
+      const user_id = res.data.user_id;
+      history.push(`/user-cohorts/${user_id}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  /****************************************************** */
+  function loginHandler() {
+    axios
+      .post(
+        "/api/login",
+        {
+          username: username,
+          password: password,
+        },
+        undefined,
+        { withCredentials: true }
+      )
 
       .then((res) => {
         history.push("/blah");
@@ -54,7 +81,9 @@ export function Home() {
         </div>
 
         <div>
-          <button  className="login-btn" onClick={loginHandler}>Sign In</button>
+          <button className="login-btn" onClick={auth}>
+            Sign In
+          </button>
         </div>
       </div>
       <div className="footer-component">

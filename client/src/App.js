@@ -20,9 +20,7 @@ const App = () => (
       {" "}
       <LandingPage />
     </Route>
-    <Route path="/cohorts" exact>
-      <Cohorts />
-    </Route>
+    <Route path="/user-cohorts/:user_id" component={Cohorts} exact />
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
     <Route path="/cohorts/:cohortId/classRegisterForm">
       <ClassRegisterForm />

@@ -1,16 +1,18 @@
 import "./Cohorts.css";
 import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import CohortList from "../components/CohortList";
 import Footer from "../components/Footer";
 
 const Cohorts = () => {
+  const { user_id } = useParams();
   const [cohortList, setCohortList] = useState([]);
 
   useEffect(() => {
     // function to fetch the cohort list from the server api
     const fetchCohorts = async () => {
-      const response = await fetch("/api/cohorts");
+      const response = await fetch(`/api/user-cohorts/${user_id}`);
       if (!response.ok) {
         const message = `An error has occurred: ${response.status}`;
         throw new Error(message);
