@@ -1,3 +1,25 @@
 .classPage {
   background-color: rgb(246, 243,243);
+  min-height: 100vh;
 }
+
+.classes-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 10vh;
+}
+
+.classes-heading{
+  margin-right: 10rem;
+}
+
+.class-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 68.5vh;
+}
+
+

@@ -1,8 +1,18 @@
 .infoCard {
-  min-height: 7rem;
+  height: 100%;
+  margin: 2.5rem;
   padding: 0.5rem;
   background-color: rgb(255,255,255);
   box-shadow: 1px 2px 1px rgb(200,200,200);
+  border-radius: 10px;
+}
+
+.infoCard:hover{
+  cursor: pointer;
+}
+
+.infoCard{
+  transform: translateY(5px);
 }
 
 .cohortDetails {
@@ -11,7 +21,7 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .cohortDetailsList {

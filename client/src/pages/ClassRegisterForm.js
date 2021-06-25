@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 const ClassRegisterForm = () => {
   // hook for input students data
@@ -60,10 +61,15 @@ const ClassRegisterForm = () => {
   };
 
   return (
-    <div className="formContainer">
+
+    <>
+    
       <div className="HeaderContainer">
-        <Header />
+        <img className='small-logo' src='https://syllabus.codeyourfuture.io/img/logo.png' alt='img' ></img>
+        <h1>Class Register</h1>
+        <AccountBoxIcon className="logo" fontSize="large" style={{color: "green"}} />
       </div>
+      <div className="formContainer">
       <div className="classTitle">
         <RegionAndClassTitle />
         <DownloadReportButton className="DownloadReportButton" />
@@ -87,15 +93,21 @@ const ClassRegisterForm = () => {
               rowUpdate={(data) => updateHandlerUserChange(data, index)}
             />
           ))}
-        </div>
-        <button type="submit" className="submitButton" onClick={submitHandler}>
+        
+    </div>
+     
+      </form>
+      </div>
+         <button type="submit" className="submitButton" onClick={submitHandler}>
           Submit
         </button>
-      </form>
-      <div className="footer-component">
+     
+    
+     <div className="footer-component">
         <Footer />
       </div>
-    </div>
+
+   </>
   );
 };
 

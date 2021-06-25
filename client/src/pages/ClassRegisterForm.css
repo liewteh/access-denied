@@ -5,7 +5,16 @@
 }
 
 .HeaderContainer {
-  border-bottom: black 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border-bottom: light-grey1px solid; */
+  margin-top: 2rem;
+
+}
+
+.logo{
+  margin-right: 2rem;
 }
 
 .classTitle {
@@ -15,6 +24,14 @@
   padding: 10px;
   font-size: 1.6rem;
 }
+
+.formContainer{
+   margin-left: 20rem;
+   /* display: block;
+   margin: 0 auto;
+   width: 80%;
+   position: relative;*/
+} 
 
 .grid-item {
   font-size: 1.1rem;
