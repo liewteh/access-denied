@@ -14,23 +14,50 @@ export function Home() {
 
   // Request on Client
 
-  const auth = async () => {
-    try {
-      console.log("hello, authentication in process");
-      console.log(username);
-      console.log(password);
-      const res = await axios.get("/api/authenticate", {
-        auth: { user: username, password: password },
-      });
-      console.log(res);
-      const user_id = res.data.user_id;
-      history.push(`/user-cohorts/${user_id}`);
-    } catch (e) {
-      console.log(e);
+  // const auth = async () => {
+  //   try {
+  //     console.log("hello, authentication in process");
+  //     console.log(username);
+  //     console.log(password);
+  //     const res = await axios.get("/api/authenticate", {
+  //       auth: { username: username, password: password },
+  //     });
+  //     console.log("axios completed");
+  //     console.log(res);
+  //     const user_id = res.data.user_id;
+  //     history.push(`/user-cohorts/${user_id}`);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  /****************************************************** */
+
+  // do a get request to check if a user is logged in.
+  // if yes use the user)id and go to cohorts page
+  // else show login screen
+  // checkIfLoggedIn define fn
+  // checkedifLogged in call function
+  // if logged in redirect
+
+  const isUserLoggedIn = async () => {
+    console.log("checking is user logged in");
+    const response = await axios.get("/api/checkLogin");
+    const loggedUser = response.data;
+    console.log(loggedUser);
+
+    // check if loggedUser is an empty Object
+    function isEmptyObject(value) {
+      return Object.keys(value).length === 0 && value.constructor === Object;
+    }
+    if (!isEmptyObject(loggedUser)) {
+      let path = "/cohorts";
+      history.push(path);
     }
   };
 
-  /****************************************************** */
+  isUserLoggedIn();
+
   function loginHandler() {
     axios
       .post(
@@ -42,9 +69,8 @@ export function Home() {
         undefined,
         { withCredentials: true }
       )
-
       .then((res) => {
-        history.push("/blah");
+        history.push("/cohorts");
         console.log("hello");
       });
   }
@@ -81,7 +107,7 @@ export function Home() {
         </div>
 
         <div>
-          <button className="login-btn" onClick={auth}>
+          <button className="login-btn" onClick={loginHandler}>
             Sign In
           </button>
         </div>

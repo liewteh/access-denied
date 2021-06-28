@@ -1,10 +1,11 @@
 import { response, Router } from "express";
-import { Pool } from "pg";
+// import { Pool } from "pg";
 
 const knex = require("./knex");
 const router = new Router();
 
 /****************************************************** */
+/*
 const basicAuth = require("express-basic-auth");
 
 const auth = basicAuth({
@@ -54,7 +55,7 @@ router.get("/authenticate", auth, async (req, res) => {
     response.sendStatus(401);
   }
 });
-
+*/
 /****************************************************** */
 
 
@@ -83,21 +84,35 @@ function fakeLogin(username, password) {
   return userFound;
 }
 
+const loginUser = async (username, password) => {
+  console.log("trying to login user");
+  console.log(username);
+  console.log(password);
+  const users = await knex("users as u")
+    .whereRaw("LOWER(u.user_name) = ?", username)
+    .andWhere("u.password", password)
+    .select( "u.id", "u.user_name");
+
+  // get the role and the username and id.
+  console.log(users);
+  return users[0];
+};
+
 /* All Users Login API */
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
 
   const username = req.body.username;
   const password = req.body.password;
-  const user = fakeLogin(username, password);
+  const user = await loginUser(username, password);
 
   if (!user) {
     return res.status(401).send("username and password required");
   }
-  req.session.username = user.username;
-  req.session.role = user.role;
+  req.session.username = user.user_name;
+  // req.session.role = user.role;
   req.session.userId = user.id;
-  res.send("hello");
-
+  console.log(req.session);
+  res.sendStatus(204);
 
 // 	pool
 // 	  .query( userQuery, [username, password]
@@ -119,35 +134,71 @@ router.get("/blah", (req, res) => {
     username: req.session.username,
     count: req.session.count,
   });
-
 });
 
-router.get("/cohorts", async (req, res) => {
-  const cohorts = await knex("regions")
-    .join("cohorts", "regions.id", "=", "cohorts.region_id")
-    .select(
-      "cohorts.id",
-      "regions.name as region_name",
-      "cohorts.cohort_number"
-    );
-
-  res.send(cohorts);
+router.post("/logout", (req, res) => {
+  req.session.destroy();
+  res.sendStatus(204);
 });
 
-router.get("/user-cohorts/:user_id", async (req, res) => {
-  const user_id = req.params.user_id;
-  const cohorts = await knex("regions")
-    .join("cohorts", "regions.id", "=", "cohorts.region_id")
-    .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")
-    .where("cohort_members.user_id", user_id)
-    .select(
-      "cohorts.id",
-      "regions.name as region_name",
-      "cohorts.cohort_number"
-    );
-
-  res.send(cohorts);
+router.get("/checkLogin", (req, res) => {
+  console.log("in checkLogin");
+  const userId = req.session.userId;
+  console.log(userId);
+  res.json({ "userId" : userId });
 });
+
+// router.get("/cohorts", async (req, res) => {
+//   const cohorts = await knex("regions")
+//     .join("cohorts", "regions.id", "=", "cohorts.region_id")
+//     .select(
+//       "cohorts.id",
+//       "regions.name as region_name",
+//       "cohorts.cohort_number"
+//     );
+
+//   res.send(cohorts);
+// });
+
+// update this to get the user_id from session
+// router.get("/user-cohorts/:user_id", async (req, res) => {
+//   const user_id = req.params.user_id;
+//   const cohorts = await knex("regions")
+//     .join("cohorts", "regions.id", "=", "cohorts.region_id")
+//     .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")
+//     .where("cohort_members.user_id", user_id)
+//     .select(
+//       "cohorts.id",
+//       "regions.name as region_name",
+//       "cohorts.cohort_number"
+//     );
+
+//   res.send(cohorts);
+// });
+
+// update this to get the user_id from session
+router.get("/cohorts/", async (req, res) => {
+  console.log("user-cohorts");
+  const user_id = req.session.userId;
+  console.log(user_id);
+  if(user_id) {
+    console.log("user id exists");
+    const cohorts = await knex("regions")
+      .join("cohorts", "regions.id", "=", "cohorts.region_id")
+      .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")
+      .where("cohort_members.user_id", user_id)
+      .select(
+        "cohorts.id",
+        "regions.name as region_name",
+        "cohorts.cohort_number"
+      );
+    console.log("sending cohorts to frontend");
+    console.log(cohorts);
+    res.json(cohorts);
+  }
+});
+
+
 
 router.get("/cohorts/:cohortId/classes", async (req, res) => {
   const cohortId = req.params.cohortId;
