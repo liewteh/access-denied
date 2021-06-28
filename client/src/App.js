@@ -15,11 +15,11 @@ const App = () => (
     <Route path="/about/this/site">
       <About />
     </Route>
-    <Route path="/cohorts">
+    <Route path="/cohorts" exact>
       <Cohorts />
     </Route>
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
-    <Route path="/cohorts/:cohortId/classRegisterForm">
+    <Route path="/cohorts/:cohortId/classRegisterForm" exact>
       <ClassRegisterForm />
     </Route>
   </Switch>
