@@ -1,5 +1,4 @@
 import { Route, Switch } from "react-router-dom";
-import LandingPage from "./pages/landingPage";
 import About from "./pages/About";
 
 // import About from "./pages/About";
@@ -16,11 +15,9 @@ const App = () => (
     <Route path="/about/this/site">
       <About />
     </Route>
-    <Route path="/blah">
-      {" "}
-      <LandingPage />
+    <Route path="/cohorts">
+      <Cohorts />
     </Route>
-    <Route path="/cohorts" component={Cohorts} />
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
     <Route path="/cohorts/:cohortId/classRegisterForm">
       <ClassRegisterForm />

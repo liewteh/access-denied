@@ -10,29 +10,6 @@ export function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  /****************************************************** */
-
-  // Request on Client
-
-  // const auth = async () => {
-  //   try {
-  //     console.log("hello, authentication in process");
-  //     console.log(username);
-  //     console.log(password);
-  //     const res = await axios.get("/api/authenticate", {
-  //       auth: { username: username, password: password },
-  //     });
-  //     console.log("axios completed");
-  //     console.log(res);
-  //     const user_id = res.data.user_id;
-  //     history.push(`/user-cohorts/${user_id}`);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  /****************************************************** */
-
   // do a get request to check if a user is logged in.
   // if yes use the user)id and go to cohorts page
   // else show login screen

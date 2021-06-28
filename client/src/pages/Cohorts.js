@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 import axios from "axios";
 
 const Cohorts = () => {
-  // const { user_id } = useParams();
   const [cohortList, setCohortList] = useState(null);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ const Cohorts = () => {
     };
     console.log("in useEffect.");
     fetchCohorts();
-  }, []);
+  });
 
   return (
     <div className="cohortPage">
