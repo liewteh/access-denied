@@ -1,0 +1,25 @@
+.infoCard {
+  min-height: 7rem;
+  padding: 0.5rem;
+  background-color: rgb(255,255,255);
+  box-shadow: 1px 2px 1px rgb(200,200,200);
+}
+
+.cohortDetails {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cohortDetailsList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cohortDetailType {
+  font-weight: bold;
+}
