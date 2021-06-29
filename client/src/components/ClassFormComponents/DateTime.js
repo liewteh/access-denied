@@ -1,10 +1,10 @@
 import React from "react";
 import "./DateTime.css";
 
-const DateTime = () => {
-  const isoDateString = `Date: ${new Date().toISOString()}`;
+const DateTime = ({ dateAndTime }) => {
+  let displayDate = dateAndTime[0]?.dateAndTime;
 
-  return <input className="dateInput" placeholder={isoDateString} />;
+  return <input className="dateInput" value={displayDate} />;
 };
 
 export default DateTime;
