@@ -1,11 +1,53 @@
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import "./Home.css";
 
 export function Home() {
-  const [username, setUsername] = useState(""); // eslint-disable-line no-unused-vars
-  const [password, setPassword] = useState(""); // eslint-disable-line no-unused-vars
+  const history = useHistory();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  // do a get request to check if a user is logged in.
+  // if yes use the user)id and go to cohorts page
+  // else show login screen
+  // checkIfLoggedIn define fn
+  // checkedifLogged in call function
+  // if logged in redirect
+
+  const isUserLoggedIn = async () => {
+    const response = await axios.get("/api/checkLogin");
+    const loggedUser = response.data;
+
+    // check if loggedUser is an empty Object
+    function isEmptyObject(value) {
+      return Object.keys(value).length === 0 && value.constructor === Object;
+    }
+    if (!isEmptyObject(loggedUser)) {
+      let path = "/cohorts";
+      history.push(path);
+    }
+  };
+
+  isUserLoggedIn();
+
+  function loginHandler() {
+    axios
+      .post(
+        "/api/login",
+        {
+          username: username,
+          password: password,
+        },
+        undefined,
+        { withCredentials: true }
+      )
+      .then(() => {
+        history.push("/cohorts");
+      });
+  }
 
   return (
     <main role="main">
@@ -13,7 +55,7 @@ export function Home() {
         <div className="heading">
           <img
             className="logo"
-            src="https://syllabus.codeyourfuture.io/img/logo.png"
+            src="./client/img/cyf_logo.png"
             alt="cyf_logo"
           />
         </div>
@@ -38,9 +80,11 @@ export function Home() {
           ></input>
         </div>
 
-        <Link to="/about/this/site">
-          <button className="login-btn">Sign In</button>
-        </Link>
+        <div>
+          <button className="login-btn" onClick={loginHandler}>
+            Sign In
+          </button>
+        </div>
       </div>
       <div className="footer-component">
         <Footer />

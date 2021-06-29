@@ -20,6 +20,7 @@ if (process.env.DATABASE_URL) {
     port: 5432,
   };
 }
+
 const pool = new Pool(config);
 
 export const connectDb = async () => {
