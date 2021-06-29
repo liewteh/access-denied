@@ -4,6 +4,7 @@ import TextArea from "./TextArea";
 
 import "./StudentName.css";
 
+// eslint-disable-next-line no-unused-vars
 const StudentName = ({ studentData, rowUpdate }) => {
   // for submit form
   // const handleUpdate = (value, field) => {

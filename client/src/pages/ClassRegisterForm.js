@@ -61,7 +61,7 @@ const ClassRegisterForm = () => {
       .catch((error) => {
         console.error(`Error while fetching data. \n${error} `);
       });
-  }, [cohortId]);
+  }, [classId, cohortId]);
 
   // for submit form
   // const updateHandlerUserChange = (data, index) => {
