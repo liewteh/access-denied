@@ -41,7 +41,7 @@ export function Home() {
         <Link to="/classRegisterForm">
           <button className="login-btn">Sign In</button>
         </Link>
-        {/* <Link to="/about/this/site"> 
+        {/* <Link to="/about/this/site">
 				<button  className="login-btn">Sign In</button>
 				</Link> */}
       </div>
