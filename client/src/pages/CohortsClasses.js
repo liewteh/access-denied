@@ -14,8 +14,6 @@ const CohortClasses = () => {
   const history = useHistory();
 
   const routeChange = () => {
-    console.log("in route change function.");
-    console.log(cohortId);
     let path = `/cohorts/${cohortId}/classRegisterForm`;
     history.push(path);
   };
@@ -37,14 +35,10 @@ const CohortClasses = () => {
         const message = `An error has occurred: ${response2.status}`;
         throw new Error(message);
       }
-      console.log("fetching cohort details");
-      console.log(response2);
       const details = await response2.json();
-      console.log(details[0]);
       setCohortDetails(details[0]);
     };
 
-    console.log("in useEffect.");
     fetchClasses();
   }, [cohortId]);
 

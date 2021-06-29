@@ -1,12 +1,10 @@
 import React from "react";
 import "./ClassList.css";
 
-import ClassCard from "./ClasstCard";
+import ClassCard from "./ClassCard";
 
 const ClassList = ({ classList }) => {
   if (classList) {
-    console.log("in class list");
-    console.log(classList);
     return (
       <div className="classList">
         {classList.map((cohortClass, index) => (

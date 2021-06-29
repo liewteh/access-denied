@@ -4,7 +4,6 @@ import "./CohortCard.css";
 
 const CohortCard = ({ cohort }) => {
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div className="infoCard">
       <div className="cohortDetails">
         <h2 className="cohortName">

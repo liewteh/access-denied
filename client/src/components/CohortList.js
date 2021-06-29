@@ -5,8 +5,6 @@ import CohortCard from "./CohortCard";
 
 const CohortList = ({ cohortList }) => {
   if (cohortList) {
-    console.log("in cohort list");
-    console.log(cohortList);
     return (
       <div className="cohortList">
         {cohortList.map((cohort, index) => (

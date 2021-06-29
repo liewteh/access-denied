@@ -13,18 +13,9 @@ const Cohorts = () => {
     // function to fetch the cohort list from the server api
     const fetchCohorts = async () => {
       const response = await axios.get("/api/cohorts");
-      console.log("response of fetch cohorts is: ");
-      console.log(response);
       const cohorts = response.data;
-      console.log(cohorts);
-      // if (!response.ok) {
-      //   const message = `An error has occurred: ${response.status}`;
-      //   throw new Error(message);
-      // }
       setCohortList(cohorts);
-      console.log(cohorts);
     };
-    console.log("in useEffect.");
     fetchCohorts();
   }, []);
 

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import "./Home.css";
 
@@ -18,10 +18,8 @@ export function Home() {
   // if logged in redirect
 
   const isUserLoggedIn = async () => {
-    console.log("checking is user logged in");
     const response = await axios.get("/api/checkLogin");
     const loggedUser = response.data;
-    console.log(loggedUser);
 
     // check if loggedUser is an empty Object
     function isEmptyObject(value) {
@@ -46,9 +44,8 @@ export function Home() {
         undefined,
         { withCredentials: true }
       )
-      .then((res) => {
+      .then(() => {
         history.push("/cohorts");
-        console.log("hello");
       });
   }
 
