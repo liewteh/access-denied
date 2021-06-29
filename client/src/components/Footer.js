@@ -7,9 +7,8 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 const Footer = () => {
   return (
     <div className="footer">
-
       <div className="footer-p">
-        <p >Copyright&copy; CodeYourFuture</p>
+        <p>Copyright&copy; CodeYourFuture</p>
       </div>
       <div className="footer-icons">
         <FacebookIcon />

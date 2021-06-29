@@ -5,7 +5,6 @@ import TextArea from "./TextArea";
 import "./StudentName.css";
 
 const StudentName = ({ studentData, rowUpdate }) => {
-
   // for submit form
   // const handleUpdate = (value, field) => {
   //   const newData = { ...studentData };
