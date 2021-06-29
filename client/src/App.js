@@ -1,6 +1,5 @@
 import { Route, Switch } from "react-router-dom";
 
-import About from "./pages/About";
 import ClassRegisterForm from "./pages/ClassRegisterForm";
 import Home from "./pages/Home";
 
