@@ -109,4 +109,14 @@ router.get("/students", async (req, res) => {
   res.send(students);
 });
 
+router.get("/cohort-details/:cohortId", async (req, res) => {
+  console.log("cohort details");
+  const cohortId = req.params.cohortId;
+  const details = await knex("cohorts")
+    .join("regions", "regions.id", "cohorts.region_id")
+    .where("cohorts.id", "=", cohortId)
+    .select("cohorts.cohort_number", "regions.name as region_name");
+  console.log(details);
+  res.send(details);
+});
 export default router;

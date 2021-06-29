@@ -9,6 +9,7 @@ const CohortClasses = () => {
   const { cohortId } = useParams();
 
   const [classList, setClassList] = useState([]);
+  const [cohortDetails, setCohortDetails] = useState(null);
 
   const history = useHistory();
 
@@ -28,9 +29,19 @@ const CohortClasses = () => {
         const message = `An error has occurred: ${response.status}`;
         throw new Error(message);
       }
-
       const classes = await response.json();
       setClassList(classes);
+
+      const response2 = await fetch(`/api/cohort-details/${cohortId}`);
+      if (!response2.ok) {
+        const message = `An error has occurred: ${response2.status}`;
+        throw new Error(message);
+      }
+      console.log("fetching cohort details");
+      console.log(response2);
+      const details = await response2.json();
+      console.log(details[0]);
+      setCohortDetails(details[0]);
     };
 
     console.log("in useEffect.");
@@ -39,7 +50,9 @@ const CohortClasses = () => {
 
   return (
     <div className="classPage">
-      <h1 className="cohortClassPageHeading">Cohort Classes</h1>
+      <h1 className="cohortClassPageHeading">
+        {cohortDetails && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
+      </h1>
       <ClassList classList={classList} />
       <button onClick={routeChange} role="link">Add New Class</button>
       <Footer />
