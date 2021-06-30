@@ -15,7 +15,7 @@ const ClassRegisterForm = () => {
   const { classId } = useParams();
 
   /* test submit or result form */
-  let testAddSubmitForm = true;
+  let testAddSubmitForm = false;
 
   // hook for input students data
   const [studentsData, setStudentsData] = useState([]);
