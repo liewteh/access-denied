@@ -85,15 +85,7 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
   res.send(students);
 });
 
-router.get("/students", async (req, res) => {
-  const students = await knex("users")
-    .select("user_name")
-    .where("user_name", "like", "Student%")
-    .limit(10);
-
-  res.send(students);
-});
-
+// get student attendance data
 router.get(
   "/cohorts/:cohortId/classes/:classId/students-attendance",
   async (req, res) => {
