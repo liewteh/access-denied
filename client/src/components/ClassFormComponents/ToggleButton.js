@@ -62,18 +62,12 @@ export default function ToggleButtonOff({ defaultValue }) {
     checkedB: defaultValue,
   });
 
-  const handleChange = (event) => {
-    toggleValue(event.target.checked);
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   return (
     <FormGroup>
       <FormControlLabel
         control={
           <IOSSwitch
             checked={state.checkedB}
-            onChange={handleChange}
             name="checkedB"
           />
         }
