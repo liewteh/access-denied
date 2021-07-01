@@ -44,6 +44,7 @@ const CohortClasses = () => {
 
   return (
     <div className="classPage">
+    <button onClick={() => history.goBack()}>Back</button>
       <h1 className="cohortClassPageHeading">
         {cohortDetails && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>

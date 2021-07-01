@@ -1,3 +1,81 @@
-.HeaderLogo {
-  height: 70px;
+.header-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
 }
+
+.header-left{
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.header-right{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* margin: 1rem; */
+}
+
+.header-logo {
+  height: 50px;
+  margin-bottom: .5rem;;
+}
+
+.back-btn{
+  border-radius: 10px;
+  padding: 10px;
+  width: 150px;
+  background-color: #303846;
+  color: #fff;
+}
+
+.back-btn:hover{
+  cursor: pointer;
+}
+
+.back-arrow:hover{
+    cursor: pointer;
+}
+
+.back-btn:active {
+  transform: translateY(5px);
+}
+
+
+
+.logout-btn{
+  border-radius: 10px;
+  padding: 10px;
+  width: 150px;
+  margin-right: 5rem;
+  margin-top: .5rem;
+  background-color: #d64444;
+  color: #fff;
+}
+
+.logout-btn:hover{
+    cursor: pointer;
+}
+
+.logout-btn:active {
+  transform: translateY(5px);
+}
+
+
+.avatar-container{
+  display:flex;
+  flex-direction: column;
+  /* justify-content:center; */
+  align-items: center; 
+  margin-right: 5rem;
+}
+
+.avatar{
+  
+  color: green;
+  font-size: 2rem;
+}
+

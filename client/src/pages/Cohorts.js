@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import CohortList from "../components/CohortList";
+import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import axios from "axios";
 
@@ -21,6 +22,7 @@ const Cohorts = () => {
 
   return (
     <div className="cohortPage">
+        <button className="backBtn" onClick={() => history.goBack()}>Logout</button>
       <h1 className="cohortPageHeading">Your Cohorts</h1>
       { cohortList
         ? <CohortList cohortList={cohortList} /> : <h2>Loading...</h2>
