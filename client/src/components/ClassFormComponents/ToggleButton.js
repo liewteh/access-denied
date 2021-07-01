@@ -57,7 +57,7 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-export default function ToggleButtonOff({ defaultValue, toggleValue }) {
+export default function ToggleButtonOff({ defaultValue }) {
   const [state, setState] = React.useState({
     checkedB: defaultValue,
   });
@@ -77,7 +77,6 @@ export default function ToggleButtonOff({ defaultValue, toggleValue }) {
             name="checkedB"
           />
         }
-        // label="test"
       />
     </FormGroup>
   );

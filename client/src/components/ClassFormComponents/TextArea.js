@@ -1,13 +1,13 @@
 import React from "react";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-const TextArea = ({ comment, disabledComment }) => {
+const TextArea = ({ comment }) => {
   return (
     <TextareaAutosize
       aria-label="minimum height"
       rowsMin={1}
-      value={comment}
-      disabled={!disabledComment}
+      defaultValue={comment}
+      disabled={true}
     />
   );
 };
