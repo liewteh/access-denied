@@ -25,11 +25,11 @@ const ClassRegisterForm = () => {
           defaultStudent = {
             user_id: null,
             user_name: s.user_name,
-            absence: null,
-            late: null,
-            distractNotParticipate: null,
-            cameraOnOff: null,
-            techIssue: null,
+            attended: null,
+            late_minutes: null,
+            distracted: null,
+            camera_on: null,
+            connectivity_issues: null,
             comments: null,
           };
           return defaultStudent;
@@ -37,8 +37,8 @@ const ClassRegisterForm = () => {
 
         const rAndC = res.data.map((rC) => {
           const chosen = {
-            region: rC.name,
-            class: rC.cohort_number,
+            name: rC.name,
+            cohort_number: rC.cohort_number,
           };
           return chosen;
         });
