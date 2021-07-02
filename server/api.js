@@ -92,7 +92,7 @@ router.get(
     const cohortId = req.params.cohortId;
     const classId = req.params.classId;
 
-    // get student list of a region's name, and its class's number
+    // get student list of a region's name, and its class's number for form's result
     const students = await knex("cohorts as c")
       .select("*")
       .join("regions as r", "r.id", "c.region_id")
@@ -106,7 +106,7 @@ router.get(
   }
 );
 
-// get student attendance data for submit form
+// get student's name, region and class data for submit form
 router.get("/submit/:cohortId/submit-attendance", async (req, res) => {
   const cohortId = req.params.cohortId;
 
@@ -119,19 +119,23 @@ router.get("/submit/:cohortId/submit-attendance", async (req, res) => {
     .andWhere("u.user_name", "like", "Student%");
 
   res.send(students);
-
-  // const cohortId = req.params.cohortId;
-  // // get student list of a region's name, and its class's number
-  // const students = await knex("cohorts as c")
-  //   .select("*")
-  //   .join("regions as r", "r.id", "c.region_id")
-  //   .join("cohort_members as cm", "c.id", "cm.cohort_id")
-  //   .join("users as u", "u.id", "cm.user_id")
-  //   .join("class_attendances as ca", "ca.user_id", "u.id")
-  //   .where("u.user_name", "like", "Student%")
-  //   .andWhere("c.id", cohortId)
-  // res.send(students);
 });
+
+// // post to submit form
+// router.post("/login", async (req, res) => {
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   const user = await loginUser(username, password);
+
+//   if (!user) {
+//     return res.status(401).send("Incorrect username and/or password!");
+//   }
+
+//   req.session.username = user.user_name;
+//   // req.session.role = user.role;
+//   req.session.userId = user.id;
+//   res.sendStatus(204);
+// });
 
 router.get("/cohort-details/:cohortId", async (req, res) => {
   const cohortId = req.params.cohortId;
