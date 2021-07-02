@@ -14,7 +14,7 @@ const CohortClasses = () => {
   const history = useHistory();
 
   const routeChange = () => {
-    let path = `/cohorts/${cohortId}/classes`;
+    let path = `/submit/${cohortId}/submit-attendance`;
     history.push(path);
   };
 

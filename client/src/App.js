@@ -3,6 +3,7 @@ import ClassRegisterResult from "./pages/ClassRegisterResult";
 import Home from "./pages/Home";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
+import SubmitForm from "./pages/SubmitForm";
 
 const App = () => (
   <Switch>
@@ -18,6 +19,9 @@ const App = () => (
       component={ClassRegisterResult}
       exact
     />
+    <Route path="/submit/:cohortId/submit-attendance" exact>
+      <SubmitForm />
+    </Route>
   </Switch>
 );
 

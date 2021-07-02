@@ -15,7 +15,7 @@ const loginUser = async (username, password) => {
   const users = await knex("users")
     .whereRaw("LOWER(user_name) = ?", username)
     .andWhere("password", password)
-    .select( "id", "user_name");
+    .select("id", "user_name");
 
   // get the username and id.
   return users[0];
@@ -44,13 +44,13 @@ router.post("/logout", (req, res) => {
 
 router.get("/checkLogin", (req, res) => {
   const userId = req.session.userId;
-  res.json({ "userId" : userId });
+  res.json({ userId: userId });
 });
 
 // update this to get the user_id from session
 router.get("/cohorts/", async (req, res) => {
   const user_id = req.session.userId;
-  if(user_id) {
+  if (user_id) {
     const cohorts = await knex("regions")
       .join("cohorts", "regions.id", "=", "cohorts.region_id")
       .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")
@@ -105,6 +105,33 @@ router.get(
     res.send(students);
   }
 );
+
+// get student attendance data for submit form
+router.get("/submit/:cohortId/submit-attendance", async (req, res) => {
+  const cohortId = req.params.cohortId;
+
+  const students = await knex("cohort_members as cm")
+    .select("*")
+    .join("users as u", "u.id", "cm.user_id")
+    .join("cohorts as c", "cm.cohort_id", "c.id")
+    .join("regions as r", "r.id", "c.region_id")
+    .where("cm.cohort_id", cohortId)
+    .andWhere("u.user_name", "like", "Student%");
+
+  res.send(students);
+
+  // const cohortId = req.params.cohortId;
+  // // get student list of a region's name, and its class's number
+  // const students = await knex("cohorts as c")
+  //   .select("*")
+  //   .join("regions as r", "r.id", "c.region_id")
+  //   .join("cohort_members as cm", "c.id", "cm.cohort_id")
+  //   .join("users as u", "u.id", "cm.user_id")
+  //   .join("class_attendances as ca", "ca.user_id", "u.id")
+  //   .where("u.user_name", "like", "Student%")
+  //   .andWhere("c.id", cohortId)
+  // res.send(students);
+});
 
 router.get("/cohort-details/:cohortId", async (req, res) => {
   const cohortId = req.params.cohortId;
