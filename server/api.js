@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  req.session.destroy();
+  req.session = null;
   res.sendStatus(204);
 });
 
@@ -46,6 +46,11 @@ router.get("/checkLogin", (req, res) => {
   const userId = req.session.userId;
   res.json({ "userId" : userId });
 });
+
+router.get("/username", (req, res) => {
+  const username = req.session.username;
+  res.send(username);
+})
 
 // update this to get the user_id from session
 router.get("/cohorts/", async (req, res) => {
