@@ -92,14 +92,14 @@ router.get(
     const cohortId = req.params.cohortId;
     const classId = req.params.classId;
 
-    // get student list of a region's name, and its class's number for form's result
+    // get student list of a region's name, and its class's number
     const students = await knex("cohorts as c")
       .select("*")
       .join("regions as r", "r.id", "c.region_id")
       .join("cohort_members as cm", "c.id", "cm.cohort_id")
       .join("users as u", "u.id", "cm.user_id")
       .join("class_attendances as ca", "ca.user_id", "u.id")
-      .where("u.user_name", "like", "Student%")
+      .where("cm.role_id", 3)
       .andWhere("c.id", cohortId)
       .andWhere("ca.class_id", classId);
     res.send(students);
