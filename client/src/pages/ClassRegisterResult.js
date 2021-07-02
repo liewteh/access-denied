@@ -16,7 +16,7 @@ const ClassRegisterForm = () => {
   const [regionAndClass, setRegionAndClass] = useState([]);
   const [dateAndTime, setDateAndTime] = useState([]);
 
-  // get region's class's student's data from database
+  // get student's attendance data from database
   useEffect(() => {
     axios
       .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
@@ -36,14 +36,36 @@ const ClassRegisterForm = () => {
           };
           return defaultStudent;
         });
+        setStudentsData(newStudentsData);
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+  }, [cohortId, classId]);
 
+  // get created date and time data from database
+  useEffect(() => {
+    axios
+      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
+      .then((res) => {
         const createdDateAndTime = res.data.map((date) => {
           const createdDate = {
-            dateAndTime: date.updated_at,
+            dateAndTime: date.created_at,
           };
           return createdDate;
         });
+        setDateAndTime(createdDateAndTime);
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+  }, [cohortId, classId]);
 
+  // get region's class's data from database
+  useEffect(() => {
+    axios
+      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
+      .then((res) => {
         const rAndC = res.data.map((rC) => {
           const chosen = {
             region: rC.name,
@@ -51,8 +73,6 @@ const ClassRegisterForm = () => {
           };
           return chosen;
         });
-        setStudentsData(newStudentsData);
-        setDateAndTime(createdDateAndTime);
         setRegionAndClass(rAndC);
       })
       .catch((error) => {
@@ -79,10 +99,7 @@ const ClassRegisterForm = () => {
       <form>
         <div className="studentNameContainer">
           {studentsData.map((student, index) => (
-            <StudentName
-              key={index}
-              studentData={student}
-            />
+            <StudentName key={index} studentData={student} />
           ))}
         </div>
       </form>
