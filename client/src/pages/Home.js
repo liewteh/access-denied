@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Home.css";
 import Footer from "../components/Footer";
+import cyf_logo from "../../img/cyf_logo.png";
 
 export function Home() {
   const history = useHistory();
@@ -56,7 +57,7 @@ export function Home() {
           <div className="heading">
             <img
               className="logo"
-              src="../../img/cyf_logo.png"
+              src={cyf_logo}
               alt="cyf_logo"
             />
           </div>
