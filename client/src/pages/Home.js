@@ -56,7 +56,7 @@ export function Home() {
           <div className="heading">
             <img
               className="logo"
-              src="./client/img/cyf_logo.png"
+              src="../../img/cyf_logo.png"
               alt="cyf_logo"
             />
           </div>
