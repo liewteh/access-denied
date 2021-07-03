@@ -1,86 +1,80 @@
-.header-container{
+.header-container {
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 6rem;
 }
 
-.header-left{
+.header-left {
   display: flex;
   flex-direction: column;
   margin: 1rem;
   height: 100%;
 }
 
-.header-right{
+.header-right {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* margin: 1rem; */
+  margin: 0 1rem;
   height: 100%;
   width: 25%;
-
 }
 
 .header-logo {
   height: 100%;
-  margin-bottom: .5rem;;
+  margin-bottom: 0.5rem;
 }
 
-.header-btn{
+.header-btn {
   min-height: 1.5rem;
   width: 8rem;
   border-radius: 10px;
-  padding: 10px;
+  padding: 0.5rem;
+  margin: 1rem;
   color: #fff;
   font-size: 1.1rem;
 }
 
-.back-btn{
+.back-btn {
   background-color: #303846;
- 
 }
 
-.back-btn:hover{
+.back-btn:hover {
   cursor: pointer;
 }
 
-.back-arrow:hover{
-    cursor: pointer;
+.back-arrow:hover {
+  cursor: pointer;
 }
 
 .back-btn:active {
   transform: translateY(5px);
 }
 
-
-
-.logout-btn{
+.logout-btn {
   background-color: #d64444;
-
 }
 
-.logout-btn:hover{
-    cursor: pointer;
+.logout-btn:hover {
+  cursor: pointer;
 }
 
 .logout-btn:active {
   transform: translateY(5px);
 }
 
-
-.avatar-container{
-  display:flex;
+.avatar-container {
+  display: flex;
   flex-direction: column;
   /* justify-content:center; */
-  align-items: center; 
+  align-items: center;
   margin-right: 5rem;
 }
 
-.avatar{
-  
+.avatar {
   color: green;
   font-size: 2rem;
 }
-

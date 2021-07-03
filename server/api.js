@@ -15,7 +15,7 @@ const loginUser = async (username, password) => {
   const users = await knex("users")
     .whereRaw("LOWER(user_name) = ?", username)
     .andWhere("password", password)
-    .select( "id", "user_name");
+    .select("id", "user_name");
 
   // get the username and id.
   return users[0];
@@ -44,18 +44,18 @@ router.post("/logout", (req, res) => {
 
 router.get("/checkLogin", (req, res) => {
   const userId = req.session.userId;
-  res.json({ "userId" : userId });
+  res.json({ userId: userId });
 });
 
 router.get("/username", (req, res) => {
   const username = req.session.username;
   res.send(username);
-})
+});
 
 // update this to get the user_id from session
 router.get("/cohorts/", async (req, res) => {
   const user_id = req.session.userId;
-  if(user_id) {
+  if (user_id) {
     const cohorts = await knex("regions")
       .join("cohorts", "regions.id", "=", "cohorts.region_id")
       .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")

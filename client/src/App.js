@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import About from "./pages/About";
 
 // import About from "./pages/About";
+import Layout from "./components/Layout";
 import ClassRegisterForm from "./pages/ClassRegisterForm";
 import Home from "./pages/Home";
 import Cohorts from "./pages/Cohorts";
@@ -12,16 +13,22 @@ const App = () => (
     <Route path="/" exact>
       <Home />
     </Route>
-    <Route path="/about/this/site">
-      <About />
-    </Route>
-    <Route path="/cohorts" exact>
-      <Cohorts />
-    </Route>
-    <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
-    <Route path="/cohorts/:cohortId/classRegisterForm" exact>
-      <ClassRegisterForm />
-    </Route>
+    <Layout>
+      <Route path="/about/this/site">
+        <About />
+      </Route>
+      <Route path="/cohorts" exact>
+        <Cohorts />
+      </Route>
+      <Route
+        path="/cohorts/:cohortId/classes"
+        component={CohortClasses}
+        exact
+      />
+      <Route path="/cohorts/:cohortId/classRegisterForm" exact>
+        <ClassRegisterForm />
+      </Route>
+    </Layout>
   </Switch>
 );
 

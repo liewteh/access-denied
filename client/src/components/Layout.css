@@ -1,0 +1,16 @@
+.page {
+  height: 85vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  margin-bottom: 0;
+  /* grid-template-rows: 1fr 2fr 1fr; */
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  /* overflow-y: scroll; */
+}

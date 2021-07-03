@@ -1,8 +1,6 @@
 import "./ClassRegisterForm.css";
 import React, { useState, useEffect } from "react";
-import Header from "../components/ClassFormComponents/Header.js";
 import StudentName from "../components/ClassFormComponents/StudentName.js";
-import Footer from "../components/Footer";
 // import StudentNames from "../TestData/Names.json";
 import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle.js";
@@ -75,9 +73,7 @@ const ClassRegisterForm = () => {
 
   return (
     <div className="formContainer">
-      <div className="HeaderContainer">
-        <Header />
-      </div>
+      <div className="HeaderContainer"></div>
       <div className="classTitle">
         <RegionAndClassTitle />
         <DownloadReportButton className="DownloadReportButton" />
@@ -103,9 +99,6 @@ const ClassRegisterForm = () => {
           Submit
         </button>
       </form>
-      <div className="footer-component">
-        <Footer />
-      </div>
     </div>
   );
 };

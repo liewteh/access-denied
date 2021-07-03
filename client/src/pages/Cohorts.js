@@ -3,8 +3,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import CohortList from "../components/CohortList";
-import { useHistory } from "react-router-dom";
-import Footer from "../components/Footer";
 import axios from "axios";
 
 const Cohorts = () => {
@@ -26,7 +24,6 @@ const Cohorts = () => {
       { cohortList
         ? <CohortList cohortList={cohortList} /> : <h2>Loading...</h2>
       }
-      <Footer />
     </div>
   );
 };
