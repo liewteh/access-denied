@@ -16,11 +16,12 @@ const App = () => (
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
     <Route
       path="/cohorts/:cohortId/classes/:classId/students-attendance"
-      component={ClassRegisterResult}
       exact
-    />
+    >
+      <SubmitForm isEditable={false} />
+    </Route>
     <Route path="/submit/:cohortId/submit-attendance" exact>
-      <SubmitForm />
+      <SubmitForm isEditable={true} />
     </Route>
   </Switch>
 );

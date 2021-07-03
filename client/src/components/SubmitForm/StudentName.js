@@ -6,11 +6,13 @@ import "./StudentName.css";
 
 // eslint-disable-next-line no-unused-vars
 const StudentName = ({ studentData, rowUpdate }) => {
-const handleUpdate = (value, field) => {
-  const newData = { ...studentData };
-  newData[field] = value;
-  rowUpdate(newData);
-};
+  console.log("inStudentName", studentData);
+  
+  const handleUpdate = (value, field) => {
+    const newData = { ...studentData };
+    newData[field] = value;
+    rowUpdate(newData);
+  };
 
   return (
     <>

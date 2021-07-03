@@ -6,9 +6,24 @@ import StudentName from "../components/SubmitForm/StudentName";
 import DownloadReportButton from "../components/SubmitForm/DownloadReportButton";
 import RegionAndClassTitle from "../components/SubmitForm/RegionAndClassTitle";
 import BasicDateTimePicker from "../components/SubmitForm/BasicDateTimePicker";
+import { ContactsTwoTone } from "@material-ui/icons";
+import DateTime from "../components/ClassFormComponents/DateTime";
 
-const ClassRegisterForm = () => {
+// a default student of region's class's student
+const defaultStudent = {
+  user_id: null,
+  user_name: "",
+  absence: false,
+  late: 10,
+  distractNotParticipate: false,
+  cameraOnOff: false,
+  techIssue: false,
+  comments: "testing",
+};
+
+const ClassRegisterForm = ({ isEditable }) => {
   const { cohortId } = useParams();
+  const { classId } = useParams();
 
   // hook for input students data
   const [studentsData, setStudentsData] = useState([]);
@@ -16,23 +31,33 @@ const ClassRegisterForm = () => {
 
   // get region's class's and student's name from database
   useEffect(() => {
+    let url;
+
+    if (isEditable) {
+      url = `/cohorts/${cohortId}/students`;
+    } else {
+      url = `/api/cohorts/${cohortId}/classes/${classId}/students-attendance`;
+    }
+
     axios
-      .get(`/api/submit/${cohortId}/submit-attendance`)
+      .get(url)
       .then((res) => {
         const newStudentsData = res.data.map((s) => {
-          let defaultStudent;
+          console.log(s);
+          return { ...defaultStudent, ...s };
+          // defaultStudent = { ...s };
           // a default student of region's class's student
-          defaultStudent = {
-            user_id: null,
-            user_name: s.user_name,
-            attended: null,
-            late_minutes: null,
-            distracted: null,
-            camera_on: null,
-            connectivity_issues: null,
-            comments: null,
-          };
-          return defaultStudent;
+          // defaultStudent = {
+          //   user_id: null,
+          //   user_name: s.user_name,
+          //   attended: null,
+          //   late_minutes: null,
+          //   distracted: null,
+          //   camera_on: null,
+          //   connectivity_issues: null,
+          //   comments: null,
+          // };
+          // return defaultStudent;
         });
         setStudentsData(newStudentsData);
       })
@@ -90,7 +115,7 @@ const ClassRegisterForm = () => {
         <RegionAndClassTitle regionName={regionAndClass} />
         <DownloadReportButton className="DownloadReportButton" />
       </div>
-      <BasicDateTimePicker />
+      {/* {isEditable ? <BasicDateTimePicker /> : <DateTime /> } */}
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
         <div className="grid-item"> Absence </div>

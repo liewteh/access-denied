@@ -7,7 +7,7 @@ import DownloadReportButton from "../components/ClassFormComponents/DownloadRepo
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
 
-const ClassRegisterForm = () => {
+const ClassRegisterForm = ({ isEditable }) => {
   const { cohortId } = useParams();
   const { classId } = useParams();
 
@@ -18,8 +18,28 @@ const ClassRegisterForm = () => {
 
   // get student's attendance data from database
   useEffect(() => {
+    let url;
+    let defaultStudent;
+    // a default student of region's class's student
+    defaultStudent = {
+      user_id: null,
+      user_name: "",
+      absence: false,
+      late: 0,
+      distractNotParticipate: false,
+      cameraOnOff: false,
+      techIssue: false,
+      comments: "",
+    };
+
+    if (isEditable) {
+      url = `/cohorts/${cohortId}/students`;
+    } else {
+      url = `/api/cohorts/${cohortId}/classes/${classId}/students-attendance`;
+    }
+
     axios
-      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
+      .get(url)
       .then((res) => {
         const newStudentsData = res.data.map((s) => {
           let defaultStudent;
