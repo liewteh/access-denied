@@ -13,7 +13,7 @@ const CohortClasses = () => {
   const history = useHistory();
 
   const routeChange = () => {
-    let path = `/cohorts/${cohortId}/classRegisterForm`;
+    let path = `/cohorts/${cohortId}/classes`;
     history.push(path);
   };
 

@@ -1,10 +1,13 @@
 import React from "react";
 
-const RegionAndClassTitle = () => {
+const RegionAndClassTitle = ({ region }) => {
   return (
-    <>
-      <h3>WestMidlands Class 2</h3>
-    </>
+    <div>
+      <h3>
+        <strong>{region[0]?.region}</strong>
+      </h3>
+      <h4>Class {region[0]?.class}</h4>
+    </div>
   );
 };
 

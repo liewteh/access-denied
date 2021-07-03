@@ -1,63 +1,54 @@
 import React from "react";
-// import { useState } from "react";
-// import ToggleButtonOn from "./ToggleButtonOn";
 import ToggleButton from "./ToggleButton";
+import TextArea from "./TextArea";
 
 import "./StudentName.css";
 
-const StudentName = ({ studentData, rowUpdate }) => {
-  const handleUpdate = (value, field) => {
-    const newData = { ...studentData };
-    newData[field] = value;
-    rowUpdate(newData);
-  };
+// eslint-disable-next-line no-unused-vars
+const StudentName = ({ studentData }) => {
 
   return (
     <>
-      <div className="tableHeader">
-        <div className="grid-item">{studentData.user_name}</div>
-        <div className="grid-item">
+      <div className="titleGridContainer">
+        <div className="studentName">{studentData.user_name}</div>
+        <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={false}
-            toggleValue={(e) => handleUpdate(e, "absence")}
+            defaultValue={studentData.absence}
           />
         </div>
-        <div className="grid-item">
+        <div>
           <input
             className="lateInput"
-            type="integer"
-            placeholder="minutes"
-            onChange={(e) => handleUpdate(e.target.value, "late")}
+            type="number"
+            min="0"
+            defaultValue={studentData.late}
+            disabled={true}
           />
         </div>
-        <div className="grid-item">
+        <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={false}
-            toggleValue={(e) => handleUpdate(e, "distractNotParticipate")}
+            defaultValue={studentData.distractNotParticipate}
           />
         </div>
-        <div className="grid-item">
+        <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={true}
-            toggleValue={(e) => handleUpdate(e, "cameraOnOff")}
+            defaultValue={studentData.cameraOnOff}
           />
         </div>
-        <div className="grid-item">
+        <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={false}
-            toggleValue={(e) => handleUpdate(e, "techIssue")}
+            defaultValue={studentData.techIssue}
           />
         </div>
-        <div className="grid-item">
-          <input
+        <div>
+          <TextArea
             type="string"
-            placeholder="brief comments"
-            onChange={(e) => handleUpdate(e.target.value, "comments")}
-          />
+            comment={studentData.comment}
+          ></TextArea>
         </div>
       </div>
     </>

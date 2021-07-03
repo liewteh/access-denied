@@ -90,14 +90,26 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
   res.send(students);
 });
 
-router.get("/students", async (req, res) => {
-  const students = await knex("users")
-    .select("user_name")
-    .where("user_name", "like", "Student%")
-    .limit(10);
+// get student attendance data
+router.get(
+  "/cohorts/:cohortId/classes/:classId/students-attendance",
+  async (req, res) => {
+    const cohortId = req.params.cohortId;
+    const classId = req.params.classId;
 
-  res.send(students);
-});
+    // get student list of a region's name, and its class's number
+    const students = await knex("cohorts as c")
+      .select("*")
+      .join("regions as r", "r.id", "c.region_id")
+      .join("cohort_members as cm", "c.id", "cm.cohort_id")
+      .join("users as u", "u.id", "cm.user_id")
+      .join("class_attendances as ca", "ca.user_id", "u.id")
+      .where("cm.role_id", 3)
+      .andWhere("c.id", cohortId)
+      .andWhere("ca.class_id", classId);
+    res.send(students);
+  }
+);
 
 router.get("/cohort-details/:cohortId", async (req, res) => {
   const cohortId = req.params.cohortId;
