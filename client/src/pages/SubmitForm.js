@@ -34,7 +34,17 @@ const ClassRegisterForm = () => {
           };
           return defaultStudent;
         });
+        setStudentsData(newStudentsData);
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+  }, [cohortId]);
 
+  useEffect(() => {
+    axios
+      .get(`/api/submit/${cohortId}/submit-attendance`)
+      .then((res) => {
         const rAndC = res.data.map((rC) => {
           const chosen = {
             name: rC.name,
@@ -42,7 +52,6 @@ const ClassRegisterForm = () => {
           };
           return chosen;
         });
-        setStudentsData(newStudentsData);
         // setDateAndTime(createdDateAndTime);
         setRegionAndClass(rAndC);
       })

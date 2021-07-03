@@ -117,10 +117,13 @@ router.get("/submit/:cohortId/submit-attendance", async (req, res) => {
     .join("regions as r", "r.id", "c.region_id")
     .where("cm.cohort_id", cohortId)
     .andWhere("u.user_name", "like", "Student%");
-
   res.send(students);
 });
 
+// post attendance
+router.post("/submitAttendance", async (req, res) => {
+  
+})
 // // post to submit form
 // router.post("/login", async (req, res) => {
 //   const username = req.body.username;
