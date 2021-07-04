@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import StudentName from "../components/SubmitForm/StudentName";
-import DownloadReportButton from "../components/SubmitForm/DownloadReportButton";
 import RegionAndClassTitle from "../components/SubmitForm/RegionAndClassTitle";
 import BasicDateTimePicker from "../components/SubmitForm/BasicDateTimePicker";
 
@@ -23,14 +22,14 @@ const ClassRegisterForm = () => {
           let defaultStudent;
           // a default student of region's class's student
           defaultStudent = {
-            user_id: null,
             user_name: s.user_name,
-            attended: null,
+            attended: true,
             late_minutes: null,
-            distracted: null,
-            camera_on: null,
-            connectivity_issues: null,
+            distracted: false,
+            camera_on: true,
+            connectivity_issues: false,
             comments: null,
+            created_at: null,
           };
           return defaultStudent;
         });
@@ -60,6 +59,14 @@ const ClassRegisterForm = () => {
       });
   }, [cohortId]);
 
+
+  // date and time handler
+  const dateAndTimeHandleUpdate = (value, field) => {
+    const newDate = [...studentsData];
+    newDate[field] = value;
+    setStudentsData(newDate);
+  };
+
   // post new student attendance data
   const updateHandlerUserChange = (data, index) => {
     const newData = [...studentsData];
@@ -88,9 +95,10 @@ const ClassRegisterForm = () => {
     <div className="formContainer">
       <div className="classTitle">
         <RegionAndClassTitle regionName={regionAndClass} />
-        <DownloadReportButton className="DownloadReportButton" />
       </div>
-      <BasicDateTimePicker />
+      <BasicDateTimePicker
+        dateAndTimeValue={(e) => dateAndTimeHandleUpdate(e, "created_at")}
+      />
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
         <div className="grid-item"> Absence </div>

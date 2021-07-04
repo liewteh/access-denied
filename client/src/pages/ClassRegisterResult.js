@@ -22,6 +22,7 @@ const ClassRegisterForm = () => {
       .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
       .then((res) => {
         const newStudentsData = res.data.map((s) => {
+          console.log(res.data);
           let defaultStudent;
           // a default student of region's class's student
           defaultStudent = {
