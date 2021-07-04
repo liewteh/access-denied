@@ -73,6 +73,18 @@ router.get("/cohorts/", async (req, res) => {
   }
 });
 
+// api to get the list of all the cohorts
+router.get("/cohorts/all", async (req, res) => {
+  const cohorts = await knex("regions")
+    .join("cohorts", "regions.id", "=", "cohorts.region_id")
+    .select(
+      "cohorts.id",
+      "regions.name as region_name",
+      "cohorts.cohort_number"
+    );
+  res.json(cohorts);
+});
+
 // api to get cohort_number and region_name for a given cohortId
 router.get("/cohorts/:cohortId", async (req, res) => {
   const cohortId = req.params.cohortId;
