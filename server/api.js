@@ -92,9 +92,19 @@ router.get(
     const cohortId = req.params.cohortId;
     const classId = req.params.classId;
 
-    // get student list of a region's name, and its class's number
     const students = await knex("cohorts as c")
-      .select("*")
+      .select(
+        "r.name",
+        "c.cohort_number",
+        "u.user_name",
+        "ca.attended",
+        "ca.late_minutes",
+        "ca.distracted",
+        "ca.camera_on",
+        "ca.connectivity_issues",
+        "ca.comments",
+        "ca.created_at"
+      )
       .join("regions as r", "r.id", "c.region_id")
       .join("cohort_members as cm", "c.id", "cm.cohort_id")
       .join("users as u", "u.id", "cm.user_id")
