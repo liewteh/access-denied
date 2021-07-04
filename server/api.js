@@ -119,6 +119,47 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
   res.send(students);
 });
 
+// api to get list of all the roles
+router.get("/roles", async (req, res) => {
+  const roles = await knex("roles").select("*");
+  res.json(roles);
+});
+
+// api to get list of all the users
+router.get("/users/", async (req, res) => {
+  const users = await knex("users").select("id", "user_name", "email");
+
+  const fetchCohortsList = async () => {
+    await Promise.all(
+      users.map(async (user) => {
+        console.log("in map");
+        const cohortsList = await knex("regions")
+          .join("cohorts", "regions.id", "=", "cohorts.region_id")
+          .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")
+          .where("cohort_members.user_id", user.id)
+          .select(
+            "cohorts.id",
+            "regions.name as region_name",
+            "cohorts.cohort_number"
+          );
+
+        console.log("cohortsList");
+        console.log(cohortsList);
+        user.cohortsList = cohortsList;
+      })
+    );
+    console.log("in fetchCohortsList");
+    console.log("users");
+    console.log(users);
+  };
+
+  await fetchCohortsList();
+
+  console.log("after map");
+  console.log(users);
+  res.json(users);
+});
+
 /*****************************************************************************/
 /* POST APIs */
 /*****************************************************************************/
@@ -214,6 +255,47 @@ router.post("/cohorts/:cohortId/classes/:classId", async (req, res) => {
   console.log(attendanceData);
   await knex("class_attendances").insert(attendanceData);
   res.sendStatus(200);
+});
+
+// api to create a new user in users and cohort_members table
+router.post("/create-user", async (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  const accountVerified = req.body.accountVerified;
+  const roleId = req.body.roleId;
+  const cohortIds = req.body.cohortIds; // it will be an array of cohort Ids
+
+  console.log("req.body");
+  console.log(req.body);
+
+  const userData = {
+    user_name: username,
+    email: email,
+    password: password,
+    account_verified: accountVerified,
+  };
+
+  console.log("userData");
+  console.log(userData);
+
+  const userId = await knex("users").insert(userData, ["id"]);
+  console.log("userId");
+  console.log(userId);
+
+  const cohortMemberData = cohortIds.map((cohortId) => {
+    return {
+      user_id: userId[0].id,
+      role_id: roleId,
+      cohort_id: cohortId,
+    };
+  });
+
+  console.log("cohortMemberData");
+  console.log(cohortMemberData);
+
+  await knex("cohort_members").insert(cohortMemberData);
+  res.send(200);
 });
 
 export default router;
