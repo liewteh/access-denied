@@ -9,7 +9,7 @@ import BasicDateTimePicker from "../components/SubmitForm/BasicDateTimePicker";
 import { ContactsTwoTone } from "@material-ui/icons";
 import DateTime from "../components/ClassFormComponents/DateTime";
 
-// a default student of region's class's student
+// default student object
 const defaultStudent = {
   user_id: null,
   user_name: "",
@@ -22,27 +22,33 @@ const defaultStudent = {
 };
 
 const ClassRegisterForm = ({ isEditable }) => {
+  console.log("In ClassRegisterForm");
   const { cohortId } = useParams();
   const { classId } = useParams();
 
   // hook for input students data
   const [studentsData, setStudentsData] = useState([]);
   const [regionAndClass, setRegionAndClass] = useState([]);
+  const [dateAndTime, setDateAndTime] = useState([]);
 
   // get region's class's and student's name from database
   useEffect(() => {
     let url;
-
     if (isEditable) {
-      url = `/cohorts/${cohortId}/students`;
+      url = `/api/cohorts/${cohortId}/students`;
     } else {
       url = `/api/cohorts/${cohortId}/classes/${classId}/students-attendance`;
     }
 
+    console.log("in useEffect");
+    console.log(url);
     axios
       .get(url)
       .then((res) => {
+        console.log("in then");
+        console.log(res);
         const newStudentsData = res.data.map((s) => {
+          console.log("in map");
           console.log(s);
           return { ...defaultStudent, ...s };
           // defaultStudent = { ...s };
@@ -59,31 +65,33 @@ const ClassRegisterForm = ({ isEditable }) => {
           // };
           // return defaultStudent;
         });
+        console.log("newStudentsData");
+        console.log(newStudentsData);
         setStudentsData(newStudentsData);
       })
       .catch((error) => {
         console.error(`Error while fetching data. \n${error} `);
       });
-  }, [cohortId]);
+  }, [classId, cohortId, isEditable]);
 
+  // get region's class's data from database
   useEffect(() => {
     axios
-      .get(`/api/submit/${cohortId}/submit-attendance`)
+      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
       .then((res) => {
         const rAndC = res.data.map((rC) => {
           const chosen = {
-            name: rC.name,
-            cohort_number: rC.cohort_number,
+            region: rC.name,
+            class: rC.cohort_number,
           };
           return chosen;
         });
-        // setDateAndTime(createdDateAndTime);
         setRegionAndClass(rAndC);
       })
       .catch((error) => {
         console.error(`Error while fetching data. \n${error} `);
       });
-  }, [cohortId]);
+  }, [cohortId, classId]);
 
   // post new student attendance data
   const updateHandlerUserChange = (data, index) => {
@@ -98,7 +106,7 @@ const ClassRegisterForm = ({ isEditable }) => {
     e.preventDefault();
     // post students data to api
     axios
-      .post(`api/1/class_attendance`, {
+      .post("api/1/class_attendance", {
         body: studentsData,
       })
       .then((res) => {
@@ -109,13 +117,22 @@ const ClassRegisterForm = ({ isEditable }) => {
       });
   };
 
+  let dateType;
+  if (isEditable) {
+    dateType = <BasicDateTimePicker />;
+  } else {
+    dateType = <DateTime dateAndTime={dateAndTime} />;
+  }
+  console.log("dateType");
+  console.log(dateType);
+
   return (
     <div className="formContainer">
       <div className="classTitle">
         <RegionAndClassTitle regionName={regionAndClass} />
         <DownloadReportButton className="DownloadReportButton" />
       </div>
-      {/* {isEditable ? <BasicDateTimePicker /> : <DateTime /> } */}
+      {dateType}
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
         <div className="grid-item"> Absence </div>
