@@ -122,12 +122,12 @@ router.get("/submit/:cohortId/submit-attendance", async (req, res) => {
   const cohortId = req.params.cohortId;
 
   const students = await knex("cohort_members as cm")
-    .select("*")
+    .select("r.name", "c.cohort_number", "u.user_name")
     .join("users as u", "u.id", "cm.user_id")
     .join("cohorts as c", "cm.cohort_id", "c.id")
     .join("regions as r", "r.id", "c.region_id")
     .where("cm.cohort_id", cohortId)
-    .andWhere("u.user_name", "like", "Student%");
+    .andWhere("cm.role_id", 3);
   res.send(students);
 });
 
