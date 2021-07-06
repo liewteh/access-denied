@@ -119,17 +119,16 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
   res.send(students);
 });
 
-// get student attendance data
+// get student attendance data for a given classId
 router.get(
   "/cohorts/:cohortId/classes/:classId/students-attendance",
   async (req, res) => {
-    const cohortId = req.params.cohortId;
+    // console.log("in the api");
+    // const cohortId = req.params.cohortId;
     const classId = req.params.classId;
 
-    const students = await knex("cohorts as c")
+    const students = await knex("classes as c")
       .select(
-        "r.name",
-        "c.cohort_number",
         "u.user_name",
         "ca.attended",
         "ca.late_minutes",
@@ -137,18 +136,28 @@ router.get(
         "ca.camera_on",
         "ca.connectivity_issues",
         "ca.comments",
-        "ca.created_at"
+        "c.date"
       )
-      .join("regions as r", "r.id", "c.region_id")
-      .join("cohort_members as cm", "c.id", "cm.cohort_id")
-      .join("users as u", "u.id", "cm.user_id")
-      .join("class_attendances as ca", "ca.user_id", "u.id")
+      .join("class_attendances as ca", "c.id", "ca.class_id")
+      .join("users as u", "u.id", "ca.user_id")
+      .join("cohort_members as cm", "u.id", "cm.user_id")
       .where("cm.role_id", 3)
-      .andWhere("c.id", cohortId)
-      .andWhere("ca.class_id", classId);
+      .andWhere("c.id", classId);
+    // console.log(students);
     res.send(students);
   }
 );
+
+// api to get the date and online_class for a given classId
+router.get("/cohorts/classes/:classId", async (req, res) => {
+  const classId = req.params.classId;
+  const classDetails = await knex("classes")
+    .select("date", "online_class")
+    .where("id", classId);
+  console.log("classDetails");
+  console.log(classDetails);
+  res.json(classDetails);
+});
 
 // api to get list of all the roles
 router.get("/roles", async (req, res) => {

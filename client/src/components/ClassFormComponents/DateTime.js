@@ -5,11 +5,13 @@ import "./DateTime.css";
 const DateTime = ({ dateAndTime }) => {
   let displayDate;
 
-  dateAndTime.map((date) => {
-    displayDate = moment(date.dateAndTime).format("MMM Do YY HH:mm:ss");
-  });
+  displayDate = moment(dateAndTime).format("MMM Do YYYY");
   return (
-    <input className="dateInput" defaultValue={displayDate} disabled={true} />
+    <input
+      className="dateInput"
+      value={displayDate}
+      disabled={true}
+    />
   );
 };
 

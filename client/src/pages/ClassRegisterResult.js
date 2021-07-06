@@ -1,11 +1,13 @@
 import "./ClassRegisterResult.css";
+
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import StudentName from "../components/ClassFormComponents/StudentName";
-import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
+
+import axios from "axios";
+
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
+import StudentName from "../components/ClassFormComponents/StudentName";
 
 const ClassRegisterForm = () => {
   const { cohortId } = useParams();
@@ -18,6 +20,34 @@ const ClassRegisterForm = () => {
 
   // get student's attendance data from database
   useEffect(() => {
+    // fetch cohort details
+    axios
+      .get(`/api/cohorts/${cohortId}`)
+      .then((res) => {
+        const data = res.data;
+
+        setRegionAndClass({
+          region: data[0].region_name,
+          class: data[0].cohort_number,
+        });
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+
+    // fetch class details : class date
+    axios
+      .get(`/api/cohorts/classes/${classId}`)
+      .then((res) => {
+        const data = res.data;
+        const classDate = data[0].date;
+        setDateAndTime(classDate);
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+
+    // fetch students' data
     axios
       .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
       .then((res) => {
@@ -43,48 +73,10 @@ const ClassRegisterForm = () => {
       });
   }, [cohortId, classId]);
 
-  // get created date and time data from database
-  useEffect(() => {
-    axios
-      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
-      .then((res) => {
-        const createdDateAndTime = res.data.map((date) => {
-          const createdDate = {
-            dateAndTime: date.created_at,
-          };
-          return createdDate;
-        });
-        setDateAndTime(createdDateAndTime);
-      })
-      .catch((error) => {
-        console.error(`Error while fetching data. \n${error} `);
-      });
-  }, [cohortId, classId]);
-
-  // get region's class's data from database
-  useEffect(() => {
-    axios
-      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
-      .then((res) => {
-        const rAndC = res.data.map((rC) => {
-          const chosen = {
-            region: rC.name,
-            class: rC.cohort_number,
-          };
-          return chosen;
-        });
-        setRegionAndClass(rAndC);
-      })
-      .catch((error) => {
-        console.error(`Error while fetching data. \n${error} `);
-      });
-  }, [cohortId, classId]);
-
   return (
     <div className="formContainer">
       <div className="classTitle">
         <RegionAndClassTitle region={regionAndClass} />
-        <DownloadReportButton className="DownloadReportButton" />
       </div>
       <DateTime dateAndTime={dateAndTime} />
       <div className="titleGridContainer">
