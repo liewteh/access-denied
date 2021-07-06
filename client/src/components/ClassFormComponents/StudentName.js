@@ -47,7 +47,7 @@ const StudentName = ({ studentData }) => {
         <div>
           <TextArea
             type="string"
-            comment={studentData.comment}
+            comment={studentData.comments}
           ></TextArea>
         </div>
       </div>
