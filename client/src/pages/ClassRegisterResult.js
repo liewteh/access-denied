@@ -89,10 +89,10 @@ const ClassRegisterForm = () => {
       <DateTime dateAndTime={dateAndTime} />
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
-        <div className="grid-item"> Absence </div>
-        <div className="grid-item"> Late </div>
-        <div className="grid-item"> Distract / Not Participate </div>
-        <div className="grid-item"> Camera On / Off </div>
+        <div className="grid-item"> Present </div>
+        <div className="grid-item"> Late (minutes) </div>
+        <div className="grid-item"> Distract / Not Participating </div>
+        <div className="grid-item"> Camera On </div>
         <div className="grid-item"> Tech Issues </div>
         <div className="grid-item"> Comments </div>
       </div>
