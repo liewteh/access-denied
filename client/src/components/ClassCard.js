@@ -1,21 +1,22 @@
-import React from "react";
-import moment from "moment";
-import { useHistory } from "react-router-dom";
 import "./ClassCard.css";
 
-const ClassCard = ({ cohortClass }) => {
-  const history = useHistory();
+import React from "react";
+import { Link } from "react-router-dom";
 
-  const routeChange = () => {
-    let path = `/cohorts/${cohortClass.cohort_id}/classes/${cohortClass.id}/students-attendance`;
-    history.push(path);
-  };
+import moment from "moment";
+
+const ClassCard = ({ cohortClass }) => {
   const cohortClassDate = moment(cohortClass.date).format("MMM Do YY");
 
   return (
-    <div className="infoCard" onClick={routeChange} role="link">
+    <div className="infoCard">
       <div className="classDetails">
         <h2 className="className">{`Class Date: ${cohortClassDate}`}</h2>
+        <Link
+          to={`/cohorts/${cohortClass.cohort_id}/classes/${cohortClass.id}/students-attendance`}
+        >
+          Go to attendance record
+        </Link>
         {/* <ul className="classDetailsList">
           <li>
             <span className="classDetailType">Cohort ID: </span>
