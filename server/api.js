@@ -233,17 +233,6 @@ router.post("/cohorts/:cohortId/classes/:classId", async (req, res) => {
     .whereIn("user_name", studentNames)
     .select("id", "user_name");
 
-  // sort userIds by user_name
-  const alphabeticalSort = (a, b) => {
-    if (a.user_name < b.user_name) {
-      return -1;
-    }
-    if (a.user_name > b.user_name) {
-      return 1;
-    }
-    return 0;
-  };
-
   userIds.sort((a, b) => {
     if (a.user_name < b.user_name) {
       return -1;
