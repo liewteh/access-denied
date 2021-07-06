@@ -8,7 +8,6 @@ import HomeIcon from "@material-ui/icons/Home";
 const Footer = () => {
   return (
     <div className="footer">
-
       <div className="footer-p">
         <p >Copyright&copy; {new Date().getFullYear()} CodeYourFuture</p>
       </div>

@@ -14,7 +14,7 @@ const CohortClasses = () => {
   const history = useHistory();
 
   const routeChange = () => {
-    let path = `/cohorts/${cohortId}/classRegisterForm`;
+    let path = `/cohorts/${cohortId}/classes`;
     history.push(path);
   };
 
@@ -30,7 +30,7 @@ const CohortClasses = () => {
       const classes = await response.json();
       setClassList(classes);
 
-      const response2 = await fetch(`/api/cohort-details/${cohortId}`);
+      const response2 = await fetch(`/api/cohorts/${cohortId}`);
       if (!response2.ok) {
         const message = `An error has occurred: ${response2.status}`;
         throw new Error(message);

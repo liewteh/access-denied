@@ -1,7 +1,6 @@
-
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("class_attendances", function (table) {
-    table.increments().primary();
+    table.primary(["class_id", "user_id"], "id");
     table.integer("class_id").references("id").inTable("classes");
     table.integer("user_id").references("id").inTable("users");
     table.boolean("attended").notNullable().defaultTo(true);
@@ -16,6 +15,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("class_attendances");
 };

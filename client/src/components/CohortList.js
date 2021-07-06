@@ -1,6 +1,5 @@
 import React from "react";
 import "./CohortList.css";
-
 import CohortCard from "./CohortCard";
 
 const CohortList = ({ cohortList }) => {

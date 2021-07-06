@@ -33,7 +33,7 @@ const IOSSwitch = withStyles((theme) => ({
   },
   track: {
     borderRadius: 26 / 2,
-    border: `1px solid ${theme.palette.grey[400]}`,
+    border: `1px solid ${theme.palette.grey[500]}`,
     backgroundColor: theme.palette.grey[50],
     opacity: 1,
     transition: theme.transitions.create(["background-color", "border"]),
@@ -57,27 +57,16 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-export default function ToggleButtonOff({ defaultValue, toggleValue }) {
-  const [state, setState] = React.useState({
-    checkedB: defaultValue,
-  });
-
-  const handleChange = (event) => {
-    toggleValue(event.target.checked);
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+export default function ToggleButtonOff({ defaultValue }) {
 
   return (
     <FormGroup>
       <FormControlLabel
         control={
           <IOSSwitch
-            checked={state.checkedB}
-            onChange={handleChange}
-            name="checkedB"
+            checked={defaultValue}
           />
         }
-        // label="test"
       />
     </FormGroup>
   );
