@@ -81,29 +81,32 @@ const ClassRegisterForm = () => {
   }, [cohortId, classId]);
 
   return (
-    <div className="formContainer">
-      <div className="classTitle">
-        <RegionAndClassTitle region={regionAndClass} />
-        <DownloadReportButton className="DownloadReportButton" />
-      </div>
-      <DateTime dateAndTime={dateAndTime} />
-      <div className="titleGridContainer">
-        <div className="grid-item"> Student Name </div>
-        <div className="grid-item"> Absence </div>
-        <div className="grid-item"> Late </div>
-        <div className="grid-item"> Distract / Not Participate </div>
-        <div className="grid-item"> Camera On / Off </div>
-        <div className="grid-item"> Tech Issues </div>
-        <div className="grid-item"> Comments </div>
-      </div>
-      <form>
+    <>
+      <form className="formContainer">
+        <div className="classTitle">
+          <RegionAndClassTitle region={regionAndClass} />
+          <DownloadReportButton className="DownloadReportButton" />
+        </div>
+        <DateTime dateAndTime={dateAndTime} />
+        <table className="titleGridContainer">
+          <tr>
+            <th className="grid-item">Student Name</th>
+            <th className="grid-item">Absence</th>
+            <th className="grid-item">Late</th>
+            <th className="grid-item">Distract / Not Participate</th>
+            <th className="grid-item">Camera On / Off</th>
+            <th className="grid-item">Tech Issues</th>
+            <th className="grid-item">Comments</th>
+          </tr>
+        </table>
+
         <div className="studentNameContainer">
-          {studentsData.map((student, index) => (
-            <StudentName key={index} studentData={student} />
-          ))}
+        {studentsData.map((student, index) => (
+          <StudentName key={index} studentData={student} />
+        ))}
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

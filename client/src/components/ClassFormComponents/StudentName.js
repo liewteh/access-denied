@@ -8,16 +8,16 @@ import "./StudentName.css";
 const StudentName = ({ studentData }) => {
 
   return (
-    <>
-      <div className="titleGridContainer">
-        <div className="studentName">{studentData.user_name}</div>
-        <div>
+    // <>
+      <tr className="titleGridContainer">
+        <td className="studentName">{studentData.user_name}</td>
+        <td>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.absence}
           />
-        </div>
-        <div>
+        </td>
+        <td>
           <input
             className="lateInput"
             type="number"
@@ -25,33 +25,33 @@ const StudentName = ({ studentData }) => {
             defaultValue={studentData.late}
             disabled={true}
           />
-        </div>
-        <div>
+        </td>
+        <td>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.distractNotParticipate}
           />
-        </div>
-        <div>
+        </td>
+        <td>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.cameraOnOff}
           />
-        </div>
-        <div>
+        </td>
+        <td>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.techIssue}
           />
-        </div>
-        <div>
+        </td>
+        <td>
           <TextArea
             type="string"
             comment={studentData.comments}
           ></TextArea>
-        </div>
-      </div>
-    </>
+        </td>
+      </tr>
+    // </>
   );
 };
 
