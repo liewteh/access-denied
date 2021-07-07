@@ -3,14 +3,18 @@ import { Router } from "express";
 const knex = require("./knex");
 const router = new Router();
 
+// root api
 router.get("/", (_, res) => {
   res.json({ message: "Hello, world!" });
 });
 
-router.get("/test", (_, res) => {
-  res.json({ message: "Testing!" });
-});
-
+/*****************************************************************************/
+/* Login & Logout related APIs */
+/*****************************************************************************/
+/*
+ function to get the matched username and id
+ for the given username and password
+*/
 const loginUser = async (username, password) => {
   const users = await knex("users")
     .whereRaw("LOWER(user_name) = ?", username)
@@ -21,7 +25,7 @@ const loginUser = async (username, password) => {
   return users[0];
 };
 
-/* All Users Login API */
+// api to login the user and set up user session
 router.post("/login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -32,22 +36,27 @@ router.post("/login", async (req, res) => {
   }
 
   req.session.username = user.user_name;
-  // req.session.role = user.role;
   req.session.userId = user.id;
   res.sendStatus(204);
 });
 
+// api to logout the logged in user and end current express session
 router.post("/logout", (req, res) => {
   req.session.destroy();
   res.sendStatus(204);
 });
 
+// api to return the userId of the logged in user
 router.get("/checkLogin", (req, res) => {
   const userId = req.session.userId;
   res.json({ userId: userId });
 });
 
-// update this to get the user_id from session
+/*****************************************************************************/
+/* GET APIs */
+/*****************************************************************************/
+
+// api to get the list of all the cohorts for the logged in user
 router.get("/cohorts/", async (req, res) => {
   const user_id = req.session.userId;
   if (user_id) {
@@ -64,6 +73,31 @@ router.get("/cohorts/", async (req, res) => {
   }
 });
 
+// api to get the list of all the cohorts
+router.get("/cohorts/all", async (req, res) => {
+  const cohorts = await knex("regions")
+    .join("cohorts", "regions.id", "=", "cohorts.region_id")
+    .select(
+      "cohorts.id",
+      "regions.name as region_name",
+      "cohorts.cohort_number"
+    );
+  res.json(cohorts);
+});
+
+// api to get cohort_number and region_name for a given cohortId
+router.get("/cohorts/:cohortId", async (req, res) => {
+  const cohortId = req.params.cohortId;
+
+  const details = await knex("cohorts")
+    .join("regions", "regions.id", "cohorts.region_id")
+    .where("cohorts.id", "=", cohortId)
+    .select("cohorts.cohort_number", "regions.name as region_name");
+
+  res.send(details);
+});
+
+// api to fetch all the classes for a given cohortId
 router.get("/cohorts/:cohortId/classes", async (req, res) => {
   const cohortId = req.params.cohortId;
   const classes = await knex("classes")
@@ -72,7 +106,7 @@ router.get("/cohorts/:cohortId/classes", async (req, res) => {
   res.send(classes);
 });
 
-// api to fetch student names for a given cohort
+// api to fetch all the students names for a given cohortId
 router.get("/cohorts/:cohortId/students", async (req, res) => {
   const cohortId = req.params.cohortId;
 
@@ -85,69 +119,183 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
   res.send(students);
 });
 
-// get student attendance data
-router.get(
-  "/cohorts/:cohortId/classes/:classId/students-attendance",
-  async (req, res) => {
-    const cohortId = req.params.cohortId;
-    const classId = req.params.classId;
-
-    // get student list of a region's name, and its class's number
-    const students = await knex("cohorts as c")
-      .select("*")
-      .join("regions as r", "r.id", "c.region_id")
-      .join("cohort_members as cm", "c.id", "cm.cohort_id")
-      .join("users as u", "u.id", "cm.user_id")
-      .join("class_attendances as ca", "ca.user_id", "u.id")
-      .where("cm.role_id", 3)
-      .andWhere("c.id", cohortId)
-      .andWhere("ca.class_id", classId);
-    res.send(students);
-  }
-);
-
-// get student's name, region and class data for submit form
-router.get("/submit/:cohortId/submit-attendance", async (req, res) => {
-  const cohortId = req.params.cohortId;
-
-  const students = await knex("cohort_members as cm")
-    .select("*")
-    .join("users as u", "u.id", "cm.user_id")
-    .join("cohorts as c", "cm.cohort_id", "c.id")
-    .join("regions as r", "r.id", "c.region_id")
-    .where("cm.cohort_id", cohortId)
-    .andWhere("u.user_name", "like", "Student%");
-  res.send(students);
+// api to get list of all the roles
+router.get("/roles", async (req, res) => {
+  const roles = await knex("roles").select("*");
+  res.json(roles);
 });
 
-// post attendance
-router.post("/submitAttendance", async (req, res) => {
-  
-})
-// // post to submit form
-// router.post("/login", async (req, res) => {
-//   const username = req.body.username;
-//   const password = req.body.password;
-//   const user = await loginUser(username, password);
+// api to get list of all the users
+router.get("/users/", async (req, res) => {
+  const users = await knex("users").select("id", "user_name", "email");
 
-//   if (!user) {
-//     return res.status(401).send("Incorrect username and/or password!");
-//   }
+  const fetchCohortsList = async () => {
+    await Promise.all(
+      users.map(async (user) => {
+        console.log("in map");
+        const cohortsList = await knex("regions")
+          .join("cohorts", "regions.id", "=", "cohorts.region_id")
+          .join("cohort_members", "cohort_members.cohort_id", "=", "cohorts.id")
+          .where("cohort_members.user_id", user.id)
+          .select(
+            "cohorts.id",
+            "regions.name as region_name",
+            "cohorts.cohort_number"
+          );
 
-//   req.session.username = user.user_name;
-//   // req.session.role = user.role;
-//   req.session.userId = user.id;
-//   res.sendStatus(204);
-// });
+        console.log("cohortsList");
+        console.log(cohortsList);
+        user.cohortsList = cohortsList;
+      })
+    );
+    console.log("in fetchCohortsList");
+    console.log("users");
+    console.log(users);
+  };
 
-router.get("/cohort-details/:cohortId", async (req, res) => {
-  const cohortId = req.params.cohortId;
+  await fetchCohortsList();
 
-  const details = await knex("cohorts")
-    .join("regions", "regions.id", "cohorts.region_id")
-    .where("cohorts.id", "=", cohortId)
-    .select("cohorts.cohort_number", "regions.name as region_name");
-
-  res.send(details);
+  console.log("after map");
+  console.log(users);
+  res.json(users);
 });
+
+/*****************************************************************************/
+/* POST APIs */
+/*****************************************************************************/
+
+/*
+ api to create a class for given cohortId, date and online_class values,
+ and it returns the object { id: class_id }
+*/
+router.post("/cohorts/:cohortId/classes", async (req, res) => {
+  console.log("create class api");
+  const cohortId = req.params.cohortId;
+  const date = req.body.date; // date should be in format "yyyy-mm-dd"
+  const onlineClass = req.body.onlineClass; // can take values as true / false
+
+  const classId = await knex
+    .insert({ cohort_id: cohortId, date: date, online_class: onlineClass }, [
+      "id",
+    ])
+    .into("classes");
+  console.log(classId);
+  res.json(classId[0]);
+});
+
+/*
+ api to create class attendances for all the students for a given
+ classId and cohortId. It returns status 200 if successful.
+*/
+router.post("/cohorts/:cohortId/classes/:classId", async (req, res) => {
+  console.log("post request");
+  // const cohortId = req.params.cohortId;
+  const classId = req.params.classId;
+  const classAttendances = req.body.classAttendances;
+  const studentNames = classAttendances.map(
+    (classAttendance) => classAttendance.name
+  );
+
+  console.log("studentNames");
+  console.log(studentNames);
+  const userIds = await knex("users")
+    .whereIn("user_name", studentNames)
+    .select("id", "user_name");
+
+  // sort userIds by user_name
+  const alphabeticalSort = (a, b) => {
+    if (a.user_name < b.user_name) {
+      return -1;
+    }
+    if (a.user_name > b.user_name) {
+      return 1;
+    }
+    return 0;
+  };
+
+  userIds.sort((a, b) => {
+    if (a.user_name < b.user_name) {
+      return -1;
+    }
+    if (a.user_name > b.user_name) {
+      return 1;
+    }
+    return 0;
+  });
+
+  classAttendances.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+
+  console.log("userIds");
+  console.log(userIds);
+  console.log("classAttendances");
+  console.log(classAttendances);
+
+  const attendanceData = classAttendances.map((classAttendance, index) => {
+    return {
+      class_id: classId,
+      user_id: userIds[index].id,
+      attended: classAttendance.attended,
+      arrived_late: classAttendance.arrived_late,
+      late_minutes: classAttendance.late_minutes,
+      camera_on: classAttendance.camera_on,
+      connectivity_issues: classAttendance.connectivity_issues,
+      distracted: classAttendance.distracted,
+      comments: classAttendance.comments,
+    };
+  });
+  console.log("attendanceData");
+  console.log(attendanceData);
+  await knex("class_attendances").insert(attendanceData);
+  res.sendStatus(200);
+});
+
+// api to create a new user in users and cohort_members table
+router.post("/create-user", async (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  const accountVerified = req.body.accountVerified;
+  const roleId = req.body.roleId;
+  const cohortIds = req.body.cohortIds; // it will be an array of cohort Ids
+
+  console.log("req.body");
+  console.log(req.body);
+
+  const userData = {
+    user_name: username,
+    email: email,
+    password: password,
+    account_verified: accountVerified,
+  };
+
+  console.log("userData");
+  console.log(userData);
+
+  const userId = await knex("users").insert(userData, ["id"]);
+  console.log("userId");
+  console.log(userId);
+
+  const cohortMemberData = cohortIds.map((cohortId) => {
+    return {
+      user_id: userId[0].id,
+      role_id: roleId,
+      cohort_id: cohortId,
+    };
+  });
+
+  console.log("cohortMemberData");
+  console.log(cohortMemberData);
+
+  await knex("cohort_members").insert(cohortMemberData);
+  res.send(200);
+});
+
 export default router;
