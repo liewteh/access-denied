@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 
 // api to logout the logged in user and end current express session
 router.post("/logout", (req, res) => {
-  req.session.destroy();
+  req.session = null;
   res.sendStatus(204);
 });
 
@@ -50,6 +50,12 @@ router.post("/logout", (req, res) => {
 router.get("/checkLogin", (req, res) => {
   const userId = req.session.userId;
   res.json({ userId: userId });
+});
+
+// api to return the username of the logged in user
+router.get("/username", (req, res) => {
+  const username = req.session.username;
+  res.send(username);
 });
 
 /*****************************************************************************/

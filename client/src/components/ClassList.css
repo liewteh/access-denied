@@ -8,9 +8,3 @@
   grid-template-rows: repeat(auto-fit, minmax(1rem, 1fr));
   font-family: "Lato", sans-serif;
 }
-
-.cohortClassPageHeading {
-  text-align: center;
-  padding: 2rem;
-  text-decoration: underline red;
-}
