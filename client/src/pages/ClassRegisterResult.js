@@ -9,7 +9,7 @@ import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClas
 import DateTime from "../components/ClassFormComponents/DateTime";
 import StudentName from "../components/ClassFormComponents/StudentName";
 
-const ClassRegisterForm = () => {
+const ClassRegisterForm = ( { isEditable }) => {
   const { cohortId } = useParams();
   const { classId } = useParams();
 
@@ -95,6 +95,9 @@ const ClassRegisterForm = () => {
           ))}
         </div>
       </form>
+      {isEditable && <button type="submit" className="submitButton">
+        Submit
+      </button>}
     </div>
   );
 };

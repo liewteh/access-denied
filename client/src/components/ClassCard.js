@@ -17,16 +17,6 @@ const ClassCard = ({ cohortClass }) => {
         >
           Go to attendance record
         </Link>
-        {/* <ul className="classDetailsList">
-          <li>
-            <span className="classDetailType">Cohort ID: </span>
-            {cohortClass.cohort_id}
-          </li>
-          <li>
-            <span className="classDetailType">Class Date: </span>
-            {cohortClassDate}
-          </li>
-        </ul> */}
       </div>
     </div>
   );

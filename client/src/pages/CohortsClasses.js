@@ -13,7 +13,8 @@ const CohortClasses = () => {
   const history = useHistory();
 
   const routeChange = () => {
-    let path = `/cohorts/${cohortId}/classes`;
+    console.log("in route change for add new class");
+    let path = `/cohorts/${cohortId}/add-new-class`;
     history.push(path);
   };
 
@@ -43,8 +44,8 @@ const CohortClasses = () => {
   return (
     <div className="classPage">
       <h1 className="cohortClassPageHeading">
-        {cohortDetails &&
-          `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
+        {cohortDetails
+          && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
       <ClassList classList={classList} />
       <button className="addClassBtn" onClick={routeChange} role="link">

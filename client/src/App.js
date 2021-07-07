@@ -22,9 +22,13 @@ const App = () => (
       />
       <Route
         path="/cohorts/:cohortId/classes/:classId/students-attendance"
-        component={ClassRegisterResult}
         exact
-      />
+      >
+        <ClassRegisterResult isEditable={false} />
+      </Route>
+      <Route path="/cohorts/:cohortId/add-new-class" exact>
+        <ClassRegisterResult isEditable={true} />
+      </Route>
     </Layout>
   </Switch>
 );
