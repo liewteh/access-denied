@@ -5,24 +5,27 @@ import "./Welcome.css";
 const Welcome = () => {
   const history = useHistory();
 
-  let test = "Admin";
+  // TODO selectedUser - to hide/display options
+  let selectedUser = "Admin";
   let createUserOption, cohortsOption;
 
-  if (test === "Admin") {
+  if (selectedUser === "Admin") {
     createUserOption = "showOption";
     cohortsOption = "showOption";
-  } else if (test === "Teacher") {
+  } else if (selectedUser === "Teacher") {
     createUserOption = "hideOption";
     cohortsOption = "showOption";
-  } else if (test === "Student") {
+  } else if (selectedUser === "Student") {
     createUserOption = "hideOption";
     cohortsOption = "hideOption";
   }
 
+  //  TODO goto Create User page
   const routeChangeCreateUser = () => {
-    console.log("createUser clicked!")
+    console.log("createUser clicked!");
   };
 
+  //   goto cohorts page
   const routeChangeCohorts = () => {
     let path = `/cohorts`;
     history.push(path);
@@ -30,9 +33,15 @@ const Welcome = () => {
 
   return (
     <div className="welcomePage">
-      <h1 className="welcomePageHeading">Welcome {test}</h1>
+      <h1 className="welcomePageHeading">Welcome {selectedUser}</h1>
       <div className="optionsContainer">
-        <h2 className={createUserOption} onClick={routeChangeCreateUser} role="link">Create User</h2>
+        <h2
+          className={createUserOption}
+          onClick={routeChangeCreateUser}
+          role="link"
+        >
+          Create User
+        </h2>
         <h2 className={cohortsOption} onClick={routeChangeCohorts} role="link">
           Cohorts
         </h2>
