@@ -69,7 +69,9 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/pickers": "^3.3.10",
     "axios": "^0.21.1",
+    "chart.js": "^3.4.1",
     "cookie-session": "^1.4.0",
+    "date-fns": "^2.22.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
@@ -79,7 +81,8 @@
     "knex-migrate": "^1.7.4",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "react-chartjs-2": "^3.0.3"
   },
   "engines": {
     "node": "^10 || ^12 || ^14 || ^16"

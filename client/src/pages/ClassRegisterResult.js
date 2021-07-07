@@ -6,6 +6,7 @@ import StudentName from "../components/ClassFormComponents/StudentName";
 import DownloadReportButton from "../components/ClassFormComponents/DownloadReportButton";
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
+import TestBarChart from "./TestBarChart";
 
 const ClassRegisterForm = () => {
   const { cohortId } = useParams();
@@ -106,6 +107,7 @@ const ClassRegisterForm = () => {
         ))}
         </div>
       </form>
+      <TestBarChart />
     </>
   );
 };
