@@ -5,7 +5,15 @@ import TextArea from "./TextArea";
 import "./StudentName.css";
 
 // eslint-disable-next-line no-unused-vars
-const StudentName = ({ studentData }) => {
+const StudentName = ({ isEditable, studentData, rowUpdate }) => {
+  // console.log("in studentName");
+  // console.log(studentData);
+  const handleUpdate = (value, field) => {
+    console.log("in handle update");
+    const newData = { ...studentData };
+    newData[field] = value;
+    rowUpdate(newData);
+  };
 
   return (
     <>
@@ -14,7 +22,8 @@ const StudentName = ({ studentData }) => {
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={studentData.absence}
+            defaultValue={studentData.attended}
+            onClick={(e) => handleUpdate(e, "attended")}
           />
         </div>
         <div>
@@ -22,33 +31,37 @@ const StudentName = ({ studentData }) => {
             className="lateInput"
             type="number"
             min="0"
-            defaultValue={studentData.late}
-            disabled={true}
+            defaultValue={studentData.late_minutes}
+            disabled={!isEditable}
           />
         </div>
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={studentData.distractNotParticipate}
+            defaultValue={studentData.distracted}
           />
         </div>
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={studentData.cameraOnOff}
+            defaultValue={studentData.camera_on}
           />
         </div>
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
-            defaultValue={studentData.techIssue}
+            defaultValue={studentData.connectivity_issues}
           />
         </div>
         <div>
-          <TextArea
-            type="string"
-            comment={studentData.comment}
-          ></TextArea>
+          {isEditable ? (
+            <TextArea
+              type="string"
+              inputValue={(e) => handleUpdate(e.target.value, "comments")}
+            ></TextArea>
+          ) : (
+            <span>{studentData.comments}</span>
+          )}
         </div>
       </div>
     </>

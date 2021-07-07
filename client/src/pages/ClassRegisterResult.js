@@ -9,7 +9,20 @@ import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClas
 import DateTime from "../components/ClassFormComponents/DateTime";
 import StudentName from "../components/ClassFormComponents/StudentName";
 
+// default student object
+const defaultStudent = {
+  user_name: "",
+  attended: true,
+  camera_on: true,
+  comments: "testing",
+  connectivity_issues: false,
+  distracted: false,
+  late_minutes: 10,
+};
+
 const ClassRegisterForm = ( { isEditable }) => {
+  console.log("isEditable");
+  console.log(isEditable);
   const { cohortId } = useParams();
   const { classId } = useParams();
 
@@ -20,6 +33,13 @@ const ClassRegisterForm = ( { isEditable }) => {
 
   // get student's attendance data from database
   useEffect(() => {
+    let studentAttendanceUrl;
+    if (isEditable) {
+      studentAttendanceUrl = `/api/cohorts/${cohortId}/students`;
+    } else {
+      studentAttendanceUrl = `/api/cohorts/${cohortId}/classes/${classId}/students-attendance`;
+    }
+
     // fetch cohort details
     axios
       .get(`/api/cohorts/${cohortId}`)
@@ -36,42 +56,50 @@ const ClassRegisterForm = ( { isEditable }) => {
       });
 
     // fetch class details : class date
-    axios
-      .get(`/api/cohorts/classes/${classId}`)
-      .then((res) => {
-        const data = res.data;
-        const classDate = data[0].date;
-        setDateAndTime(classDate);
-      })
-      .catch((error) => {
-        console.error(`Error while fetching data. \n${error} `);
-      });
+    if(isEditable === false) {
+      axios
+        .get(`/api/cohorts/classes/${classId}`)
+        .then((res) => {
+          const data = res.data;
+          const classDate = data[0].date;
+          setDateAndTime(classDate);
+        })
+        .catch((error) => {
+          console.error(`Error while fetching data. \n${error} `);
+        });
+    } else {
+      setDateAndTime("2021-12-22");
+    }
 
     // fetch students' data
     axios
-      .get(`/api/cohorts/${cohortId}/classes/${classId}/students-attendance`)
+      .get(studentAttendanceUrl)
       .then((res) => {
+        // console.log("in then");
+        // console.log(res);
         const newStudentsData = res.data.map((s) => {
-          let defaultStudent;
-          // a default student of region's class's student
-          defaultStudent = {
-            user_id: null,
-            user_name: s.user_name,
-            absence: s.attended,
-            late: s.late_minutes,
-            distractNotParticipate: s.distracted,
-            cameraOnOff: s.camera_on,
-            techIssue: s.connectivity_issues,
-            comments: s.comments,
-          };
-          return defaultStudent;
+          // console.log("in map");
+          // console.log("data from DB");
+          // console.log(s);
+          return { ...defaultStudent, ...s };
         });
+        // console.log("newStudentsData");
+        // console.log(newStudentsData);
         setStudentsData(newStudentsData);
       })
       .catch((error) => {
         console.error(`Error while fetching data. \n${error} `);
       });
-  }, [cohortId, classId]);
+  }, [cohortId, classId, isEditable]);
+
+  // post new student attendance data
+  const updateHandlerUserChange = (data, index) => {
+    console.log("updateHandlerUserChange");
+
+    const newData = [...studentsData];
+    newData[index] = data;
+    setStudentsData(newData);
+  };
 
   return (
     <div className="formContainer">
@@ -91,13 +119,20 @@ const ClassRegisterForm = ( { isEditable }) => {
       <form>
         <div className="studentNameContainer">
           {studentsData.map((student, index) => (
-            <StudentName key={index} studentData={student} />
+            <StudentName
+              key={index}
+              isEditable={isEditable}
+              studentData={student}
+              rowUpdate={(data) => updateHandlerUserChange(data, index)}
+            />
           ))}
         </div>
       </form>
-      {isEditable && <button type="submit" className="submitButton">
-        Submit
-      </button>}
+      {isEditable && (
+        <button type="submit" className="submitButton">
+          Submit
+        </button>
+      )}
     </div>
   );
 };
