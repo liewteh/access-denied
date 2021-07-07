@@ -8,6 +8,7 @@ import axios from "axios";
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
 import StudentName from "../components/ClassFormComponents/StudentName";
+import StudentNameSubmit from "../components/ClassFormComponents/StudentNameSubmit";
 
 // default student object
 const defaultStudent = {
@@ -95,10 +96,30 @@ const ClassRegisterForm = ( { isEditable }) => {
   // post new student attendance data
   const updateHandlerUserChange = (data, index) => {
     console.log("updateHandlerUserChange");
-
+    console.log("data", data);
     const newData = [...studentsData];
     newData[index] = data;
     setStudentsData(newData);
+  };
+
+  console.log("newStudentData", studentsData);
+
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("submit handler");
+    console.log(studentsData);
+    // post students data to api
+    axios
+      .post("api/1/class_attendance", {
+        body: studentsData,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -118,18 +139,23 @@ const ClassRegisterForm = ( { isEditable }) => {
       </div>
       <form>
         <div className="studentNameContainer">
-          {studentsData.map((student, index) => (
-            <StudentName
-              key={index}
-              isEditable={isEditable}
-              studentData={student}
-              rowUpdate={(data) => updateHandlerUserChange(data, index)}
-            />
-          ))}
+          {studentsData.map((student, index) => {
+            if (isEditable) {
+              return (
+                <StudentNameSubmit
+                  key={index}
+                  studentData={student}
+                  rowUpdate={(data) => updateHandlerUserChange(data, index)}
+                />
+              );
+            } else {
+              return <StudentName key={index} studentData={student} />;
+            }
+          })}
         </div>
       </form>
       {isEditable && (
-        <button type="submit" className="submitButton">
+        <button type="submit" className="submitButton" onClick={submitHandler}>
           Submit
         </button>
       )}

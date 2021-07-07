@@ -4,15 +4,13 @@ import TextArea from "./TextArea";
 
 import "./StudentName.css";
 
-const StudentName = ({ studentData }) => {
-  // console.log("in studentName");
-  // console.log(studentData);
-  // const handleUpdate = (value, field) => {
-  //   console.log("in handle update");
-  //   const newData = { ...studentData };
-  //   newData[field] = value;
-  //   rowUpdate(newData);
-  // };
+const StudentNameSubmit = ({ studentData, rowUpdate }) => {
+  const handleUpdate = (value, field) => {
+    console.log("uodating field: ", field);
+    const newData = { ...studentData };
+    newData[field] = value;
+    rowUpdate(newData);
+  };
 
   return (
     <>
@@ -22,6 +20,7 @@ const StudentName = ({ studentData }) => {
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.attended}
+            toggleValue={(e) => handleUpdate(e, "attended")}
           />
         </div>
         <div>
@@ -29,34 +28,40 @@ const StudentName = ({ studentData }) => {
             className="lateInput"
             type="number"
             min="0"
-            defaultValue={studentData.late_minutes}
-            disabled={true}
+            placeholder="minutes"
+            onChange={(e) => handleUpdate(e.target.value, "late_minutes")}
           />
         </div>
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.distracted}
+            toggleValue={(e) => handleUpdate(e, "distracted")}
           />
         </div>
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.camera_on}
+            toggleValue={(e) => handleUpdate(e, "camera_on")}
           />
         </div>
         <div>
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.connectivity_issues}
+            toggleValue={(e) => handleUpdate(e, "connectivity_issues")}
           />
         </div>
         <div>
-          <TextArea type="string" defaultValue={studentData.comments} disabled={true}></TextArea>
+          <TextArea
+            type="string"
+            onChange={(e) => handleUpdate(e.target.value, "comments")}
+          ></TextArea>
         </div>
       </div>
     </>
   );
 };
 
-export default StudentName;
+export default StudentNameSubmit;
