@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import ClassRegisterResult from "./pages/ClassRegisterResult";
+// import ClassRegisterResult from "./pages/ClassRegisterResult";
 import Home from "./pages/Home";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";

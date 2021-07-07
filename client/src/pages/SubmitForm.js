@@ -1,13 +1,16 @@
 import "./SubmitForm.css";
+
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+
+import axios from "axios";
+
 import StudentName from "../components/SubmitForm/StudentName";
 import DownloadReportButton from "../components/SubmitForm/DownloadReportButton";
 import RegionAndClassTitle from "../components/SubmitForm/RegionAndClassTitle";
-import BasicDateTimePicker from "../components/SubmitForm/BasicDateTimePicker";
-import { ContactsTwoTone } from "@material-ui/icons";
-import DateTime from "../components/ClassFormComponents/DateTime";
+// import BasicDateTimePicker from "../components/SubmitForm/BasicDateTimePicker";
+// import { ContactsTwoTone } from "@material-ui/icons";
+// import DateTime from "../components/ClassFormComponents/DateTime";
 
 // default student object
 const defaultStudent = {
@@ -22,14 +25,16 @@ const defaultStudent = {
 };
 
 const ClassRegisterForm = ({ isEditable }) => {
-  console.log("In ClassRegisterForm");
+  console.log("In Submit Form");
+  console.log("isEditable");
+  console.log(isEditable);
   const { cohortId } = useParams();
   const { classId } = useParams();
 
   // hook for input students data
   const [studentsData, setStudentsData] = useState([]);
   const [regionAndClass, setRegionAndClass] = useState([]);
-  const [dateAndTime, setDateAndTime] = useState([]);
+  const [dateAndTime, setDateAndTime] = useState(["2021-01-01"]);
 
   // get region's class's and student's name from database
   useEffect(() => {
@@ -51,19 +56,6 @@ const ClassRegisterForm = ({ isEditable }) => {
           console.log("in map");
           console.log(s);
           return { ...defaultStudent, ...s };
-          // defaultStudent = { ...s };
-          // a default student of region's class's student
-          // defaultStudent = {
-          //   user_id: null,
-          //   user_name: s.user_name,
-          //   attended: null,
-          //   late_minutes: null,
-          //   distracted: null,
-          //   camera_on: null,
-          //   connectivity_issues: null,
-          //   comments: null,
-          // };
-          // return defaultStudent;
         });
         console.log("newStudentsData");
         console.log(newStudentsData);
@@ -117,14 +109,16 @@ const ClassRegisterForm = ({ isEditable }) => {
       });
   };
 
-  let dateType;
-  if (isEditable) {
-    dateType = <BasicDateTimePicker />;
-  } else {
-    dateType = <DateTime dateAndTime={dateAndTime} />;
-  }
-  console.log("dateType");
-  console.log(dateType);
+  // let dateType;
+  // if (isEditable) {
+  //   dateType = <BasicDateTimePicker />;
+  // } else {
+  //   setDateAndTime("2021-12-22");
+  //   dateType = <DateTime dateAndTime={dateAndTime} />;
+  // }
+
+  // console.log("dateType");
+  // console.log(dateType);
 
   return (
     <div className="formContainer">
@@ -132,7 +126,7 @@ const ClassRegisterForm = ({ isEditable }) => {
         <RegionAndClassTitle regionName={regionAndClass} />
         <DownloadReportButton className="DownloadReportButton" />
       </div>
-      {dateType}
+      {/* {dateType} */}
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
         <div className="grid-item"> Absence </div>
@@ -153,9 +147,11 @@ const ClassRegisterForm = ({ isEditable }) => {
           ))}
         </div>
       </form>
-      <button type="submit" className="submitButton" onClick={submitHandler}>
-        Submit
-      </button>
+      {isEditable && (
+        <button type="submit" className="submitButton" onClick={submitHandler}>
+          Submit
+        </button>
+      )}
     </div>
   );
 };
