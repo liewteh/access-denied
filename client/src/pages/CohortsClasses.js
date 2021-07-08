@@ -1,7 +1,7 @@
 import "./CohortsClasses.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import ClassList from "../components/ClassList";
 import Footer from "../components/Footer";
 
@@ -45,10 +45,16 @@ const CohortClasses = () => {
   return (
     <div className="classPage">
       <h1 className="cohortClassPageHeading">
-        {cohortDetails && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
+        {cohortDetails &&
+          `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
+      <Link to="/cohorts-report">
+        <button>Cohorts Report</button>
+      </Link>
       <ClassList classList={classList} />
-      <button onClick={routeChange} role="link">Add New Class</button>
+      <button onClick={routeChange} role="link">
+        Add New Class
+      </button>
       <Footer />
     </div>
   );

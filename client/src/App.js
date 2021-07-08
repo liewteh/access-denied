@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
+import CohortsReport from "./pages/CohortsReport";
 
 const App = () => (
   <Switch>
@@ -15,6 +16,9 @@ const App = () => (
     </Route>
     <Route path="/cohorts" exact>
       <Cohorts />
+    </Route>
+    <Route path="/cohorts-report" exact>
+      <CohortsReport />
     </Route>
     <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
     <Route
