@@ -7,11 +7,6 @@ const Welcome = () => {
   // TODO selectedUser - to hide/display options
   let isAdmin = true;
 
-  //  TODO goto Create User page
-  const routeChangeCreateUser = () => {
-    console.log("createUser clicked!");
-  };
-
   return (
     <div className="welcomePage">
       <h1 className="welcomePageHeading">Welcome To CYF Register</h1>
