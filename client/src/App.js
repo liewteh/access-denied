@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import ClassRegisterResult from "./pages/ClassRegisterResult";
 import Home from "./pages/Home";
+import Welcome from "./pages/Welcome";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
 
@@ -8,6 +9,9 @@ const App = () => (
   <Switch>
     <Route path="/" exact>
       <Home />
+    </Route>
+    <Route path="/welcome" exact>
+      <Welcome />
     </Route>
     <Route path="/cohorts" exact>
       <Cohorts />
