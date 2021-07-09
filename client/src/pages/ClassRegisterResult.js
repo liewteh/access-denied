@@ -1,8 +1,7 @@
-import "./ClassRegisterResult.css";
-
+import "./ClassRegisterResult.css"
+;
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-
 import axios from "axios";
 
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";

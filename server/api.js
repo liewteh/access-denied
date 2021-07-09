@@ -213,6 +213,20 @@ router.get("/users/", async (req, res) => {
   res.json(users);
 });
 
+// Cohorts report
+router.get("/cohorts/:cohortId/cohortsReport", async (req, res) => {
+  const cohortId = req.params.cohortId;
+  const cohortsReport = await knex("classes as c")
+    .join("class_attendances as ca", "c.id", "ca.class_id")
+    .where("cohort_id", cohortId)
+    .andWhere("ca.attended", true)
+    .groupBy("ca.class_id", "c.date")
+    .select("c.date as Date")
+    .count("ca.user_id as Students");
+  console.log(cohortsReport);
+  res.send(cohortsReport);
+});
+
 /*****************************************************************************/
 /* POST APIs */
 /*****************************************************************************/

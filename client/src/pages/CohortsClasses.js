@@ -1,7 +1,7 @@
 import "./CohortsClasses.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import ClassList from "../components/ClassList";
 
 const CohortClasses = () => {
@@ -47,6 +47,16 @@ const CohortClasses = () => {
         {cohortDetails
           && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
+      <Link
+        to= {{
+          pathname:"/cohorts-report",
+          state: {
+            cohortId: { cohortId },
+          },
+        }}
+      >
+        Cohorts Report
+      </Link>
       <ClassList classList={classList} />
       <button className="addClassBtn" onClick={routeChange} role="link">
         Add New Class

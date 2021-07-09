@@ -3,9 +3,11 @@ import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
+import CreateUser from "./pages/CreateUser";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
 import ClassRegisterResult from "./pages/ClassRegisterResult";
+import CohortsReport from "./pages/CohortsReport";
 
 const App = () => (
   <Switch>
@@ -16,8 +18,14 @@ const App = () => (
       <Route path="/welcome" exact>
         <Welcome />
       </Route>
+      <Route path="/create-user">
+        <CreateUser />
+      </Route>
       <Route path="/cohorts" exact>
         <Cohorts />
+      </Route>
+      <Route path="/cohorts-report" exact>
+        <CohortsReport />
       </Route>
       <Route
         path="/cohorts/:cohortId/classes"
