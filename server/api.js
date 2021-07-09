@@ -74,7 +74,8 @@ router.get("/cohorts/", async (req, res) => {
         "cohorts.id",
         "regions.name as region_name",
         "cohorts.cohort_number"
-      );
+      )
+      .orderBy("cohorts.id", "asc");
     res.json(cohorts);
   }
 });
@@ -87,7 +88,8 @@ router.get("/cohorts/all", async (req, res) => {
       "cohorts.id",
       "regions.name as region_name",
       "cohorts.cohort_number"
-    );
+    )
+    .orderBy("cohorts.id", "asc");
   res.json(cohorts);
 });
 
@@ -108,7 +110,8 @@ router.get("/cohorts/:cohortId/classes", async (req, res) => {
   const cohortId = req.params.cohortId;
   const classes = await knex("classes")
     .where("cohort_id", cohortId)
-    .select("*");
+    .select("*")
+    .orderBy("date", "desc");
   res.send(classes);
 });
 
@@ -120,7 +123,8 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
     .join("users", "users.id", "=", "cohort_members.user_id")
     .where("cohort_members.cohort_id", cohortId)
     .andWhere("cohort_members.role_id", 3)
-    .select("users.user_name");
+    .select("users.user_name")
+    .orderBy("users.user_name", "asc");
 
   res.send(students);
 });
@@ -148,7 +152,8 @@ router.get(
       .join("users as u", "u.id", "ca.user_id")
       .join("cohort_members as cm", "u.id", "cm.user_id")
       .where("cm.role_id", 3)
-      .andWhere("c.id", classId);
+      .andWhere("c.id", classId)
+      .orderBy("u.user_name", "asc");
     // console.log(students);
     res.send(students);
   }
@@ -167,13 +172,15 @@ router.get("/cohorts/classes/:classId", async (req, res) => {
 
 // api to get list of all the roles
 router.get("/roles", async (req, res) => {
-  const roles = await knex("roles").select("*");
+  const roles = await knex("roles").select("*").orderBy("id");
   res.json(roles);
 });
 
 // api to get list of all the users
 router.get("/users/", async (req, res) => {
-  const users = await knex("users").select("id", "user_name", "email");
+  const users = await knex("users")
+    .select("id", "user_name", "email")
+    .orderBy("user_name", "asc");
 
   const fetchCohortsList = async () => {
     await Promise.all(
