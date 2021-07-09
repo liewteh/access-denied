@@ -1,7 +1,7 @@
 import React from "react";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-const TextArea = ({ defaultValue, disabled, onChange }) => {
+const TextArea = ({ defaultValue, disabled, onChange, className }) => {
   return (
     <TextareaAutosize
       aria-label="minimum height"
@@ -10,6 +10,7 @@ const TextArea = ({ defaultValue, disabled, onChange }) => {
       disabled={disabled}
       onChange={onChange}
       placeholder={""}
+      className={className}
     />
   );
 };

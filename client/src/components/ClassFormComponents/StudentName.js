@@ -2,20 +2,18 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 import TextArea from "./TextArea";
 
-import "./StudentName.css";
-
 const StudentName = ({ studentData }) => {
   return (
     <>
-      <div className="titleGridContainer">
-        <div className="studentName">{studentData.user_name}</div>
-        <div>
+      <div className="gridRow">
+        <div className="grid-item studentName">{studentData.user_name}</div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.attended}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <input
             className="lateInput"
             type="number"
@@ -24,26 +22,31 @@ const StudentName = ({ studentData }) => {
             disabled={true}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.distracted}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.camera_on}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.connectivity_issues}
           />
         </div>
-        <div>
-          <TextArea type="string" defaultValue={studentData.comments} disabled={true}></TextArea>
+        <div className="grid-item comments">
+          <TextArea
+            type="string"
+            defaultValue={studentData.comments}
+            disabled={true}
+            className="textArea"
+          ></TextArea>
         </div>
       </div>
     </>

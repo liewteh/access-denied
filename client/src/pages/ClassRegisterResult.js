@@ -39,7 +39,7 @@ const ClassRegisterForm = ( { isEditable }) => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
     if(isOpen) {
-      history.push("/cohorts/");
+      history.push(`/cohorts/${cohortId}/classes`);
     }
   };
 
@@ -135,40 +135,41 @@ const ClassRegisterForm = ( { isEditable }) => {
 
 
   return (
-    <div className="formContainer">
+    <div className="classRegisterPage">
       <div className="classTitle">
         <RegionAndClassTitle region={regionAndClass} />
       </div>
-      {isEditable ? (
-        <BasicDateTimePicker dateAndTimeValue={(e) => setDateAndTime(e)} />
-      ) : (
-        <DateTime dateAndTime={dateAndTime} />
-      )}
-      <div className="titleGridContainer">
-        <div className="grid-item"> Student Name </div>
-        <div className="grid-item"> Present </div>
-        <div className="grid-item"> Late (minutes) </div>
-        <div className="grid-item"> Distract / Not Participating </div>
-        <div className="grid-item"> Camera On </div>
-        <div className="grid-item"> Tech Issues </div>
-        <div className="grid-item"> Comments </div>
+      <div className="dateTime">
+        {isEditable ? (
+          <BasicDateTimePicker dateAndTimeValue={(e) => setDateAndTime(e)} />
+        ) : (
+          <DateTime dateAndTime={dateAndTime} />
+        )}
       </div>
-      <form>
-        <div className="studentNameContainer">
-          {studentsData.map((student, index) => {
-            if (isEditable) {
-              return (
-                <StudentNameSubmit
-                  key={index}
-                  studentData={student}
-                  rowUpdate={(data) => updateHandlerUserChange(data, index)}
-                />
-              );
-            } else {
-              return <StudentName key={index} studentData={student} />;
-            }
-          })}
+      <form className="attendanceForm bottomBorder topBorder">
+        <div className="gridRow bottomBorder">
+          <div className="grid-item studentName"> Student Name </div>
+          <div className="grid-item"> Present </div>
+          <div className="grid-item"> Late (minutes) </div>
+          <div className="grid-item"> Distract / Not Participating </div>
+          <div className="grid-item"> Camera On </div>
+          <div className="grid-item"> Tech Issues </div>
+          <div className="grid-item comments"> Comments </div>
         </div>
+
+        {studentsData.map((student, index) => {
+          if (isEditable) {
+            return (
+              <StudentNameSubmit
+                key={index}
+                studentData={student}
+                rowUpdate={(data) => updateHandlerUserChange(data, index)}
+              />
+            );
+          } else {
+            return <StudentName key={index} studentData={student} />;
+          }
+        })}
       </form>
       {isEditable && (
         <button type="submit" className="submitButton" onClick={submitHandler}>
@@ -180,9 +181,7 @@ const ClassRegisterForm = ( { isEditable }) => {
           content={
             <>
               <b>Class Created Successfully!</b>
-              <p>
-                The class attendance register entry completed.
-              </p>
+              <p>The class attendance register entry completed.</p>
             </>
           }
           handleClose={togglePopup}

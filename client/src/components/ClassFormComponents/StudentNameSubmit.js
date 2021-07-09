@@ -2,8 +2,6 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 import TextArea from "./TextArea";
 
-import "./StudentName.css";
-
 const StudentNameSubmit = ({ studentData, rowUpdate }) => {
   const handleUpdate = (value, field) => {
     const newData = { ...studentData };
@@ -13,16 +11,16 @@ const StudentNameSubmit = ({ studentData, rowUpdate }) => {
 
   return (
     <>
-      <div className="titleGridContainer">
-        <div className="studentName">{studentData.user_name}</div>
-        <div>
+      <div className="gridRow">
+        <div className="grid-item studentName">{studentData.user_name}</div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.attended}
             toggleValue={(e) => handleUpdate(e, "attended")}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <input
             className="lateInput"
             type="number"
@@ -31,31 +29,32 @@ const StudentNameSubmit = ({ studentData, rowUpdate }) => {
             onChange={(e) => handleUpdate(e.target.value, "late_minutes")}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.distracted}
             toggleValue={(e) => handleUpdate(e, "distracted")}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.camera_on}
             toggleValue={(e) => handleUpdate(e, "camera_on")}
           />
         </div>
-        <div>
+        <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.connectivity_issues}
             toggleValue={(e) => handleUpdate(e, "connectivity_issues")}
           />
         </div>
-        <div>
+        <div className="grid-item comments">
           <TextArea
             type="string"
             onChange={(e) => handleUpdate(e.target.value, "comments")}
+            className="textArea"
           ></TextArea>
         </div>
       </div>
