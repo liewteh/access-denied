@@ -78,7 +78,7 @@
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "pg": "^8.6.0",
-    "react-select": "^4.3.1"
+    "react-chartjs-2": "^3.0.3"
   },
   "engines": {
     "node": "^10 || ^12 || ^14 || ^16"

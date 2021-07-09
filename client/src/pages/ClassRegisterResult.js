@@ -1,10 +1,7 @@
 import "./ClassRegisterResult.css";
-
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import axios from "axios";
-
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
 import StudentName from "../components/ClassFormComponents/StudentName";
