@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 
 // api to logout the logged in user and end current express session
 router.post("/logout", (req, res) => {
-  req.session.destroy();
+  req.session = null;
   res.sendStatus(204);
 });
 
