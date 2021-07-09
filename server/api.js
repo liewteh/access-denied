@@ -99,6 +99,15 @@ router.get("/students", async (req, res) => {
   res.send(students);
 });
 
+// api to get list of all the roles
+router.get("/roles", async (req, res) => {
+  const roles = await knex("roles").select("*");
+  console.log("roles api");
+  console.log(roles);
+  
+  res.json(roles);
+});
+
 router.get("/cohort-details/:cohortId", async (req, res) => {
   const cohortId = req.params.cohortId;
 

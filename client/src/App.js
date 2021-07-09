@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
-import About from "./pages/About";
+// import About from "./pages/About";
+import CreateUser from "./pages/CreateUser"
 
 // import About from "./pages/About";
 import Layout from "./components/Layout";
@@ -14,8 +15,8 @@ const App = () => (
       <Home />
     </Route>
     <Layout>
-      <Route path="/about/this/site">
-        <About />
+      <Route path="/create-user">
+        <CreateUser />
       </Route>
       <Route path="/cohorts" exact>
         <Cohorts />
