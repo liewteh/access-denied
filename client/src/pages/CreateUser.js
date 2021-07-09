@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./CreateUser.css";
 import user2 from "../../img/user2.png";
 
+import Popup from "../components/ClassFormComponents/Popup";
 
 const CreateUser = () => {
+  const history = useHistory();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +15,15 @@ const CreateUser = () => {
   const [selectedRole, setSelectedRole] = useState(3);
   const [cohorts, setCohorts] = useState([]);
   const [selectCohorts, setSelectedCohorts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  // function to close the popup that appears after form submission
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+    if (isOpen) {
+      history.push("/");
+    }
+  };
 
   useEffect(() => {
     axios
@@ -40,12 +52,10 @@ const CreateUser = () => {
       });
   }, []);
 
-
-  function newUserHandler(){
-    const newUser =   {
-
+  function newUserHandler() {
+    const newUser = {
       username: username,
-      password : password,
+      password: password,
       roleId: selectedRole,
       cohortIds: [selectCohorts],
       accountVerified: true,
@@ -54,7 +64,7 @@ const CreateUser = () => {
     axios
       .post("/api/create-user", {
         username: username,
-        password : password,
+        password: password,
         roleId: selectedRole,
         cohortIds: [selectCohorts],
         accountVerified: true,
@@ -65,6 +75,7 @@ const CreateUser = () => {
       .catch((error) => {
         console.error(`Error while fetching data. \n${error} `);
       });
+    togglePopup();
   }
 
   return (
@@ -93,21 +104,45 @@ const CreateUser = () => {
           ></input>
           <select name="roles" onBlur={(e) => setSelectedRole(e.target.value)}>
             <option value={roles.id}>Please choose a role</option>
-            {
-              roles.map((role, index) => {
-                return <option value={role.id} label={role.name} key={index}>{role.name}</option>;
-              })
-            }
+            {roles.map((role, index) => {
+              return (
+                <option value={role.id} label={role.name} key={index}>
+                  {role.name}
+                </option>
+              );
+            })}
           </select>
-          <select name="cohorts" onBlur={(e) => setSelectedCohorts(e.target.value)}>
+          <select
+            name="cohorts"
+            onBlur={(e) => setSelectedCohorts(e.target.value)}
+          >
             <option value={cohorts.id}>Please choose a cohort</option>
-            {
-              cohorts.map((cohort, index) => {
-                return <option value={cohort.id} label={cohort.region_name} key={index}>{cohort.region_name}</option>;
-              })
-            }
+            {cohorts.map((cohort, index) => {
+              return (
+                <option
+                  value={cohort.id}
+                  label={cohort.region_name}
+                  key={index}
+                >
+                  {cohort.region_name}
+                </option>
+              );
+            })}
           </select>
-          <button className='create-btn' onClick={newUserHandler}>Create</button>
+          <button className="create-btn" onClick={newUserHandler}>
+            Create
+          </button>
+          {isOpen && (
+            <Popup
+              content={
+                <>
+                  <b>User Created Successfully!</b>
+                  <p>The user data successfully added to the database.</p>
+                </>
+              }
+              handleClose={togglePopup}
+            />
+          )}
         </div>
       </div>
     </>
