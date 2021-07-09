@@ -44,14 +44,14 @@ const CohortClasses = () => {
   return (
     <div className="classPage">
       <h1 className="cohortClassPageHeading">
-        {cohortDetails &&
-          `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
+        {cohortDetails
+          && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
       <Link
         to= {{
           pathname:"/cohorts-report",
           state: {
-            cohortId: {cohortId},
+            cohortId: { cohortId },
           },
         }}
       >

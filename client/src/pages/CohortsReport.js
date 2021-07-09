@@ -26,9 +26,9 @@ const CohortsReport = () => {
   let studentsTotal = [];
 
   classesData.map((data) => {
-      dates.push(moment(data.Date).format("MMM Do YYYY"));
-      studentsTotal.push(data.Students);
-  })
+    dates.push(moment(data.Date).format("MMM Do YYYY"));
+    studentsTotal.push(data.Students);
+  });
 
   const state = {
     labels: dates,
