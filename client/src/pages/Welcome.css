@@ -1,0 +1,21 @@
+.welcomePageHeading {
+  text-align: center;
+  padding: 2rem;
+  text-decoration: underline red;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  font-family: "Lato", sans-serif;
+}
+
+.showOption {
+  min-width: 200px;
+  text-align: center;
+  padding: 1rem;
+}
+
+.hideOption {
+  display: none;
+}

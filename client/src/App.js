@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import Welcome from "./pages/Welcome";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
 import ClassRegisterResult from "./pages/ClassRegisterResult";
@@ -12,6 +13,9 @@ const App = () => (
       <Home />
     </Route>
     <Layout>
+      <Route path="/welcome" exact>
+        <Welcome />
+      </Route>
       <Route path="/cohorts" exact>
         <Cohorts />
       </Route>
