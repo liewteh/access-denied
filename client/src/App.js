@@ -1,11 +1,10 @@
 import { Route, Switch } from "react-router-dom";
-// import About from "./pages/About";
-import CreateUser from "./pages/CreateUser"
 
-// import About from "./pages/About";
 import Layout from "./components/Layout";
-import ClassRegisterForm from "./pages/ClassRegisterForm";
+import ClassRegisterResult from "./pages/ClassRegisterResult";
 import Home from "./pages/Home";
+import Welcome from "./pages/Welcome";
+import CreateUser from "./pages/CreateUser";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
 
@@ -15,6 +14,9 @@ const App = () => (
       <Home />
     </Route>
     <Layout>
+      <Route path="/welcome" exact>
+        <Welcome />
+      </Route>
       <Route path="/create-user">
         <CreateUser />
       </Route>
@@ -26,9 +28,11 @@ const App = () => (
         component={CohortClasses}
         exact
       />
-      <Route path="/cohorts/:cohortId/classRegisterForm" exact>
-        <ClassRegisterForm />
-      </Route>
+      <Route
+        path="/cohorts/:cohortId/classes/:classId/students-attendance"
+        component={ClassRegisterResult}
+        exact
+      />
     </Layout>
   </Switch>
 );

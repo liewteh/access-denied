@@ -1,6 +1,9 @@
-import React from "react";
-import moment from "moment";
 import "./ClassCard.css";
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+import moment from "moment";
 
 const ClassCard = ({ cohortClass }) => {
   const cohortClassDate = moment(cohortClass.date).format("MMM Do YY");
@@ -8,9 +11,12 @@ const ClassCard = ({ cohortClass }) => {
   return (
     <div className="infoCard">
       <div className="classDetails">
-        <h2 className="className">
-          {`Class Date: ${cohortClassDate}`}
-        </h2>
+        <h2 className="className">{`Class Date: ${cohortClassDate}`}</h2>
+        <Link
+          to={`/cohorts/${cohortClass.cohort_id}/classes/${cohortClass.id}/students-attendance`}
+        >
+          Go to attendance record
+        </Link>
         {/* <ul className="classDetailsList">
           <li>
             <span className="classDetailType">Cohort ID: </span>

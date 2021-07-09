@@ -26,7 +26,7 @@ export function Home() {
       return Object.keys(value).length === 0 && value.constructor === Object;
     }
     if (!isEmptyObject(loggedUser)) {
-      let path = "/cohorts";
+      let path = "/welcome";
       history.push(path);
     }
   };
@@ -45,7 +45,7 @@ export function Home() {
         { withCredentials: true }
       )
       .then(() => {
-        history.push("/cohorts");
+        history.push("/welcome");
       });
   }
 
