@@ -33,12 +33,13 @@ const ClassRegisterForm = ( { isEditable }) => {
   const [regionAndClass, setRegionAndClass] = useState([]);
   const [dateAndTime, setDateAndTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
+  const [newClassId, setNewClassId] = useState(undefined);
 
   // function to close the popup that appears after form submission
   const togglePopup = () => {
     setIsOpen(!isOpen);
     if(isOpen) {
-      history.push(`/cohorts/${cohortId}/classes`);
+      history.push(`/cohorts/${cohortId}/classes/${newClassId}/students-attendance`);
     }
   };
 
@@ -118,6 +119,7 @@ const ClassRegisterForm = ( { isEditable }) => {
       .then(async (res) => {
         // create the students' attendance for the class
         // the classId is found in res.data.id
+        setNewClassId(res.data.id);
         axios
           .post(`/api/cohorts/${cohortId}/classes/${res.data.id}`, {
             classAttendances: studentsData,
@@ -131,7 +133,6 @@ const ClassRegisterForm = ( { isEditable }) => {
         console.log(error);
       });
   };
-
 
   return (
     <div className="classRegisterPage">
