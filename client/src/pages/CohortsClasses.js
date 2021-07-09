@@ -43,8 +43,8 @@ const CohortClasses = () => {
   return (
     <div className="classPage">
       <h1 className="cohortClassPageHeading">
-        {cohortDetails &&
-          `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
+        {cohortDetails
+          && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
       <ClassList classList={classList} />
       <button className="addClassBtn" onClick={routeChange} role="link">
