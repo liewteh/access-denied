@@ -58,6 +58,14 @@ router.get("/username", (req, res) => {
   res.send(username);
 });
 
+router.get("/username/role", async (req,res) => {
+  const userId = req.session.userId;
+  const role = await knex("cohort_members")
+    .where("user_id", userId)
+    .distinct("role_id");
+  res.send(role[0]);
+});
+
 /*****************************************************************************/
 /* GET APIs */
 /*****************************************************************************/

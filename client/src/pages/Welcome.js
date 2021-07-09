@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Welcome.css";
 
 const Welcome = () => {
 
   // TODO selectedUser - to hide/display options
-  let isAdmin = true;
+  // let isAdmin = true;
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    axios.get("/api/username/role").then((res) => {
+      if(res.data.role_id == 1) {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    });
+  }, []);
 
   return (
     <div className="welcomePage">
