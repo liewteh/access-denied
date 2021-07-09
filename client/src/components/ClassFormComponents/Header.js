@@ -3,7 +3,7 @@ import "./Header.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 // import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
@@ -29,11 +29,13 @@ const Header = () => {
   return (
     <header className="header-container">
       <div className="header-left">
-        <img
-          className="header-logo"
-          src="https://syllabus.codeyourfuture.io/img/logo.png"
-          alt="CYFLogo"
-        />
+        <Link to="/" className="logo-container">
+          <img
+            className="header-logo"
+            src="https://syllabus.codeyourfuture.io/img/logo.png"
+            alt="CYFLogo"
+          />
+        </Link>
       </div>
       <div className="header-right">
         <button
