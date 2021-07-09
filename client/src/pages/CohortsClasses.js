@@ -19,7 +19,7 @@ const CohortClasses = () => {
   };
 
   useEffect(() => {
-    // function to fetch the cohort list from the server api
+    // fetch the cohort list from the server api
     const fetchClasses = async () => {
       const response = await fetch(`/api/cohorts/${cohortId}/classes`);
       if (!response.ok) {

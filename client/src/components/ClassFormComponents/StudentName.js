@@ -5,15 +5,6 @@ import TextArea from "./TextArea";
 import "./StudentName.css";
 
 const StudentName = ({ studentData }) => {
-  // console.log("in studentName");
-  // console.log(studentData);
-  // const handleUpdate = (value, field) => {
-  //   console.log("in handle update");
-  //   const newData = { ...studentData };
-  //   newData[field] = value;
-  //   rowUpdate(newData);
-  // };
-
   return (
     <>
       <div className="titleGridContainer">

@@ -26,18 +26,16 @@ const defaultStudent = {
 const ClassRegisterForm = ( { isEditable }) => {
   const history = useHistory();
 
-  // console.log("isEditable");
-  // console.log(isEditable);
   const { cohortId } = useParams();
   const { classId } = useParams();
 
-  // hook for input students data
+  // states required to input students' data
   const [studentsData, setStudentsData] = useState([]);
   const [regionAndClass, setRegionAndClass] = useState([]);
   const [dateAndTime, setDateAndTime] = useState(new Date());
-  const [newClassId, setNewClassId] = useState(classId);
   const [isOpen, setIsOpen] = useState(false);
 
+  // function to close the popup that appears after form submission
   const togglePopup = () => {
     setIsOpen(!isOpen);
     if(isOpen) {
@@ -45,8 +43,12 @@ const ClassRegisterForm = ( { isEditable }) => {
     }
   };
 
-  // get student's attendance data from database
   useEffect(() => {
+    /*
+     url to get students' data based on the view type.
+     if the component isEditable then fetch only student names
+     else fetch the whole attendance data
+    */
     let studentAttendanceUrl;
     if (isEditable) {
       studentAttendanceUrl = `/api/cohorts/${cohortId}/students`;
@@ -70,7 +72,7 @@ const ClassRegisterForm = ( { isEditable }) => {
       });
 
     // fetch class details : class date
-    if(isEditable === false) {
+    if (isEditable === false) {
       axios
         .get(`/api/cohorts/classes/${classId}`)
         .then((res) => {
@@ -87,16 +89,9 @@ const ClassRegisterForm = ( { isEditable }) => {
     axios
       .get(studentAttendanceUrl)
       .then((res) => {
-        // console.log("in then");
-        // console.log(res);
         const newStudentsData = res.data.map((s) => {
-          // console.log("in map");
-          // console.log("data from DB");
-          // console.log(s);
           return { ...defaultStudent, ...s };
         });
-        // console.log("newStudentsData");
-        // console.log(newStudentsData);
         setStudentsData(newStudentsData);
       })
       .catch((error) => {
@@ -106,19 +101,14 @@ const ClassRegisterForm = ( { isEditable }) => {
 
   // post new student attendance data
   const updateHandlerUserChange = (data, index) => {
-    // console.log("updateHandlerUserChange");
-    // console.log("data", data);
     const newData = [...studentsData];
     newData[index] = data;
     setStudentsData(newData);
   };
 
-  // console.log("newStudentData", studentsData);
-
+  // form submit handler
   const submitHandler = (event) => {
     event.preventDefault();
-    // console.log("Submit Handler");
-    // console.log(dateAndTime);
 
     // create the class for the selected date
     axios
@@ -127,27 +117,16 @@ const ClassRegisterForm = ( { isEditable }) => {
         online_class: true,
       })
       .then(async (res) => {
-        // console.log(res);
-        // console.log(res.data);
-        setNewClassId(res.data.id);
-        // console.log(newClassId);
-
         // create the students' attendance for the class
+        // the classId is found in res.data.id
         axios
           .post(`/api/cohorts/${cohortId}/classes/${res.data.id}`, {
             classAttendances: studentsData,
-          })
-          .then((res) => {
-            // console.log("attendances created!");
-            // console.log(res);
-            // console.log(res.data);
           })
           .catch((error) => {
             console.log(error);
           });
         togglePopup();
-        // history.push("/cohorts/");
-
       })
       .catch((error) => {
         console.log(error);
