@@ -21,7 +21,6 @@ const CohortClasses = () => {
   useEffect(() => {
     // function to fetch the cohort list from the server api
     const fetchClasses = async () => {
-
       const response = await fetch(`/api/cohorts/${cohortId}/classes`);
       if (!response.ok) {
         const message = `An error has occurred: ${response.status}`;
@@ -48,8 +47,15 @@ const CohortClasses = () => {
         {cohortDetails &&
           `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
-      <Link to="/cohorts-report">
-        <button>Cohorts Report</button>
+      <Link
+        to= {{
+          pathname:"/cohorts-report",
+          state: {
+            cohortId: {cohortId},
+          },
+        }}
+      >
+        Cohorts Report
       </Link>
       <ClassList classList={classList} />
       <button onClick={routeChange} role="link">

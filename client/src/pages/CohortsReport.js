@@ -1,51 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 import { Line } from "react-chartjs-2";
+import moment from "moment";
 
-const state = {
-  labels: ["January", "February", "March", "April", "May"],
+const CohortsReport = () => {
+  const location = useLocation();
+  const { cohortId } = location.state;
+  const [classesData, setClassesData] = useState([]);
 
-  datasets: [
-    {
-      label: "Rainfall",
+  useEffect(() => {
+    // fetch cohort details
+    axios
+      .get(`/api/cohorts/${cohortId.cohortId}/cohortsReport`)
+      .then((res) => {
+        const data = res.data;
+        setClassesData(data);
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+  }, [cohortId]);
 
-      fill: false,
+  let dates = [];
+  let studentsTotal = [];
 
-      lineTension: 0.5,
+  classesData.map((data) => {
+      dates.push(moment(data.Date).format("MMM Do YYYY"));
+      studentsTotal.push(data.Students);
+  })
 
-      backgroundColor: "rgba(75,192,192,1)",
+  const state = {
+    labels: dates,
+    datasets: [
+      {
+        label: "Total Students Attended",
+        fill: false,
+        lineTension: 0.5,
+        backgroundColor: "rgba(75,192,192,1)",
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 2,
+        data: studentsTotal,
+      },
+    ],
+  };
 
-      borderColor: "rgba(0,0,0,1)",
-
-      borderWidth: 2,
-
-      data: [65, 59, 80, 81, 56],
-    },
-  ],
+  return (
+    <div>
+      <Line
+        data={state}
+        options={{
+          title: {
+            display: true,
+            text: "Total Students",
+            fontSize: 20,
+          },
+          legend: {
+            display: true,
+            position: "right",
+          },
+        }}
+      />
+    </div>
+  );
 };
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Line
-          data={state}
-          options={{
-            title: {
-              display: true,
-
-              text: "Average Rainfall per month",
-
-              fontSize: 20,
-            },
-
-            legend: {
-              display: true,
-
-              position: "right",
-            },
-          }}
-        />
-      </div>
-    );
-  }
-}
+export default CohortsReport;
