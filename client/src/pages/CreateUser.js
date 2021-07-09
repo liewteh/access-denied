@@ -48,7 +48,7 @@ const CreateUser = () => {
         username: username,
         password : password,
         roleId: selectedRole,
-        cohortIds: [1,4],
+        cohortIds: [selectCohorts],
         accountVerified: true
     }
     console.log(newUser)
@@ -57,11 +57,17 @@ const CreateUser = () => {
         
           username: username,
           password : password,
-          roleId: 2,
-          cohortIds: [1,4],
+          roleId: selectedRole,
+          cohortIds: [selectCohorts],
           accountVerified: true
-      
       })
+      .then(() => {
+        console.log('user-created')
+      })
+      .catch((error) => {
+        console.error(`Error while fetching data. \n${error} `);
+      });
+
     }
 
  return (
