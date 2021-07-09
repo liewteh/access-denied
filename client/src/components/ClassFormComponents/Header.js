@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import cyf_logo from "../../img/cyf_logo.png";
 // import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
         <Link to="/" className="logo-container">
           <img
             className="header-logo"
-            src="https://syllabus.codeyourfuture.io/img/logo.png"
+            src={cyf_logo}
             alt="CYFLogo"
           />
         </Link>
