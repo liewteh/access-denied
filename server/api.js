@@ -233,13 +233,13 @@ router.post("/cohorts/:cohortId/classes", async (req, res) => {
  api to create class attendances for all the students for a given
  classId and cohortId. It returns status 200 if successful.
 */
-router.post("/cohorts/:cohortId/classes/:classId", async (req, res) => {
+router.post("/cohorts/:cohortId/classes/:classId/", async (req, res) => {
   console.log("post request");
   // const cohortId = req.params.cohortId;
   const classId = req.params.classId;
   const classAttendances = req.body.classAttendances;
   const studentNames = classAttendances.map(
-    (classAttendance) => classAttendance.name
+    (classAttendance) => classAttendance.user_name
   );
 
   console.log("studentNames");
@@ -331,6 +331,13 @@ router.post("/create-user", async (req, res) => {
 
   await knex("cohort_members").insert(cohortMemberData);
   res.send(200);
+});
+
+//testing
+router.post("/api/1/class_attendance", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  res.sendStatus(200);
 });
 
 export default router;

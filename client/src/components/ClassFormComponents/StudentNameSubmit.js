@@ -6,7 +6,6 @@ import "./StudentName.css";
 
 const StudentNameSubmit = ({ studentData, rowUpdate }) => {
   const handleUpdate = (value, field) => {
-    console.log("uodating field: ", field);
     const newData = { ...studentData };
     newData[field] = value;
     rowUpdate(newData);

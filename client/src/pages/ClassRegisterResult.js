@@ -1,36 +1,49 @@
 import "./ClassRegisterResult.css";
 
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
 import RegionAndClassTitle from "../components/ClassFormComponents/RegionAndClassTitle";
 import DateTime from "../components/ClassFormComponents/DateTime";
+import BasicDateTimePicker from "../components/ClassFormComponents/BasicDateTimePicker";
 import StudentName from "../components/ClassFormComponents/StudentName";
 import StudentNameSubmit from "../components/ClassFormComponents/StudentNameSubmit";
+import Popup from "../components/ClassFormComponents/Popup";
 
 // default student object
 const defaultStudent = {
   user_name: "",
   attended: true,
   camera_on: true,
-  comments: "testing",
+  comments: "",
   connectivity_issues: false,
   distracted: false,
-  late_minutes: 10,
+  late_minutes: 0,
 };
 
 const ClassRegisterForm = ( { isEditable }) => {
-  console.log("isEditable");
-  console.log(isEditable);
+  const history = useHistory();
+
+  // console.log("isEditable");
+  // console.log(isEditable);
   const { cohortId } = useParams();
   const { classId } = useParams();
 
   // hook for input students data
   const [studentsData, setStudentsData] = useState([]);
   const [regionAndClass, setRegionAndClass] = useState([]);
-  const [dateAndTime, setDateAndTime] = useState([]);
+  const [dateAndTime, setDateAndTime] = useState(new Date());
+  const [newClassId, setNewClassId] = useState(classId);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+    if(isOpen) {
+      history.push("/cohorts/");
+    }
+  };
 
   // get student's attendance data from database
   useEffect(() => {
@@ -68,8 +81,6 @@ const ClassRegisterForm = ( { isEditable }) => {
         .catch((error) => {
           console.error(`Error while fetching data. \n${error} `);
         });
-    } else {
-      setDateAndTime("2021-12-22");
     }
 
     // fetch students' data
@@ -95,39 +106,65 @@ const ClassRegisterForm = ( { isEditable }) => {
 
   // post new student attendance data
   const updateHandlerUserChange = (data, index) => {
-    console.log("updateHandlerUserChange");
-    console.log("data", data);
+    // console.log("updateHandlerUserChange");
+    // console.log("data", data);
     const newData = [...studentsData];
     newData[index] = data;
     setStudentsData(newData);
   };
 
-  console.log("newStudentData", studentsData);
+  // console.log("newStudentData", studentsData);
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+    // console.log("Submit Handler");
+    // console.log(dateAndTime);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("submit handler");
-    console.log(studentsData);
-    // post students data to api
+    // create the class for the selected date
     axios
-      .post("api/1/class_attendance", {
-        body: studentsData,
+      .post(`/api/cohorts/${cohortId}/classes`, {
+        date: dateAndTime,
+        online_class: true,
       })
-      .then((res) => {
-        console.log(res);
+      .then(async (res) => {
+        // console.log(res);
+        // console.log(res.data);
+        setNewClassId(res.data.id);
+        // console.log(newClassId);
+
+        // create the students' attendance for the class
+        axios
+          .post(`/api/cohorts/${cohortId}/classes/${res.data.id}`, {
+            classAttendances: studentsData,
+          })
+          .then((res) => {
+            // console.log("attendances created!");
+            // console.log(res);
+            // console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        togglePopup();
+        // history.push("/cohorts/");
+
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+
   return (
     <div className="formContainer">
       <div className="classTitle">
         <RegionAndClassTitle region={regionAndClass} />
       </div>
-      <DateTime dateAndTime={dateAndTime} />
+      {isEditable ? (
+        <BasicDateTimePicker dateAndTimeValue={(e) => setDateAndTime(e)} />
+      ) : (
+        <DateTime dateAndTime={dateAndTime} />
+      )}
       <div className="titleGridContainer">
         <div className="grid-item"> Student Name </div>
         <div className="grid-item"> Present </div>
@@ -158,6 +195,19 @@ const ClassRegisterForm = ( { isEditable }) => {
         <button type="submit" className="submitButton" onClick={submitHandler}>
           Submit
         </button>
+      )}
+      {isOpen && (
+        <Popup
+          content={
+            <>
+              <b>Class Created Successfully!</b>
+              <p>
+                The class attendance register entry completed.
+              </p>
+            </>
+          }
+          handleClose={togglePopup}
+        />
       )}
     </div>
   );

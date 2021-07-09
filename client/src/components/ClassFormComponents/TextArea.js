@@ -9,7 +9,7 @@ const TextArea = ({ defaultValue, disabled, onChange }) => {
       defaultValue={defaultValue}
       disabled={disabled}
       onChange={onChange}
-      placeholder={"Add comments..."}
+      placeholder={""}
     />
   );
 };
