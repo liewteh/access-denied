@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import cyf_logo from "../../img/cyf_logo.png";
+import cyf_logo from "../../../img/cyf_logo.png";
 // import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const Header = () => {
