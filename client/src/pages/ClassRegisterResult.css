@@ -71,8 +71,9 @@
 .lateInput {
   margin: 0px;
   max-width: 100%;
-  width: 3rem;
+  width: 5rem;
   margin: 0.5rem;
+  padding: 0.3rem;
 }
 
 .comments {
