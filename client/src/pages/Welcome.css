@@ -1,3 +1,7 @@
+.welcomePage {
+  min-height: 100%;
+  background-color: rgb(246, 243, 243);
+}
 .welcomePageHeading {
   text-align: center;
   padding: 2rem;

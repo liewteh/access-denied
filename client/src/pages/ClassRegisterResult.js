@@ -151,7 +151,7 @@ const ClassRegisterForm = ( { isEditable }) => {
           <div className="grid-item studentName"> Student Name </div>
           <div className="grid-item"> Present </div>
           <div className="grid-item"> Late (minutes) </div>
-          <div className="grid-item"> Distract / Not Participating </div>
+          <div className="grid-item"> Distracted </div>
           <div className="grid-item"> Camera On </div>
           <div className="grid-item"> Tech Issues </div>
           <div className="grid-item comments"> Comments </div>
