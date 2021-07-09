@@ -1,0 +1,103 @@
+.create-heading{
+  text-align: center;
+  text-decoration: underline red;
+  margin-bottom: 1rem;
+}
+
+.create-container{
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgb(246, 243, 243);
+  height: 63vh;
+}
+
+.user{
+  height: 400px;
+  width: 350px;
+  border-radius: 10px;
+}
+
+.left-container{
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  min-height: 450px;
+  margin-top: 3rem;
+
+}
+
+.right-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 30%;
+  min-height: 400px;
+  margin-top: 5rem;
+}
+
+select{
+  width: 250px;
+  border-radius: 10px;
+  padding: 7px;
+  border: 0.5px solid #777;
+  justify-content: space-evenly;
+  /* box-shadow: 1px 7px rgba(0, 0, 0, 0.1); */
+  margin-top: 1.1rem;
+  font-weight: lighter;
+}
+
+select:hover{
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+}
+
+.react-select{
+  width: 250px;
+  border-radius: 10px;
+  padding: 7px;
+  border: 0.5px solid #777;
+  justify-content: space-evenly;
+  /* box-shadow: 1px 7px rgba(0, 0, 0, 0.1); */
+  margin-top: 1.1rem;
+  font-weight: lighter;
+}
+
+option{
+  font-weight: lighter;
+}
+
+  .create-btn {
+    padding: 0.75rem;
+    background-color: #ed4343;
+    color: #fff;
+    width: 100px;
+    border-radius: 10px;
+    margin-top: 2rem;
+    cursor: pointer;
+    outline: 0;
+    font-size: 1rem;
+  }
+  
+  .create-btn:hover {
+    background-color: #f52d34;
+  }
+  
+  .create-btn:active {
+    transform: translateY(5px);
+  }
+
+
+
+  @media only screen and (max-width: 550px) {
+
+    .create-container{
+      display: flex;
+      flex-direction: column;
+    }
+
+
+  } 

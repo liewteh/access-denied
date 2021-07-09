@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Footer from "../components/Footer";
 import "./Home.css";
+import Footer from "../components/Footer";
 
 export function Home() {
   const history = useHistory();
@@ -50,46 +50,46 @@ export function Home() {
   }
 
   return (
-    <main role="main">
-      <div className="container">
-        <div className="heading">
-          <img
-            className="logo"
-            src="./client/img/cyf_logo.png"
-            alt="cyf_logo"
-          />
-        </div>
-        <div className="title">
-          <h1 className="message">Class Register</h1>
-          <h2>Welcome</h2>
-        </div>
-        <div className="login">
-          <h3>Please Sign In</h3>
+    <>
+      <main role="main">
+        <div className="container">
+          <div className="heading">
+            <img
+              className="logo"
+              src="./client/img/cyf_logo.png"
+              alt="cyf_logo"
+            />
+          </div>
+          <div className="title">
+            <h1 className="message">Class Register</h1>
+            <h2>Welcome</h2>
+          </div>
+          <div className="login">
+            <h3>Please Sign In</h3>
 
-          <input
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
-            type="text"
-          ></input>
-        </div>
-        <div className="login">
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="password"
-            type="password"
-          ></input>
-        </div>
+            <input
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="username"
+              type="text"
+            ></input>
+          </div>
+          <div className="login">
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="password"
+              type="password"
+            ></input>
+          </div>
 
-        <div>
-          <button className="login-btn" onClick={loginHandler}>
-            Sign In
-          </button>
+          <div>
+            <button className="login-btn" onClick={loginHandler}>
+              Sign In
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="footer-component">
-        <Footer />
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }
 

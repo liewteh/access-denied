@@ -23,3 +23,23 @@
 .cohortDetailType {
   font-weight: bold;
 }
+
+.class-btn{
+  padding: 0.75rem;
+  background-color: #ed4343;
+  color: #fff;
+  width: 100px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  cursor: pointer;
+  outline: 0;
+  font-size: 1rem;
+}
+
+.class-btn:hover {
+  background-color: #f52d34;
+}
+
+.class-btn:active {
+  transform: translateY(5px);
+}

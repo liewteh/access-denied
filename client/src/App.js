@@ -1,7 +1,10 @@
 import { Route, Switch } from "react-router-dom";
+
+import Layout from "./components/Layout";
 import ClassRegisterResult from "./pages/ClassRegisterResult";
 import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
+import CreateUser from "./pages/CreateUser";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
 import CohortsReport from "./pages/CohortsReport";
@@ -11,21 +14,30 @@ const App = () => (
     <Route path="/" exact>
       <Home />
     </Route>
-    <Route path="/welcome" exact>
-      <Welcome />
-    </Route>
-    <Route path="/cohorts" exact>
-      <Cohorts />
-    </Route>
-    <Route path="/cohorts-report" exact>
-      <CohortsReport />
-    </Route>
-    <Route path="/cohorts/:cohortId/classes" component={CohortClasses} exact />
-    <Route
-      path="/cohorts/:cohortId/classes/:classId/students-attendance"
-      component={ClassRegisterResult}
-      exact
-    />
+    <Layout>
+      <Route path="/welcome" exact>
+        <Welcome />
+      </Route>
+      <Route path="/create-user">
+        <CreateUser />
+      </Route>
+      <Route path="/cohorts" exact>
+        <Cohorts />
+      </Route>
+      <Route path="/cohorts-report" exact>
+        <CohortsReport />
+      </Route>
+      <Route
+        path="/cohorts/:cohortId/classes"
+        component={CohortClasses}
+        exact
+      />
+      <Route
+        path="/cohorts/:cohortId/classes/:classId/students-attendance"
+        component={ClassRegisterResult}
+        exact
+      />
+    </Layout>
   </Switch>
 );
 

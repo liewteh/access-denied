@@ -3,7 +3,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import ClassList from "../components/ClassList";
-import Footer from "../components/Footer";
 
 const CohortClasses = () => {
   const { cohortId } = useParams();
@@ -58,10 +57,9 @@ const CohortClasses = () => {
         Cohorts Report
       </Link>
       <ClassList classList={classList} />
-      <button onClick={routeChange} role="link">
+      <button className="addClassBtn" onClick={routeChange} role="link">
         Add New Class
       </button>
-      <Footer />
     </div>
   );
 };
