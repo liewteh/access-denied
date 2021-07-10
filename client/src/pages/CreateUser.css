@@ -1,14 +1,18 @@
+.create-page{
+  background-color: rgb(246, 243, 243);
+}
+
 .create-heading{
   text-align: center;
   text-decoration: underline red;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
 }
 
 .create-container{
   display: flex;
   justify-content: flex-start;
   background-color: rgb(246, 243, 243);
-  height: 63vh;
+  height: 66vh;
 }
 
 .user{
@@ -22,7 +26,7 @@
   justify-content: center;
   width: 50%;
   min-height: 450px;
-  margin-top: 3rem;
+  margin-top: 2rem;
 
 }
 
@@ -33,7 +37,7 @@
   align-items: center;
   width: 30%;
   min-height: 400px;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 select{
@@ -55,16 +59,6 @@ select:focus {
   outline: none;
 }
 
-.react-select{
-  width: 250px;
-  border-radius: 10px;
-  padding: 7px;
-  border: 0.5px solid #777;
-  justify-content: space-evenly;
-  /* box-shadow: 1px 7px rgba(0, 0, 0, 0.1); */
-  margin-top: 1.1rem;
-  font-weight: lighter;
-}
 
 option{
   font-weight: lighter;

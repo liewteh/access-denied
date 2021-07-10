@@ -15,7 +15,7 @@ const ClassCard = ({ cohortClass }) => {
         <Link
           to={`/cohorts/${cohortClass.cohort_id}/classes/${cohortClass.id}/students-attendance`}
         >
-          Go to attendance record
+          <button className="class-btn">Go to attendance record</button>
         </Link>
       </div>
     </div>

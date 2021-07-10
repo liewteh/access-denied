@@ -21,6 +21,7 @@
   margin: 0 1rem;
   height: 100%;
   width: 25%;
+  text-align: center;
 }
 
 .logo-container {
@@ -48,6 +49,7 @@
 
 .back-btn:hover {
   cursor: pointer;
+  background-color: #425058;
 }
 
 .back-arrow:hover {

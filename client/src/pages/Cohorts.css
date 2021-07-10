@@ -6,5 +6,6 @@
 .cohortPageHeading {
   text-align: center;
   padding: 2rem;
+  text-decoration: underline red;
   /* text-decoration: underline red; */
 }

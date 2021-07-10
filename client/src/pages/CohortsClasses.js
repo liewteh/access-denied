@@ -55,7 +55,7 @@ const CohortClasses = () => {
           },
         }}
       >
-        Cohorts Report
+        <button className="report-btn">Cohorts Report</button>
       </Link>
       <ClassList classList={classList} />
       <button className="addClassBtn" onClick={routeChange} role="link">

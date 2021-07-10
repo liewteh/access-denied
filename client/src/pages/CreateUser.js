@@ -79,7 +79,7 @@ const CreateUser = () => {
   }
 
   return (
-    <>
+    <div className="create-page">
       <h1 className="create-heading">Create New User</h1>
       <div className="create-container">
         <div className="left-container">
@@ -145,7 +145,7 @@ const CreateUser = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

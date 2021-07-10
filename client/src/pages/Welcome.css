@@ -1,6 +1,7 @@
 .welcomePage {
   min-height: 100%;
   background-color: rgb(246, 243, 243);
+  
 }
 .welcomePageHeading {
   text-align: center;
@@ -10,8 +11,11 @@
 
 .optionsContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-family: "Lato", sans-serif;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
 }
 
 .showOption {
@@ -23,3 +27,56 @@
 .hideOption {
   display: none;
 }
+
+.create, .cohort{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  width: 200px;
+  /* background-color: #fff; */
+  border-radius: 10px;
+  margin-top: 2rem;
+}
+
+.user-img{
+  height: 200px;
+  width: 350px;
+  /* background-color: #fff; */
+  /* border-radius: 10px; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.cohort-img{
+  height: 200px;
+  width: 350px;
+  background-color: #fff;
+  /* border-radius: 10px; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.welcome-btn{
+  padding: 0.75rem;
+  background-color: #ed4343;
+  color: #fff;
+  width: 350px;
+  /* border-radius: 10px; */
+  /* margin-top: 1rem; */
+  cursor: pointer;
+  outline: 0;
+  font-size: 1.1rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px
+}
+
+.welcome-btn:hover {
+  background-color: #f52d34;
+}
+
+.welcome-btn:active {
+  transform: translateY(5px);
+}
+
+
