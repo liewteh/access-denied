@@ -1,12 +1,12 @@
 .infoCard {
   min-height: 7rem;
-  padding: 0.5rem;
+  padding: 0.7rem;
   background-color: rgb(255,255,255);
   box-shadow: 1px 2px 1px rgb(200,200,200);
 }
 
 .classDetails {
-  width: 80%;
+  width: 90%;
   height: 100%;
   margin: auto;
   display: flex;

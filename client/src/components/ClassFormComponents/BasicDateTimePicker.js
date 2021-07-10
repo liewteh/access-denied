@@ -8,14 +8,13 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
-const BasicDateTimePicker = () => {
+const BasicDateTimePicker = ({ dateAndTimeValue }) => {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date());
-
   const handleDateChange = (date) => {
+    dateAndTimeValue(date);
     setSelectedDate(date);
   };
-
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -46,5 +45,4 @@ const BasicDateTimePicker = () => {
     </>
   );
 };
-
 export default BasicDateTimePicker;

@@ -4,11 +4,17 @@
   box-sizing: border-box;
 }
 
-.HeaderContainer {
-  border-bottom: black 1px solid;
+.classRegisterPage {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: minmax(100px, auto);
+  gap: 0.5rem;
+  background-color: rgb(246, 243, 243);
 }
 
-.classTitle, .titleGridContainer {
+.classTitle {
+  grid-column: 1/-1;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -16,23 +22,78 @@
   font-size: 1.6rem;
 }
 
+.dateTime{
+  grid-column: 3/-1;
+}
+
+.bottomBorder {
+  border-bottom: black 1px solid;
+}
+
+.topBorder {
+  border-top: black 1px solid;
+}
+
+.attendanceForm {
+  background-color: white;
+  width: 90%;
+  margin: auto;
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: minmax(100px, auto);
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.gridRow {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(50px, 1fr));
+  gap: 0.5rem;
+  padding: 10px;
+  font-size: 1.6rem;
+}
+
+.grid-item {
+  grid-column: auto;
+  font-size: 1.3rem;
+  align-self: flex-start;
+  margin: 0.5rem auto;
+}
+
+.studentName {
+  grid-column: 1/3;
+}
+
+.lateInput {
+  margin: 0px;
+  max-width: 100%;
+  width: 5rem;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+
+.comments {
+  grid-column: 8/-1;
+  width: 80%;
+}
+
+.textArea {
+  width: 80%;
+  margin: auto;
+}
+
 .tableContainer {
   display: flex;
-  /* align-items: center; */
   justify-content: space-evenly;
   background-color: red;
 }
 
-/* .grid-item {
-  font-size: 1.1rem;
-} */
-
-/* .studentNameContainer {
-  padding-bottom: 30px;
-  background-color: green;
-} */
-
 .submitButton {
+  grid-column: 5/-5;
   padding: 0.75rem;
   transition: 0.5s ease-in;
   background-color: #d64444;
@@ -44,6 +105,7 @@
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
+  
 }
 
 .submitButton:hover {

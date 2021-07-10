@@ -2,7 +2,13 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 import TextArea from "./TextArea";
 
-const StudentName = ({ studentData }) => {
+const StudentNameSubmit = ({ studentData, rowUpdate }) => {
+  const handleUpdate = (value, field) => {
+    const newData = { ...studentData };
+    newData[field] = value;
+    rowUpdate(newData);
+  };
+
   return (
     <>
       <div className="gridRow">
@@ -11,6 +17,7 @@ const StudentName = ({ studentData }) => {
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.attended}
+            toggleValue={(e) => handleUpdate(e, "attended")}
           />
         </div>
         <div className="grid-item">
@@ -18,33 +25,35 @@ const StudentName = ({ studentData }) => {
             className="lateInput"
             type="number"
             min="0"
-            defaultValue={studentData.late_minutes}
-            disabled={true}
+            placeholder="minutes"
+            onChange={(e) => handleUpdate(e.target.value, "late_minutes")}
           />
         </div>
         <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.distracted}
+            toggleValue={(e) => handleUpdate(e, "distracted")}
           />
         </div>
         <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.camera_on}
+            toggleValue={(e) => handleUpdate(e, "camera_on")}
           />
         </div>
         <div className="grid-item">
           <ToggleButton
             className="ToggleButtonContainer"
             defaultValue={studentData.connectivity_issues}
+            toggleValue={(e) => handleUpdate(e, "connectivity_issues")}
           />
         </div>
         <div className="grid-item comments">
           <TextArea
             type="string"
-            defaultValue={studentData.comments}
-            disabled={true}
+            onChange={(e) => handleUpdate(e.target.value, "comments")}
             className="textArea"
           ></TextArea>
         </div>
@@ -53,4 +62,4 @@ const StudentName = ({ studentData }) => {
   );
 };
 
-export default StudentName;
+export default StudentNameSubmit;

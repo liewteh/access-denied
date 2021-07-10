@@ -52,6 +52,20 @@ router.get("/checkLogin", (req, res) => {
   res.json({ userId: userId });
 });
 
+// api to return the username of the logged in user
+router.get("/username", (req, res) => {
+  const username = req.session.username;
+  res.send(username);
+});
+
+router.get("/username/role", async (req,res) => {
+  const userId = req.session.userId;
+  const role = await knex("cohort_members")
+    .where("user_id", userId)
+    .distinct("role_id");
+  res.send(role[0]);
+});
+
 /*****************************************************************************/
 /* GET APIs */
 /*****************************************************************************/
@@ -68,7 +82,8 @@ router.get("/cohorts/", async (req, res) => {
         "cohorts.id",
         "regions.name as region_name",
         "cohorts.cohort_number"
-      );
+      )
+      .orderBy("cohorts.id", "asc");
     res.json(cohorts);
   }
 });
@@ -81,7 +96,8 @@ router.get("/cohorts/all", async (req, res) => {
       "cohorts.id",
       "regions.name as region_name",
       "cohorts.cohort_number"
-    );
+    )
+    .orderBy("cohorts.id", "asc");
   res.json(cohorts);
 });
 
@@ -102,7 +118,8 @@ router.get("/cohorts/:cohortId/classes", async (req, res) => {
   const cohortId = req.params.cohortId;
   const classes = await knex("classes")
     .where("cohort_id", cohortId)
-    .select("*");
+    .select("*")
+    .orderBy("date", "desc");
   res.send(classes);
 });
 
@@ -114,7 +131,8 @@ router.get("/cohorts/:cohortId/students", async (req, res) => {
     .join("users", "users.id", "=", "cohort_members.user_id")
     .where("cohort_members.cohort_id", cohortId)
     .andWhere("cohort_members.role_id", 3)
-    .select("users.user_name");
+    .select("users.user_name")
+    .orderBy("users.user_name", "asc");
 
   res.send(students);
 });
@@ -142,7 +160,8 @@ router.get(
       .join("users as u", "u.id", "ca.user_id")
       .join("cohort_members as cm", "u.id", "cm.user_id")
       .where("cm.role_id", 3)
-      .andWhere("c.id", classId);
+      .andWhere("c.id", classId)
+      .orderBy("u.user_name", "asc");
     // console.log(students);
     res.send(students);
   }
@@ -161,13 +180,15 @@ router.get("/cohorts/classes/:classId", async (req, res) => {
 
 // api to get list of all the roles
 router.get("/roles", async (req, res) => {
-  const roles = await knex("roles").select("*");
+  const roles = await knex("roles").select("*").orderBy("id");
   res.json(roles);
 });
 
 // api to get list of all the users
 router.get("/users/", async (req, res) => {
-  const users = await knex("users").select("id", "user_name", "email");
+  const users = await knex("users")
+    .select("id", "user_name", "email")
+    .orderBy("user_name", "asc");
 
   const fetchCohortsList = async () => {
     await Promise.all(
@@ -241,13 +262,13 @@ router.post("/cohorts/:cohortId/classes", async (req, res) => {
  api to create class attendances for all the students for a given
  classId and cohortId. It returns status 200 if successful.
 */
-router.post("/cohorts/:cohortId/classes/:classId", async (req, res) => {
+router.post("/cohorts/:cohortId/classes/:classId/", async (req, res) => {
   console.log("post request");
   // const cohortId = req.params.cohortId;
   const classId = req.params.classId;
   const classAttendances = req.body.classAttendances;
   const studentNames = classAttendances.map(
-    (classAttendance) => classAttendance.name
+    (classAttendance) => classAttendance.user_name
   );
 
   console.log("studentNames");
@@ -339,6 +360,13 @@ router.post("/create-user", async (req, res) => {
 
   await knex("cohort_members").insert(cohortMemberData);
   res.send(200);
+});
+
+//testing
+router.post("/api/1/class_attendance", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  res.sendStatus(200);
 });
 
 export default router;

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import moment from "moment";
+import "./CohortsReport.css";
 
 const CohortsReport = () => {
   const location = useLocation();
@@ -46,9 +47,10 @@ const CohortsReport = () => {
   };
 
   return (
-    <div>
+    <div className="report-container">
       <Line
         data={state}
+        height={"95%"}
         options={{
           title: {
             display: true,
@@ -58,6 +60,7 @@ const CohortsReport = () => {
           legend: {
             display: true,
             position: "right",
+            fontSize: 50,
           },
         }}
       />

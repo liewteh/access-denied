@@ -3,6 +3,7 @@
   padding: 0.5rem;
   background-color: rgb(255,255,255);
   box-shadow: 1px 2px 1px rgb(200,200,200);
+  border-radius: 10px;
 }
 
 .cohortDetails {
@@ -26,9 +27,9 @@
 
 .class-btn{
   padding: 0.75rem;
-  background-color: #ed4343;
+  background-color: #303846;
   color: #fff;
-  width: 100px;
+  width: 230px;
   border-radius: 10px;
   margin-top: 2rem;
   cursor: pointer;
@@ -37,9 +38,21 @@
 }
 
 .class-btn:hover {
-  background-color: #f52d34;
+  background-color: #425058;
 }
 
 .class-btn:active {
   transform: translateY(5px);
+}
+
+.cohort-btn{
+  padding: 0.75rem;
+  background-color: #d64444;
+  color: #fff;
+  width: 230px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  cursor: pointer;
+  outline: 0;
+  font-size: 1rem;
 }

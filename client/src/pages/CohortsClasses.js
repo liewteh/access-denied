@@ -13,12 +13,13 @@ const CohortClasses = () => {
   const history = useHistory();
 
   const routeChange = () => {
-    let path = `/cohorts/${cohortId}/classes`;
+    console.log("in route change for add new class");
+    let path = `/cohorts/${cohortId}/add-new-class`;
     history.push(path);
   };
 
   useEffect(() => {
-    // function to fetch the cohort list from the server api
+    // fetch the cohort list from the server api
     const fetchClasses = async () => {
       const response = await fetch(`/api/cohorts/${cohortId}/classes`);
       if (!response.ok) {
@@ -54,7 +55,7 @@ const CohortClasses = () => {
           },
         }}
       >
-        Cohorts Report
+        <button className="report-btn">Cohorts Report</button>
       </Link>
       <ClassList classList={classList} />
       <button className="addClassBtn" onClick={routeChange} role="link">

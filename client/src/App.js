@@ -1,12 +1,12 @@
 import { Route, Switch } from "react-router-dom";
 
 import Layout from "./components/Layout";
-import ClassRegisterResult from "./pages/ClassRegisterResult";
 import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
 import CreateUser from "./pages/CreateUser";
 import Cohorts from "./pages/Cohorts";
 import CohortClasses from "./pages/CohortsClasses";
+import ClassRegisterResult from "./pages/ClassRegisterResult";
 import CohortsReport from "./pages/CohortsReport";
 
 const App = () => (
@@ -34,9 +34,13 @@ const App = () => (
       />
       <Route
         path="/cohorts/:cohortId/classes/:classId/students-attendance"
-        component={ClassRegisterResult}
         exact
-      />
+      >
+        <ClassRegisterResult isEditable={false} />
+      </Route>
+      <Route path="/cohorts/:cohortId/add-new-class" exact>
+        <ClassRegisterResult isEditable={true} />
+      </Route>
     </Layout>
   </Switch>
 );

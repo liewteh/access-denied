@@ -15,18 +15,8 @@ const ClassCard = ({ cohortClass }) => {
         <Link
           to={`/cohorts/${cohortClass.cohort_id}/classes/${cohortClass.id}/students-attendance`}
         >
-          Go to attendance record
+          <button className="class-btn">Go to attendance record</button>
         </Link>
-        {/* <ul className="classDetailsList">
-          <li>
-            <span className="classDetailType">Cohort ID: </span>
-            {cohortClass.cohort_id}
-          </li>
-          <li>
-            <span className="classDetailType">Class Date: </span>
-            {cohortClassDate}
-          </li>
-        </ul> */}
       </div>
     </div>
   );

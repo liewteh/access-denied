@@ -19,7 +19,7 @@ const CohortCard = ({ cohort }) => {
             {cohort.cohort_number}
           </li>
         </ul>
-        <Link to={`/cohorts/${cohort.id}/classes`}><button className="class-btn">Go to classes</button></Link>
+        <Link to={`/cohorts/${cohort.id}/classes`}><button className="cohort-btn">Go to classes</button></Link>
       </div>
     </div>
   );
