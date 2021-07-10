@@ -27,14 +27,21 @@ const Welcome = () => {
       <div className="optionsContainer">
         {isAdmin && (
           <div className="create">
-          <img className="user-img" src={user6}></img>
-            <Link to="/create-user"><button className="welcome-btn">Create New User</button></Link>
+            <img className="user-img" src={user6} alt=""></img>
+            <Link to="/create-user">
+              <button className="welcome-btn">
+                Create New User
+              </button>
+            </Link>
           </div>
         )}
         <div className="cohort">
-          <img className="cohort-img" src={cohorts1}></img>
-          <Link to="/cohorts"><button className="welcome-btn">Go To Cohorts</button></Link>
-
+          <img className="cohort-img" src={cohorts1} alt=""></img>
+          <Link to="/cohorts">
+            <button className="welcome-btn">
+              Go To Cohorts
+            </button>
+          </Link>
         </div>
       </div>
     </div>
