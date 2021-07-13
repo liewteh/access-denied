@@ -1,13 +1,13 @@
-
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex("users").del()
+  return knex("users")
+    .del()
     .then(function () {
       // Inserts seed entries
       return knex("users").insert([
         {
           id: 1,
-          user_name: "Legacy Sage",
+          user_name: "admin",
           password: "admin",
           account_verified: true,
         },
