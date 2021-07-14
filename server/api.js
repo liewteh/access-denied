@@ -17,7 +17,7 @@ router.get("/", (_, res) => {
 */
 const loginUser = async (username, password) => {
   const users = await knex("users")
-    .whereRaw("LOWER(user_name) = ?", username)
+    .whereRaw("LOWER(user_name) = ?", username.toLowerCase())
     .andWhere("password", password)
     .select("id", "user_name");
 
