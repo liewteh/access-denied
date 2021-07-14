@@ -36,9 +36,14 @@ You should now make sure all of the project team are [collaborators] on the repo
 - Checkout to the branch create-db.
 - Run the command `npm ci`, to ensure that you have all the required packages installed.
 - Ensure that you have a database named "cyf", already created on your local machine. If not run the command `createdb cyf` on the `terminal`.
--Run the command `npx knex migrate:latest`. It should import 7 migrations.
--Then run the command `npx knex seed:run`.
--Your database should be setup now.
+- Run the command `npx knex-migrate down --to 0`. To delete all the existing tables and migrations. Its basically to reset the database.
+- Run the command `npx knex migrate:latest`. It should import 7 migrations.
+- Then run the command `npx knex seed:run`.
+- Your database should be setup now.
+- But, to be able to insert into database. You will have to reset the primary key indices of the tables. You can do that with following steps
+    - Open the terminal.
+    - Type `psql cyf` in command line. This should open the database for you.
+    - Type `SELECT setval('tableName_id_seq', (SELECT MAX(id) FROM tableName)+1);` in `psql` command line. This command should be run in the terminal window for all the tables. Specifically for `users`, `cohort_members` and `classes` tables.
 
 ## Scripts
 
