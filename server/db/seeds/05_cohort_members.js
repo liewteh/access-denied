@@ -17,7 +17,7 @@ exports.seed = function (knex) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  for (let i = 4; i <= 100; i++) {
+  for (let i = 4; i <= 60; i++) {
     const newCohortMember = {
       id: i + 5,
       user_id: i,

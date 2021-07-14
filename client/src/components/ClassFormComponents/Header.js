@@ -46,7 +46,7 @@ const Header = () => {
           Back
         </button>
         <button
-          className="header-btn logout-btn"
+          className="header-btn redBtn"
           onClick={() => logoutHandler()}
         >
           Logout

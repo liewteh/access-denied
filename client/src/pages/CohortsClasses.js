@@ -48,17 +48,17 @@ const CohortClasses = () => {
           && `${cohortDetails.region_name} Class ${cohortDetails.cohort_number}`}
       </h1>
       <Link
-        to= {{
-          pathname:"/cohorts-report",
+        to={{
+          pathname: "/cohorts-report",
           state: {
             cohortId: { cohortId },
           },
         }}
       >
-        <button className="report-btn">Cohorts Report</button>
+        <button className="redBtn">Cohorts Report</button>
       </Link>
       <ClassList classList={classList} />
-      <button className="addClassBtn" onClick={routeChange} role="link">
+      <button className="redBtn" onClick={routeChange} role="link">
         Add New Class
       </button>
     </div>

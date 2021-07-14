@@ -172,7 +172,11 @@ const ClassRegisterForm = ( { isEditable }) => {
         })}
       </form>
       {isEditable && (
-        <button type="submit" className="submitButton" onClick={submitHandler}>
+        <button
+          type="submit"
+          className="redBtn submitButton"
+          onClick={submitHandler}
+        >
           Submit
         </button>
       )}
