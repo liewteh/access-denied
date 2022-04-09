@@ -1,4 +1,22 @@
-# Starter Kit
+# Final Project Created for Coode Your Future Full Stack Web Development Program
+
+## Intro
+
+It is a group project that was created for the completion of the Full Stack Trainee Program. It is a Class Attendance Register Application, that allows the class instructor to mark the attendance of the students. It has two user journeys i.e. Admin and Volunteer. Volunteers have access to following features - 
+ - Create a new class.
+ - Mark if the students were present, had their cameras on, or if they faced any tech issues etc during the class.
+ - See the class report or the summary for their assigned cohort.
+
+The admin has access to all the volunteer privilegdes and some additional features such as -
+ - Ability to create a new Student / Volunteer whenever a new user joins CYF community and assign them to their respective cohort.
+ - Have access to all the cohorts.
+ 
+ ## Demo Video & Google Slides
+ 
+-  :movie_camera: [Demo video](https://drive.google.com/file/d/1MrN8BZe797NUMpEEStzA6l2Zy0itgnZO/view?usp=sharing)
+-  :clipboard: [Slides](https://docs.google.com/presentation/d/1vvXSfdD88ZRK39L9iKwuRwHuNnHCElunh1bs6EZHX9A/edit?usp=sharing)
+  
+## Tech Stack
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -31,14 +49,15 @@ Whenever you commit to master (or e.g. merge a [pull request]) it will get autom
 
 You should now make sure all of the project team are [collaborators] on the repository.
 
-## Steps to setup the database with the dummy data
+## Steps to setup the database with the dummy data on your local machine
 
-- Checkout to the branch create-db.
+Pre-requisite - You should have postgreSQL installed and setup on your local machine.
+
 - Run the command `npm ci`, to ensure that you have all the required packages installed.
 - Ensure that you have a database named "cyf", already created on your local machine. If not run the command `createdb cyf` on the `terminal`.
--Run the command `npx knex migrate:latest`. It should import 7 migrations.
--Then run the command `npx knex seed:run`.
--Your database should be setup now.
+- Run the command `npx knex migrate:latest`. It should import 7 migrations.
+- Then run the command `npx knex seed:run`.
+- Your database should be setup now.
 
 ## Scripts
 
